@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Route:</b>
+  <%= @way_place.route_id %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= @way_place.place_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @way_place.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_way_place_path(@way_place) %> |
+<%= link_to 'Back', way_places_path %>

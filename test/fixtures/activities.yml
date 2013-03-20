@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity_type: 1
+  cost: 9.99
+  name: MyString
+  notes: MyText
+
+two:
+  activity_type: 1
+  cost: 9.99
+  name: MyString
+  notes: MyText

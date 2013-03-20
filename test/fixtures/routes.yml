@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trip_id: 1
+  start_location: 1
+  end_location: 1
+  notes: MyText
+  distance: 1
+
+two:
+  trip_id: 1
+  start_location: 1
+  end_location: 1
+  notes: MyText
+  distance: 1
