@@ -6,7 +6,7 @@ one:
   user_id: 1
 
 two:
-  name: MyString
+  name: MyString2
   description: MyText
   user_id: 1
 
