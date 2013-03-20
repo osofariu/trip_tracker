@@ -18,7 +18,7 @@ class PlacesControllerTest < ActionController::TestCase
 
   test "should create place" do
     assert_difference('Place.count') do
-      post :create, place: { name: @place.name, notes: @place.notes, route_id: @place.route_id }
+      post :create, place: { name: "${@place.name}_2", notes: @place.notes, route_id: @place.route_id }
     end
 
     assert_redirected_to place_path(assigns(:place))

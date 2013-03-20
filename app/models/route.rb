@@ -5,4 +5,11 @@ class Route < ActiveRecord::Base
   attr_accessible :distance, :end_location, :notes, :start_location, :trip_id
   validates :distance, numericality: true
   validates :start_location, :end_location, presence: true
+  validate :unique_segment, on: :create
+
+  def unique_segment
+    if Route.where(start_location: start_location, end_location: end_location).any?
+      errors.add(:start_location, "must have unique route between two places")
+    end
+  end
 end

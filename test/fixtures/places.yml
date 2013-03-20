@@ -1,11 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   name: MyString1
   notes: MyText
   route_id: 1
-
 two:
+  id: 2
   name: MyString2
+  notes: MyText
+  route_id: 1
+
+three:
+  id: 3
+  name: MyString3
   notes: MyText
   route_id: 1

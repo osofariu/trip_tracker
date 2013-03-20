@@ -1,16 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   name: MyString
   description: MyText
   user_id: 1
 
 two:
+  id: 2
   name: MyString2
   description: MyText
   user_id: 1
 
 tga:
+  id: 3
   name: TGA America
   description: Cross-country trip
   user_id: 1
