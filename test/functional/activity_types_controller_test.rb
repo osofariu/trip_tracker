@@ -18,7 +18,7 @@ class ActivityTypesControllerTest < ActionController::TestCase
 
   test "should create activity_type" do
     assert_difference('ActivityType.count') do
-      post :create, activity_type: { description: @activity_type.description, activity_type: @activity_type.activity_type }
+      post :create, activity_type: { description: @activity_type.description, activity_type: "#{@activity_type.activity_type}_2" }
     end
 
     assert_redirected_to activity_type_path(assigns(:activity_type))

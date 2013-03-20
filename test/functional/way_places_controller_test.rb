@@ -3,6 +3,7 @@ require 'test_helper'
 class WayPlacesControllerTest < ActionController::TestCase
   setup do
     @way_place = way_places(:one)
+    @place3 = places(:three)
   end
 
   test "should get index" do
@@ -18,7 +19,7 @@ class WayPlacesControllerTest < ActionController::TestCase
 
   test "should create way_place" do
     assert_difference('WayPlace.count') do
-      post :create, way_place: { name: @way_place.name, place_id: @way_place.place_id, route_id: @way_place.route_id }
+      post :create, way_place: { name: @way_place.name, place_id: @place3.id, route_id: @way_place.route_id }
     end
 
     assert_redirected_to way_place_path(assigns(:way_place))

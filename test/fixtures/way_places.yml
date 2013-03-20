@@ -7,5 +7,5 @@ one:
 
 two:
   route_id: 1
-  place_id: 1
+  place_id: 2
   name: MyString
