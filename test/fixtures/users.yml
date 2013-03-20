@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  password_digest: MyString
+  name: tester1
+  password_digest: company1
 
 two:
-  name: MyString
-  password_digest: MyString
+  name: tester2
+  password_digest: test123
