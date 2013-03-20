@@ -9,3 +9,8 @@ two:
   name: MyString
   description: MyText
   user_id: 1
+
+tga:
+  name: TGA America
+  description: Cross-country trip
+  user_id: 1

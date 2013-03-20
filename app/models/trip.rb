@@ -3,4 +3,6 @@ class Trip < ActiveRecord::Base
   has_many :routes, dependent: :destroy
   attr_accessible :description, :name, :user_id
   validates :name, :user_id, presence: true
+  validates :name, length: {maximum: 40}
+  validates_uniqueness_of :name, scope: :user_id
 end
