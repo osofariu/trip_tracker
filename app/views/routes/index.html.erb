@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>If</th>
     <th>Trip</th>
     <th>Start location</th>
     <th>End location</th>
@@ -14,6 +15,7 @@
 
 <% @routes.each do |route| %>
   <tr>
+    <td><%= route.id %></td>
     <td><%= route.trip_id %></td>
     <td><%= route.start_location %></td>
     <td><%= route.end_location %></td>

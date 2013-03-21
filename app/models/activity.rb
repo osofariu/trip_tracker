@@ -3,5 +3,5 @@ class Activity < ActiveRecord::Base
   validates :activity_type, :name, presence: true
   validates :cost, numericality: true
   validates :name, uniqueness: true
-  attr_accessible :activity_type, :cost, :name, :notes
+  attr_accessible :activity_type, :cost, :name, :notes, :place_id
 end

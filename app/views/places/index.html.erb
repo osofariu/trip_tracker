@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Id</th>
     <th>Name</th>
     <th>Notes</th>
     <th>Route</th>
@@ -12,6 +13,7 @@
 
 <% @places.each do |place| %>
   <tr>
+    <td><%= place.id %></td>
     <td><%= place.name %></td>
     <td><%= place.notes %></td>
     <td><%= place.route_id %></td>
