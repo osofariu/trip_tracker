@@ -15,6 +15,8 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
     @routes = Route.where(trip_id: @trip.id)
+    @first_route = @routes.first
+    @last_route =  @routes.last
     @user_name = User.find(@trip.user_id).name
 
     respond_to do |format|

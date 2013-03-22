@@ -1,3 +1,71 @@
 // Place all the styles related to the Trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.trips {
+
+	h1 {
+		margin: 0;
+		padding-bottom: 0.5em;
+		font:  150% sans-serif;
+		color: #226;
+		border-bottom: 3px dotted #77d;
+		border-bottom-length:150px;
+	}
+
+
+	table {
+		border-collapse: collapse;
+	}
+
+	table tr td {
+		padding: 5px;
+		vertical-align: top;
+	}
+
+
+	p.normal {font-weight:normal;}
+	p.light {font-weight:lighter;}
+	p.thick {font-weight:bold;}
+	p.thicker {font-weight:900;}
+
+	.action_name {
+		font-size:100%;
+	}
+
+	.action_desc {
+		position:relative;
+		top:5px;	
+	}
+
+	#trip_description {
+		overflow: auto;
+		margin-top: 1em;
+		border-bottom: 2px dotted #77d;
+		min-height: 50px;
+	}
+
+	.place_name {
+		font-size:large;
+		padding-bottom: 0.5em;
+		padding-top: 2em;
+		border-bottom: 1px dotted #77d;
+	}
+
+	.place_desc {
+		min-height: 20px;
+	}
+
+	#start_places {
+		//background-color:#E6E6E6;
+
+
+		td {
+			vertical-align: top;
+		}
+	}
+	
+	#way_places {
+		//background-color:#EBFFEB;
+	}
+}

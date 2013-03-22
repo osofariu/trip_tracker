@@ -14,18 +14,13 @@ class Route < ActiveRecord::Base
 
 public
 
-  def start
-    Place.find(self.start_place)
-  end
-
-  def end
-     Place.find(self.end_place)
-  end
-
-  def get_w_places
-    places = []
+  def get_places
+    places = {}
+    places[:start] = Place.find(start_place)
+    places[:end] = Place.find(end_place)
+    places[:way_places] = []
     WayPlace.where(route_id: id).each do |wp|
-      places << Place.where(id: wp.place_id).first
+      places[:way_places] << Place.where(id: wp.place_id).first
     end
     return places
   end

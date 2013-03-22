@@ -1,13 +1,75 @@
 <p id="notice"><%= notice %></p>
+	
+<table border="0">
+	<col style="width:5%">
+	<col style="width:40%">
+	<col style="width:50%">
+	<tr>
+		<td colspan="3"><h1>Trip <%= @trip.name %> </h1></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<div id="trip_description">
+				<%= @trip.description %>
+			</div>
+		</td>
+	</tr>
 
-<h1>Trip <%= @trip.name %> </h1>
-<p><div class="trip_description">
-	<%= @trip.description %>
-</div></p>
+	<% @routes.each do |route| %>
+		<tr>
+			<% if route == @first_route %>
+				<td class="place_name" colspan="3"><%= route.get_places[:start].name %> (HOME)</td>
+			<% else %>
+				<td class="place_name" colspan="3"><%= route.get_places[:start].name %></td>
+			<% end %>
+		</tr>
 
-<table id="routes">
-	<%= render @routes %>
+		<tr id="start_places">
+			<td> </td>
+			<td colspan="2'">
+				<ul>
+					<% route.get_places[:start].get_activities.each do |activity| %>
+						<li>
+							<%= activity.name %> (<%= activity.get_type_name %>)
+						</li>
+					<% end %>
+				</ul>
+				
+			</td>
+		</tr>
+		<tr>
+			<td class="place_desc" colspan="3" > on the way to <em><%= route.get_places[:end].name%></em>
+				<% if route.distance %>
+					, traveling: <%=route.distance %> miles.
+				<% end %>
+			</td>
+		</tr>
+
+
+		<% if route.get_places[:way_places].any? %>				
+			<tr id="way_places">
+				<td></td>
+				<td class="action_desc" colspan="2">
+				<% route.get_places[:way_places].each do |place| %>	
+					<ul>
+						<% place.get_activities.each do |activity| %>
+							<li>
+								<%= activity.name %> (<%= activity.get_type_name %>)
+							</li>
+						<% end %>
+					</ul>		
+				<% end %>
+			</tr>
+		<% end %>
+		
+		<% if route == @last_route %>
+			<tr id="last_place">
+				<td class="place_name" colspan="3"> <%= route.get_places[:end].name %> (END) </td>
+			</tr>
+		<% end %>
+	<% end %>
 </table>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
+<%= params[:controller]%>/<%= params[:action] %>
