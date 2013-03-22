@@ -14,6 +14,8 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
+    @routes = Route.where(trip_id: @trip.id)
+    @user_name = User.find(@trip.user_id).name
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,0 +1,77 @@
+
+=======================================
+2012-04-09 at Home
+---------------------------------------
+
+TRAVEL:
+ > 2012-04-09 from Home drive 1200 miles to New Orleans for 3 days
+ > Traveled total of: 1200 miles.
+
+=======================================
+2012-04-12 at New Orleans
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-12 Lodging at: B&B Name for 4 days
+
+TRAVEL:
+ > 2012-04-16 from New Orleans drive 357 miles to Houston 
+ > Traveled total of: 1557 miles.
+
+=======================================
+2012-04-16 at Houston
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-16 Lodging at: Quality Inn (before Houston) for 1 days
+ > 2012-04-17 Attraction: NASA 12-4pm
+ > 2012-04-17 Attraction: experience Houston night life
+ > 2012-04-17 Lodging at: Houston Inn & Suites for 1 days
+ > 2012-04-18 Attraction: Natural Science Museum
+ > 2012-04-18 adjusting local milage by: 28
+ > 2012-04-18 Attraction: Houston Zoo
+ > 2012-04-18 adjusting local milage by: 8
+ > 2012-04-18 Lodging at: Houston Inn & Suites for 1 days
+
+TRAVEL:
+ > 2012-04-19 from Houston drive 205 miles to San Antonio 
+ > Traveled total of: 1798 miles.
+
+=======================================
+2012-04-19 at San Antonio
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-19 Attraction: the Mission
+
+TRAVEL:
+ > 2012-04-19 from San Antonio drive 77 miles to Kerrville 
+ > Traveled total of: 1875 miles.
+
+=======================================
+2012-04-19 at Kerrville
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-19 Lodging at: KOA Kerrville for 1 days
+
+TRAVEL:
+ > 2012-04-20 from Kerrville drive 531 miles to Las Cruces 
+ > Traveled total of: 2406 miles.
+
+=======================================
+2012-04-20 at Las Cruces
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-20 Lodging at: Super-8 for 1 days
+ > 2012-04-21 adjusting local milage by: 48
+ > 2012-04-21 Attraction: White Sands National Monument
+
+TRAVEL:
+ > 2012-04-21 from Las Cruces drive 320 miles to Tucson 
+ > Traveled total of: 2774 miles.
+
+=======================================
+2012-04-21 at Tucson
+---------------------------------------
+ACTIVITIES:
+ > 2012-04-21 Lodging at: Gilbert Mountain Camping for 1 days
+ > 2012-04-22 adjusting local milage by: 10
+ > 2012-04-22 Attraction: Saguro West National Monument
+

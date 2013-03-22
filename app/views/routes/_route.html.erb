@@ -1,0 +1,24 @@
+
+<tr><td id="start_name"><%= route.start.name %></td></tr>
+<tr>
+	<td> on route to <%= route.end.name %></li></td>
+	<td>
+	<% if route.distance %>
+		traveling: <%=route.distance %> miles.
+	<% end %>
+	</td>
+</tr>
+
+<tr id="start_places">
+	<td valign="top">do @ <%= Place.get_by_id(route.start_place).name %> </td>
+	<td>
+		<%= render "places/place", places: [Place.get_by_id(route.start_place)] %>
+	</td>
+</tr>
+
+<tr id="way_places">
+	<% if route.get_w_places.any? %>
+		<td valign="top">do on the way to <%= route.end.name %></td>
+		<td><%= render "places/place", places: route.get_w_places %></td>
+	<% end %>
+</tr>

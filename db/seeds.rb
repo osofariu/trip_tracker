@@ -43,7 +43,7 @@ t2 = Trip.where(user_id: u2.id, name: "Disneyworld trip").first
 Place.create name: "123 Pipers Squeak Dr."
 Place.create name: "1 Disneyworld Way, Orlando, Florida"
 Place.create name: "83 E Longview"
-Place.create name: "kansas plains view.. ahh.. the best.. with cows!"
+Place.create name: "kansas plains"
 Place.create name: "Kansas City"
 Place.create name: "Witchita"
 Place.create name: "Tulsa"
@@ -55,7 +55,7 @@ Place.create name: "Arches NP"
 l_1 = Place.where(name: "123 Pipers Squeak Dr.").first
 l_2 = Place.where(name: "1 Disneyworld Way, Orlando, Florida").first
 l0  = Place.where(name: "83 E Longview").first 
-l0b = Place.where(name: "kansas plains view.. ahh.. the best.. with cows!").first 
+l0b = Place.where(name: "kansas plains").first 
 l1  = Place.where(name: "Kansas City").first 
 l2  = Place.where(name: "Witchita").first 
 l3  = Place.where(name: "Tulsa").first 
@@ -64,24 +64,24 @@ l5  = Place.where(name: "Rocky Mountain NP").first
 l5b = Place.where(name: "way to Arches").first
 l6  = Place.where(name: "Arches NP").first 
 
-Route.create trip_id: t1.id, start_location: l0.id, end_location: l1.id, distance: 100
-Route.create trip_id: t1.id, start_location: l1.id, end_location: l2.id, distance: 200
-Route.create trip_id: t1.id, start_location: l2.id, end_location: l3.id, distance: 300
-Route.create trip_id: t1.id, start_location: l3.id, end_location: l4.id, distance: 400
-Route.create trip_id: t1.id, start_location: l4.id, end_location: l5.id, distance: 500
-Route.create trip_id: t1.id, start_location: l5.id, end_location: l6.id, distance: 600
-Route.create trip_id: t1.id, start_location: l6.id, end_location: l0.id, distance: 700
-Route.create trip_id: t2.id, start_location: l_1.id, end_location: l_2.id
+Route.create trip_id: t1.id, start_place: l0.id, end_place: l1.id, distance: 100
+Route.create trip_id: t1.id, start_place: l1.id, end_place: l2.id, distance: 200
+Route.create trip_id: t1.id, start_place: l2.id, end_place: l3.id, distance: 300
+Route.create trip_id: t1.id, start_place: l3.id, end_place: l4.id, distance: 400
+Route.create trip_id: t1.id, start_place: l4.id, end_place: l5.id, distance: 500
+Route.create trip_id: t1.id, start_place: l5.id, end_place: l6.id, distance: 600
+Route.create trip_id: t1.id, start_place: l6.id, end_place: l0.id, distance: 700
+Route.create trip_id: t2.id, start_place: l_1.id, end_place: l_2.id
 
-ro1 = Route.where(trip_id: t2.id, start_location: l_1.id, end_location: l_2.id).first
+ro1 = Route.where(trip_id: t2.id, start_place: l_1.id, end_place: l_2.id).first
 
-rt1 = Route.where(trip_id: t1.id, start_location: l0.id, end_location: l1.id).first
-rt2 = Route.where(trip_id: t1.id, start_location: l1.id, end_location: l2.id).first
-rt3 = Route.where(trip_id: t1.id, start_location: l2.id, end_location: l3.id).first
-rt4 = Route.where(trip_id: t1.id, start_location: l3.id, end_location: l4.id).first
-rt5 = Route.where(trip_id: t1.id, start_location: l4.id, end_location: l5.id).first
-rt6 = Route.where(trip_id: t1.id, start_location: l5.id, end_location: l6.id).first
-rt7 = Route.where(trip_id: t1.id, start_location: l6.id, end_location: l0.id).first
+rt1 = Route.where(trip_id: t1.id, start_place: l0.id, end_place: l1.id).first
+rt2 = Route.where(trip_id: t1.id, start_place: l1.id, end_place: l2.id).first
+rt3 = Route.where(trip_id: t1.id, start_place: l2.id, end_place: l3.id).first
+rt4 = Route.where(trip_id: t1.id, start_place: l3.id, end_place: l4.id).first
+rt5 = Route.where(trip_id: t1.id, start_place: l4.id, end_place: l5.id).first
+rt6 = Route.where(trip_id: t1.id, start_place: l5.id, end_place: l6.id).first
+rt7 = Route.where(trip_id: t1.id, start_place: l6.id, end_place: l0.id).first
 
 WayPlace.create name: "see the Kansas plains",  place_id: l0b.id, route_id: rt1.id
 WayPlace.create name: "Glenn Canyon",            place_id: l5b.id, route_id: rt6.id
@@ -106,7 +106,7 @@ Activity.create name: "Arches NP", activity_type: at3.id, cost: 30, place_id: l6
 Activity.create name: "Delicate Arch", activity_type: at3.id, cost: 0, place_id: l6.id
 Activity.create name: "Solid Arch", activity_type: at3.id, cost: 0, place_id: l6.id
 Activity.create name: "Lonely Arch", activity_type: at3.id, cost: 0, place_id: l6.id
-
+Activity.create name: "view.. ahh.. the best.. with cows!", activity_type: at3.id, cost: 0, place_id: l0b.id
 
 
 

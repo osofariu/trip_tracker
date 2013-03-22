@@ -1,20 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @trip.name %>
-</p>
+<h1>Trip <%= @trip.name %> </h1>
+<p><div class="trip_description">
+	<%= @trip.description %>
+</div></p>
 
-<p>
-  <b>Description:</b>
-  <%= @trip.description %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @trip.user_id %>
-</p>
-
+<table id="routes">
+	<%= render @routes %>
+</table>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>

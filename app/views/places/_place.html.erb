@@ -1,0 +1,10 @@
+
+<% places.each do |place| %>
+	<ul>
+	<% place.get_activities.each do |activity| %>
+		<li>
+			<%= activity.name %> (<%= activity.get_type_name %>)
+		</li>
+	<% end %>
+	</ul>
+<% end %>
