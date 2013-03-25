@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: tester1
-  password_digest: company1
+  id: 1
+  name: ovi_test
+  password_digest: $2a$10$AUShKxaYwtAhmhltvy6bAevbtIWnbhlcI.52neIvijAwItq.u6TkG
 
-two:
-  name: tester2
-  password_digest: test123
+other:
+  id: 2
+  name: public_test
+  password_digest: $2a$10$tKnRbfg96r/OecEyn3QhseDfEAhbbBtdqIWz203TZ0uXM9ItEGji2

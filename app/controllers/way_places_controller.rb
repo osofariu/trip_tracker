@@ -1,4 +1,6 @@
 class WayPlacesController < ApplicationController
+  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  
   # GET /way_places
   # GET /way_places.json
   def index

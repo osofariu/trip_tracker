@@ -9,5 +9,10 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  def setup_auth_for_testing
+    @user = users(:one)
+    @request.session["user_id"] = @user.id
+    @request.session["user_name"] = @user.name
+  end
   # Add more helper methods to be used by all tests here...
 end

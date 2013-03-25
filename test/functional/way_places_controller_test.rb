@@ -2,6 +2,7 @@ require 'test_helper'
 
 class WayPlacesControllerTest < ActionController::TestCase
   setup do
+    setup_auth_for_testing
     @way_place = way_places(:one)
     @place3 = places(:three)
   end

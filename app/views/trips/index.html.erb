@@ -1,27 +1,30 @@
-<h1>Listing trips</h1>
-
-<table>
+<table class="border-table">
+  <col style="width:25%">
+  <col style="width:60%">
+  <col style="width:5%">
+  <col style="width:5%">
+  <col style="width:5%">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <td colspan="5"><h1>Listing trips</h1>
+</td>
 
 <% @trips.each do |trip| %>
   <tr>
     <td><%= trip.name %></td>
     <td><%= trip.description %></td>
-    <td><%= trip.user_id %></td>
     <td><%= link_to 'Show', trip %></td>
     <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
-    <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Remove', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+  <tr>
+    <td id="separator" colspan="5">
+      
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Trip', new_trip_path %>
+<%= link_to '[New Trip]', new_trip_path %>
+<%= link_to '[Home]', root_path %>

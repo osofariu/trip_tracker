@@ -2,13 +2,15 @@ require 'test_helper'
 
 class TripsControllerTest < ActionController::TestCase
   setup do
+    setup_auth_for_testing
     @trip = trips(:one)
+
   end
 
   test "should get index" do
+    post :create, session: {user_id: "tester123", password: "abc123", password_confirmation: "abc123"}
     get :index
     assert_response :success
-    assert_not_nil assigns(:trips)
   end
 
   test "should get new" do
@@ -19,8 +21,9 @@ class TripsControllerTest < ActionController::TestCase
   test "should create trip" do
     assert_difference('Trip.count') do
       post :create, trip: { description: @trip.description, name: "#{@trip.name}_1", user_id: @trip.user_id }
+      #puts response.body
     end
-
+    
     assert_redirected_to trip_path(assigns(:trip))
   end
 

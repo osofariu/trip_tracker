@@ -1,24 +1,32 @@
 TripTracker::Application.routes.draw do
-  resources :places
+  get "welcome/index"
 
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create 
+    delete 'logout' => :destroy
+  end
+
+get 'admin' => 'admin#index'
+get 'logout' => 'sessions#destroy'
+
+  resources :places do
+    collection do
+      get 'by_name'
+    end
+  end
 
   resources :activity_types
 
-
   resources :activities
-
 
   resources :users
 
-
   resources :way_places
-
 
   resources :routes
 
-
   resources :trips
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -69,7 +77,7 @@ TripTracker::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'trips#index'
+  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

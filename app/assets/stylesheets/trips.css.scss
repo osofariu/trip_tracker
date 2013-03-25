@@ -16,6 +16,8 @@
 
 	table {
 		border-collapse: collapse;
+		max-width: "800px";
+		table-layout: fixed;
 	}
 
 	table tr td {
@@ -23,6 +25,15 @@
 		vertical-align: top;
 	}
 
+	table, th, td
+	{
+
+	}
+
+	.border-table {
+		//border: 1px solid black;
+		width:70%;
+	}
 
 	p.normal {font-weight:normal;}
 	p.light {font-weight:lighter;}
@@ -35,7 +46,12 @@
 
 	.action_desc {
 		position:relative;
-		top:5px;	
+		top:5px;
+		vertical-align: top;
+	}
+
+	.wayplace_name {
+		vertical-align: center;
 	}
 
 	#trip_description {
@@ -43,6 +59,10 @@
 		margin-top: 1em;
 		border-bottom: 2px dotted #77d;
 		min-height: 50px;
+	}
+
+	#separator {
+		border-bottom: 1px dotted #77d;
 	}
 
 	.place_name {

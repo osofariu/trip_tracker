@@ -26,17 +26,24 @@ at3 = ActivityType.where(activity_type: "Sightsee").first
 at5 = ActivityType.where(activity_type: "Twittle thumbs").first
 at6 = ActivityType.where(activity_type: "See friends").first
 
+User.create name: "ovi_dev",      password: "st3rk3s", password_confirmation: "st3rk3s"
+User.create name: "public1_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
+User.create name: "public2_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
 
-User.create name: "tester1", password: "test123", password_confirmation: "test123"
-User.create name: "tester2", password: "test321", password_confirmation: "test321"
-User.create name: "tester3", password: "s3kr3t", password_confirmation: "s3kr3t"
+u1 = User.where(name: "ovi_dev").first
+u2 = User.where(name: "public1_dev").first
+u3 = User.where(name: "public2_dev").first
 
-u1 = User.where(name: "tester1").first
-u2 = User.where(name: "tester2").first
-u3 = User.where(name: "tester3").first
+Trip.create name: "TGA2", description: \
+  "Cross-country trip from Columbus to Seattle. Duration is approximately 6-7 weeks.\
+  We will see family and friends along the way, and stop by some National Parks as well. \
+  As for cities, we're interested in seeing Minneapolis. ", user_id: u1.id
 
-Trip.create name: "TGA2", description: "cross-country trip", user_id: u1.id
-Trip.create name: "Disneyworld trip", description: "visiting Orlando for the first time", user_id: u2.id
+Trip.create name: "Disneyworld trip", description: "Visiting Orlando for the first time \
+  so the children can have some fun.  Parents will be drinking at the bars while grandpa \
+  (thanks grandpa!) entertains the little tikes.  We will also stop by Opasola to purchase \
+  some pot.  Word is it's the best there.", user_id: u2.id
+
 t1 = Trip.where(user_id: u1.id, name: "TGA2").first
 t2 = Trip.where(user_id: u2.id, name: "Disneyworld trip").first
 
@@ -48,6 +55,7 @@ Place.create name: "Kansas City"
 Place.create name: "Witchita"
 Place.create name: "Tulsa"
 Place.create name: "Denver"
+Place.create name: "Mount Evans"
 Place.create name: "Rocky Mountain NP"
 Place.create name: "way to Arches"
 Place.create name: "Arches NP"
@@ -60,34 +68,36 @@ l1  = Place.where(name: "Kansas City").first
 l2  = Place.where(name: "Witchita").first 
 l3  = Place.where(name: "Tulsa").first 
 l4  = Place.where(name: "Denver").first 
+l4b = Place.where(name: "Mount Evans").first
 l5  = Place.where(name: "Rocky Mountain NP").first 
 l5b = Place.where(name: "way to Arches").first
 l6  = Place.where(name: "Arches NP").first 
 
-Route.create trip_id: t1.id, start_place: l0.id, end_place: l1.id, distance: 100
-Route.create trip_id: t1.id, start_place: l1.id, end_place: l2.id, distance: 200
-Route.create trip_id: t1.id, start_place: l2.id, end_place: l3.id, distance: 300
-Route.create trip_id: t1.id, start_place: l3.id, end_place: l4.id, distance: 400
-Route.create trip_id: t1.id, start_place: l4.id, end_place: l5.id, distance: 500
-Route.create trip_id: t1.id, start_place: l5.id, end_place: l6.id, distance: 600
-Route.create trip_id: t1.id, start_place: l6.id, end_place: l0.id, distance: 700
-Route.create trip_id: t2.id, start_place: l_1.id, end_place: l_2.id
+Route.create trip_id: t1.id, start_place: l0.id, end_place: l1.id, distance: 100  # to Kansas
+Route.create trip_id: t1.id, start_place: l1.id, end_place: l2.id, distance: 200  # to Witchita
+Route.create trip_id: t1.id, start_place: l2.id, end_place: l3.id, distance: 300  # to Tulsa
+Route.create trip_id: t1.id, start_place: l3.id, end_place: l4.id, distance: 400  # to Denver
+Route.create trip_id: t1.id, start_place: l4.id, end_place: l5.id, distance: 500  # to Rocky Mountain NP
+Route.create trip_id: t1.id, start_place: l5.id, end_place: l6.id, distance: 600  # to Arches
+Route.create trip_id: t1.id, start_place: l6.id, end_place: l0.id, distance: 700  # to Home
+Route.create trip_id: t2.id, start_place: l_1.id, end_place: l_2.id # to Disneyworld
 
-ro1 = Route.where(trip_id: t2.id, start_place: l_1.id, end_place: l_2.id).first
-
-rt1 = Route.where(trip_id: t1.id, start_place: l0.id, end_place: l1.id).first
-rt2 = Route.where(trip_id: t1.id, start_place: l1.id, end_place: l2.id).first
-rt3 = Route.where(trip_id: t1.id, start_place: l2.id, end_place: l3.id).first
-rt4 = Route.where(trip_id: t1.id, start_place: l3.id, end_place: l4.id).first
-rt5 = Route.where(trip_id: t1.id, start_place: l4.id, end_place: l5.id).first
-rt6 = Route.where(trip_id: t1.id, start_place: l5.id, end_place: l6.id).first
-rt7 = Route.where(trip_id: t1.id, start_place: l6.id, end_place: l0.id).first
+rt1 = Route.where(trip_id: t1.id, start_place: l0.id, end_place: l1.id).first # to Kansas
+rt2 = Route.where(trip_id: t1.id, start_place: l1.id, end_place: l2.id).first # to Witchita
+rt3 = Route.where(trip_id: t1.id, start_place: l2.id, end_place: l3.id).first # to Tulsa
+rt4 = Route.where(trip_id: t1.id, start_place: l3.id, end_place: l4.id).first # to Denver
+rt5 = Route.where(trip_id: t1.id, start_place: l4.id, end_place: l5.id).first # to Rocky Mountain NP
+rt6 = Route.where(trip_id: t1.id, start_place: l5.id, end_place: l6.id).first # to Arches
+rt7 = Route.where(trip_id: t1.id, start_place: l6.id, end_place: l0.id).first # to Home
+ro1 = Route.where(trip_id: t2.id, start_place: l_1.id, end_place: l_2.id).first # disney
 
 WayPlace.create name: "see the Kansas plains",  place_id: l0b.id, route_id: rt1.id
 WayPlace.create name: "Glenn Canyon",            place_id: l5b.id, route_id: rt6.id
 WayPlace.create name: "other things to see on the way to Arches", place_id: l5b.id, route_id: rt6.id
+WayPlace.create name: "irrelevant.. use place name!", place_id: l4b.id, route_id: rt5.id
 
 Activity.create name: "see Disneyworld", activity_type: at3.id, cost: 1500
+
 Activity.create name: "trip planning", activity_type: at5.id, cost: 0, place_id: l0.id
 Activity.create name: "visit Brian and Tracey", activity_type: at6.id, cost: 0, place_id: l1.id
 Activity.create name: "visit brother", activity_type: at6.id, cost: 0, place_id: l2.id

@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy, :by_name]
+
   # GET /places
   # GET /places.json
   def index
@@ -78,6 +80,20 @@ class PlacesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to places_url }
       format.json { head :no_content }
+    end
+  end
+
+  def by_name
+    @places_match=Array.new
+    if params[:name].empty?
+      return @places_match
+    end
+    
+    Place.all.each do |place|
+      place_pat = Regexp.compile(params[:name])  
+      if place_pat =~ place.name
+        @places_match << place
+      end
     end
   end
 end

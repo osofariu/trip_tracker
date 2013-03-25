@@ -1,0 +1,25 @@
+<p>
+	
+	Looking for places matching "<%= params[:name] %>"
+<table border="1">
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Notes</th>
+	</tr>
+	<tr>
+	<% @places_match.each do |pl| %>
+		<td> <%= pl.id %></td>
+		<td> <%= pl.name %></td>
+		<td><%= pl.notes %></td>
+	<% end %>
+	</tr> 
+</table>
+</p>
+
+<p>
+	Controller/action: <%= params[:controller] %>/<%= params[:action] %>
+</p>
+<p>
+	Go <%= link_to "Home", root_path %>.
+</p>

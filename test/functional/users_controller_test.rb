@@ -2,8 +2,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    setup_auth_for_testing
     @user_attributes = {
-      name:                   "Gosh Tester", 
+      name:                   "GoshTester", 
       password:               "test123", 
       password_confirmation:  "test123"
     }

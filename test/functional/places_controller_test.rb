@@ -3,6 +3,8 @@ require 'test_helper'
 class PlacesControllerTest < ActionController::TestCase
   setup do
     @place = places(:one)
+    @user = users(:one)
+    setup_auth_for_testing
   end
 
   test "should get index" do

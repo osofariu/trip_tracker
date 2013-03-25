@@ -8,6 +8,12 @@
 </head>
 <body class="<%= controller.controller_name %>">
 
+<% if session[:user_id] %>
+	You are logged in as <%= session[:user_name] %> <%= link_to "[Log out]", logout_path %>
+<% else %>
+	You are not logged in <%= link_to "[Log in]", login_path  %>
+<% end %>
+
 <%= yield %>
 
 </body>

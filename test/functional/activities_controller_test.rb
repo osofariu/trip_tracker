@@ -3,6 +3,7 @@ require 'test_helper'
 class ActivitiesControllerTest < ActionController::TestCase
   setup do
     @activity = activities(:one)
+    setup_auth_for_testing
   end
 
   test "should get index" do

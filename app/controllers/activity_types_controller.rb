@@ -1,4 +1,5 @@
 class ActivityTypesController < ApplicationController
+  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   # GET /activity_types
   # GET /activity_types.json
   def index
