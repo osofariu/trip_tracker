@@ -27,7 +27,6 @@ class RoutesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @route }
     end
-
   rescue  ActiveRecord::RecordNotFound
     redirect_to welcome_index_path, notice: "This route cannot be found." and return
     

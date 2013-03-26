@@ -21,6 +21,8 @@ class PlacesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @place }
     end
+  rescue  ActiveRecord::RecordNotFound
+    redirect_to welcome_index_path, notice: "This place cannot be found." and return
   end
 
   # GET /places/new

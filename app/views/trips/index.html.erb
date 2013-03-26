@@ -1,20 +1,14 @@
 <table class="border-table">
   <col style="width:25%">
   <col style="width:60%">
-  <col style="width:5%">
-  <col style="width:5%">
-  <col style="width:5%">
   <tr>
     <td colspan="5"><h1>Listing trips</h1>
 </td>
 
 <% @trips.each do |trip| %>
   <tr>
-    <td><%= trip.name %></td>
+    <td><%= link_to trip.name, trip %></td>
     <td><%= trip.description %></td>
-    <td><%= link_to 'Show', trip %></td>
-    <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
-    <td><%= link_to 'Remove', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
   <tr>
     <td id="separator" colspan="5">

@@ -30,6 +30,8 @@ class TripsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @trip }
     end
+    rescue  ActiveRecord::RecordNotFound
+    redirect_to welcome_index_path, notice: "This trip cannot be found." and return
   end
 
   # GET /trips/new

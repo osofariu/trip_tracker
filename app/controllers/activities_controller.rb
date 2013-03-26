@@ -20,6 +20,8 @@ class ActivitiesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @activity }
     end
+    rescue  ActiveRecord::RecordNotFound
+    redirect_to welcome_index_path, notice: "This activity cannot be found." and return
   end
 
   # GET /activities/new

@@ -5,12 +5,12 @@
 	<col style="width:20%">
 	<col style="width:75%">
 	<tr>
-		<td colspan="3"><h1>Trip <%= @trip.name %> </h1></td>
+		<td colspan="3"><h1>Trip <%= @trip.name %> </h1><%= link_to "[edit description]", edit_trip_path(@trip) %></td>
 	</tr>
 	<tr>
 		<td colspan="3">
 			<div id="trip_description">
-				<%= @trip.description %>
+				<%= @trip.description %> 
 			</div>
 		</td>
 	</tr>

@@ -14,23 +14,23 @@
 		<li>Once you have a skeleton of your trip you can add activities that you plan to do at each place</li>
 	</ul>
 
-	<p>
+	<%if session[:user_id] %>
+		<p>
+			Testing pages below:
+		</p>
+		<ul>
+			<li>Look for current places:
+				<%= form_tag("/places/by_name", method: "get") do %>
+				<%= label_tag(:name, "Place name:") %>
+				<%= text_field_tag(:name) %>
+				<%= submit_tag("Search") %>
+				<% end %>
+			</li>
+				<li><%= link_to "My trips", trips_path %></li>
+		</ul>
+	<% else %>
+		<p>
 		Please <%= link_to "log in", login_path %> to start using TripTracker.
 	</p>
-
-	<%if session[:user_id] %>
-	<p>
-		Testing pages below:
-	</p>
-	<ul>
-		<li>Look for current places:
-			<%= form_tag("/places/by_name", method: "get") do %>
-			<%= label_tag(:name, "Place name:") %>
-			<%= text_field_tag(:name) %>
-			<%= submit_tag("Search") %>
-			<% end %>
-		</li>
-			<li><%= link_to "My trips", trips_path %></li>
-	</ul>
 	<% end %>
 	

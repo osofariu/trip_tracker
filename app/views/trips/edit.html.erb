@@ -1,5 +1,7 @@
 <h1>Editing trip</h1>
-
+<p>
+	<%= link_to "Delete trip", @trip, method: :delete,  data: {confirm: "Are you sure you want to delete this trip?"}%>
+</p>
 <%= render 'form' %>
 
 <%= link_to 'Show', @trip %> |

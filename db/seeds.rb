@@ -14,109 +14,129 @@ Trip.delete_all
 Place.delete_all
 WayPlace.delete_all
 
-ActivityType.create activity_type: "Hotel"
-ActivityType.create activity_type: "Camping"
-ActivityType.create activity_type: "Sightsee"
-ActivityType.create activity_type: "Twittle thumbs"
-ActivityType.create activity_type: "See friends"
+u1 = User.new name: "ovi_dev",      password: "st3rk3s", password_confirmation: "st3rk3s"
+u2 = User.new name: "public1_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
+u3 = User.new name: "public2_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
+puts "Created users" if u1.save && u2.save && u3.save
 
-at1 = ActivityType.where(activity_type: "Hotel").first
-at2 = ActivityType.where(activity_type: "Camping").first
-at3 = ActivityType.where(activity_type: "Sightsee").first
-at5 = ActivityType.where(activity_type: "Twittle thumbs").first
-at6 = ActivityType.where(activity_type: "See friends").first
+at_stay_h =   ActivityType.new activity_type: "Hotel"
+at_stay_c =   ActivityType.new activity_type: "Camping"
+at_stay_f =   ActivityType.new activity_type: "Stay with Friends"
+at_see =      ActivityType.new activity_type: "Sightsee"
+at_nada =     ActivityType.new activity_type: "Twittle thumbs"
+at_friends =  ActivityType.new activity_type: "See friends"
+puts "Created ActivityTypes" if at_stay_h.save && at_stay_c.save && at_stay_f.save && at_see.save && at_nada.save && at_friends.save
 
-User.create name: "ovi_dev",      password: "st3rk3s", password_confirmation: "st3rk3s"
-User.create name: "public1_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
-User.create name: "public2_dev",  password: "st3rk3s", password_confirmation: "st3rk3s"
-
-u1 = User.where(name: "ovi_dev").first
-u2 = User.where(name: "public1_dev").first
-u3 = User.where(name: "public2_dev").first
-
-Trip.create name: "TGA2", description: \
+t1 = Trip.new name: "TGA2", description: \
   "Cross-country trip from Columbus to Seattle. Duration is approximately 6-7 weeks.\
   We will see family and friends along the way, and stop by some National Parks as well. \
   As for cities, we're interested in seeing Minneapolis. ", user_id: u1.id
+puts "Created trip 1" if t1.save 
 
-Trip.create name: "Disneyworld trip", description: "Visiting Orlando for the first time \
+p1  = Place.new name: "83 E Longview"
+p2w = Place.new name: "kansas plains"
+p2  = Place.new name: "Kansas City"
+puts "Created first places" if p1.save && p2w.save && p2.save
+
+rt1 = Route.new trip_id: t1.id, start_place: p1.id, end_place: p2.id, distance: 650 
+puts "Created the first route" if rt1.save
+
+# things to do:
+a1  = Activity.new name: "trip planning", activity_type: at_nada.id, cost: 0, place_id: p1.id
+a2  = Activity.new name: "visit Brian and Tracey", activity_type: at_friends.id, cost: 0, place_id: p2.id
+a3  = Activity.new name: "stay with Brian and Tracey", activity_type: at_stay_f.id, cost: 0, place_id: p2.id
+a3b = Activity.new name: "view.. ahh.. the best.. with cows!", activity_type: at_see.id, cost: 0, place_id: p2w.id
+puts "Created activities for first places" if a1.save && a2.save && a3.save && a3b.save
+
+wp1 = WayPlace.new name: "see the Kansas plains", place_id: p2w.id, route_id: rt1.id
+puts "Saved first Wayplace" if wp1.save
+
+p3 = Place.new name: "Witchita"
+p4 = Place.new name: "Tulsa"
+puts "Created places in witchita amd Tulsa" if p3.save && p4.save
+
+rt2 = Route.new trip_id: t1.id, start_place: p2.id, end_place: p3.id, distance: 745  
+rt3 = Route.new trip_id: t1.id, start_place: p3.id, end_place: p4.id, distance: 435
+puts "Created routes for Witchita & Tulsa" if rt2.save && rt3.save
+
+a4 = Activity.new name: "visit Diana's brother", activity_type: at_friends.id, cost: 0, place_id: p3.id
+a5 = Activity.new name: "stay with Diana's brother", activity_type: at_stay_f.id, cost: 0, place_id: p3.id
+a6 = Activity.new name: "visit Diana's parents", activity_type: at_friends.id, cost: 0, place_id: p4.id
+a7 = Activity.new name: "stay with Diana's parents", activity_type: at_stay_f.id, cost: 0, place_id: p4.id
+puts "Created Kansas activities" if a4.save && a5.save && a6.save && a7.save
+
+# Colorado
+p5w = Place.new name: "on the way to Denver"
+p5  = Place.new name: "Denver"
+p6w = Place.new name: "Mount Evans"
+p6  = Place.new name: "Rocky Mountain NP"
+puts "Created Colorado places" if p5w.save && p5.save && p6w.save && p6.save
+
+rt4 = Route.new trip_id: t1.id, start_place: p4.id, end_place: p5.id, distance: 1030
+rt5 = Route.new trip_id: t1.id, start_place: p5.id, end_place: p6.id, distance: 731  
+puts "Created Colorado and Utah routes" if rt4 && rt5
+
+wp2 = WayPlace.new name: "ok", place_id: p5w.id, route_id: rt4.id
+puts "saving wayplace 2" if wp2.save
+
+a8  = Activity.new name: "see downtown Denver", activity_type: at_see.id, cost: 0, place_id: p5.id
+a9  = Activity.new name: "Holiday Inn", activity_type: at_stay_h.id, cost: 70, place_id: p5w.id
+a10 = Activity.new name: "Sleep Inn", activity_type: at_stay_h.id, cost: 50, place_id: p5.id
+a11 = Activity.new name: "Denver Zoo", activity_type: at_see.id, cost: 25, place_id: p5.id
+a12 = Activity.new name: "Museum of Colorado history", activity_type: at_see.id, cost: 15, place_id: p5w.id
+a13 = Activity.new name: "Rocky Mountain NP", activity_type: at_see.id, cost: 20, place_id: p6.id
+a14 = Activity.new name: "Camping - Rocky Mountain NP", activity_type: at_see.id, cost: 17, place_id: p6.id
+a15 = Activity.new name: "see sunset", activity_type: at_see.id, cost: 0, place_id: p5w.id
+puts "Colorado activities" if a8.save && a9.save && a10.save && a11.save && a12.save && a13.save && a14.save && a15.save
+
+p7w = Place.new name: "way to Arches"
+p7  = Place.new name: "Arches NP"
+puts "Created arches places" if p7w.save && p7.save
+
+rt5 = Route.new trip_id: t1.id, start_place: p6.id, end_place: p7.id, distance: 731
+puts "Created route to Arches" if rt5.save
+
+rt6 = Route.new trip_id: t1.id, start_place: p7.id, end_place: p1.id, distance: 731
+puts "Created route to home" if rt6.save
+
+wp3 = WayPlace.new name: "ok", place_id: p6w.id, route_id: rt5.id
+wp4 = WayPlace.new name: "ok", place_id: p7w.id, route_id: rt6.id
+puts "saving wayplaces 3,4" if wp3.save && wp4.save
+
+a16 = Activity.new name: "drive through Glen Canyon", activity_type: at_see.id, cost: 0, place_id: p7w.id
+a17 = Activity.new name: "Lake Powell", activity_type: at_see.id, cost: 0, place_id: p7w.id
+a18 = Activity.new name: "Camping - Lake Tenting resort", activity_type: at_stay_c.id, cost: 14, place_id: p7w.id
+a19 = Activity.new name: "Arches NP", activity_type: at_see.id, cost: 30, place_id: p7.id
+a20 = Activity.new name: "Delicate Arch", activity_type: at_see.id, cost: 0, place_id: p7.id
+a21 = Activity.new name: "Solid Arch", activity_type: at_see.id, cost: 0, place_id: p7w.id
+a22 = Activity.new name: "Lonely Arch", activity_type: at_see.id, cost: 0, place_id: p7w.id
+puts "Created final activities" if a16.save && a17.save && a18.save && a19.save && a20.save && a21.save && a22.save 
+
+
+
+# minimal trip
+trb = Trip.new name: "Disneyworld trip", description: "Visiting Orlando for the first time \
   so the children can have some fun.  Parents will be drinking at the bars while grandpa \
   (thanks grandpa!) entertains the little tikes.  We will also stop by Opasola to purchase \
-  some pot.  Word is it's the best there.", user_id: u2.id
+  some chocolate.  Word is it's the best there.", user_id: u2.id
+puts "Created second trip" if trb.save
 
-t1 = Trip.where(user_id: u1.id, name: "TGA2").first
-t2 = Trip.where(user_id: u2.id, name: "Disneyworld trip").first
+pb1  = Place.new name: "123 Pipers Squeak Dr."
+pb2w = Place.new name: "state line - crossed for the first time"
+pb2  = Place.new name: "1 Disneyworld Way, Orlando, Florida"
+puts "Created pb places" if pb1.save && pb2.save
 
-Place.create name: "123 Pipers Squeak Dr."
-Place.create name: "1 Disneyworld Way, Orlando, Florida"
-Place.create name: "83 E Longview"
-Place.create name: "kansas plains"
-Place.create name: "Kansas City"
-Place.create name: "Witchita"
-Place.create name: "Tulsa"
-Place.create name: "Denver"
-Place.create name: "Mount Evans"
-Place.create name: "Rocky Mountain NP"
-Place.create name: "way to Arches"
-Place.create name: "Arches NP"
+rtb1 = Route.new trip_id: trb.id, start_place: pb1.id, end_place: pb2.id, distance: 120
+puts "Created rtb route" if rtb1.save
 
-l_1 = Place.where(name: "123 Pipers Squeak Dr.").first
-l_2 = Place.where(name: "1 Disneyworld Way, Orlando, Florida").first
-l0  = Place.where(name: "83 E Longview").first 
-l0b = Place.where(name: "kansas plains").first 
-l1  = Place.where(name: "Kansas City").first 
-l2  = Place.where(name: "Witchita").first 
-l3  = Place.where(name: "Tulsa").first 
-l4  = Place.where(name: "Denver").first 
-l4b = Place.where(name: "Mount Evans").first
-l5  = Place.where(name: "Rocky Mountain NP").first 
-l5b = Place.where(name: "way to Arches").first
-l6  = Place.where(name: "Arches NP").first 
+wpb1 = WayPlace.new name: "bogus", route_id: rtb1.id, place_id: pb2w.id
+puts "Created wpb WayPlace"
 
-Route.create trip_id: t1.id, start_place: l0.id, end_place: l1.id, distance: 100  # to Kansas
-Route.create trip_id: t1.id, start_place: l1.id, end_place: l2.id, distance: 200  # to Witchita
-Route.create trip_id: t1.id, start_place: l2.id, end_place: l3.id, distance: 300  # to Tulsa
-Route.create trip_id: t1.id, start_place: l3.id, end_place: l4.id, distance: 400  # to Denver
-Route.create trip_id: t1.id, start_place: l4.id, end_place: l5.id, distance: 500  # to Rocky Mountain NP
-Route.create trip_id: t1.id, start_place: l5.id, end_place: l6.id, distance: 600  # to Arches
-Route.create trip_id: t1.id, start_place: l6.id, end_place: l0.id, distance: 700  # to Home
-Route.create trip_id: t2.id, start_place: l_1.id, end_place: l_2.id # to Disneyworld
+acb1 = Activity.new name: "see Disneyworld", activity_type: at_see.id, cost: 1500
+puts "Created activity at destination" if acb1.save
 
-rt1 = Route.where(trip_id: t1.id, start_place: l0.id, end_place: l1.id).first # to Kansas
-rt2 = Route.where(trip_id: t1.id, start_place: l1.id, end_place: l2.id).first # to Witchita
-rt3 = Route.where(trip_id: t1.id, start_place: l2.id, end_place: l3.id).first # to Tulsa
-rt4 = Route.where(trip_id: t1.id, start_place: l3.id, end_place: l4.id).first # to Denver
-rt5 = Route.where(trip_id: t1.id, start_place: l4.id, end_place: l5.id).first # to Rocky Mountain NP
-rt6 = Route.where(trip_id: t1.id, start_place: l5.id, end_place: l6.id).first # to Arches
-rt7 = Route.where(trip_id: t1.id, start_place: l6.id, end_place: l0.id).first # to Home
-ro1 = Route.where(trip_id: t2.id, start_place: l_1.id, end_place: l_2.id).first # disney
 
-WayPlace.create name: "see the Kansas plains",  place_id: l0b.id, route_id: rt1.id
-WayPlace.create name: "Glenn Canyon",            place_id: l5b.id, route_id: rt6.id
-WayPlace.create name: "other things to see on the way to Arches", place_id: l5b.id, route_id: rt6.id
-WayPlace.create name: "irrelevant.. use place name!", place_id: l4b.id, route_id: rt5.id
 
-Activity.create name: "see Disneyworld", activity_type: at3.id, cost: 1500
-
-Activity.create name: "trip planning", activity_type: at5.id, cost: 0, place_id: l0.id
-Activity.create name: "visit Brian and Tracey", activity_type: at6.id, cost: 0, place_id: l1.id
-Activity.create name: "visit brother", activity_type: at6.id, cost: 0, place_id: l2.id
-Activity.create name: "visit parents", activity_type: at6.id, cost: 0, place_id:l3.id
-Activity.create name: "see downtown Denver", activity_type: at3.id, cost: 0, place_id: l4.id
-Activity.create name: "Holiday Inn", activity_type: at1.id, cost: 70, place_id: l4.id
-Activity.create name: "Denver Zoo", activity_type: at3.id, cost: 25, place_id: l4.id
-Activity.create name: "Museum of Denver history", activity_type: at3.id, cost: 15, place_id: l4.id
-Activity.create name: "Rocky Mountain NP", activity_type: at3.id, cost: 20, place_id: l5.id 
-Activity.create name: "Camping - Rocky Mountain NP", activity_type: at2.id, cost: 17, place_id: l5.id
-Activity.create name: "see sunset", activity_type: at3.id, cost: 0, place_id: l5b.id
-Activity.create name: "drive through Glen Canyon", activity_type: at3.id, cost: 0, place_id: l5b.id
-Activity.create name: "Lake Powell", activity_type: at3.id, cost: 0, place_id: l5b.id
-Activity.create name: "Camping - Lake Tenting resort", activity_type: at2.id, cost: 10, place_id: l5b.id
-Activity.create name: "Arches NP", activity_type: at3.id, cost: 30, place_id: l6.id
-Activity.create name: "Delicate Arch", activity_type: at3.id, cost: 0, place_id: l6.id
-Activity.create name: "Solid Arch", activity_type: at3.id, cost: 0, place_id: l6.id
-Activity.create name: "Lonely Arch", activity_type: at3.id, cost: 0, place_id: l6.id
-Activity.create name: "view.. ahh.. the best.. with cows!", activity_type: at3.id, cost: 0, place_id: l0b.id
 
 
 

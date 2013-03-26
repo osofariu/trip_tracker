@@ -20,6 +20,8 @@ class ActivityTypesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @activity_type }
     end
+  rescue  ActiveRecord::RecordNotFound
+    redirect_to welcome_index_path, notice: "This activity_type cannot be found." and return
   end
 
   # GET /activity_types/new
