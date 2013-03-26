@@ -56,7 +56,7 @@ a3  = Activity.new name: "stay with Brian and Tracey", activity_type: at_stay_f.
 a3b = Activity.new name: "view.. ahh.. the best.. with cows!", activity_type: at_see.id, cost: 0, place_id: p2w.id
 save_check "Create activities for first places", a1.save && a2.save && a3.save && a3b.save
 
-wp1 = WayPlace.new name: "see the Kansas plains", place_id: p2w.id, route_id: rt1.id
+wp1 = WayPlace.new place_id: p2w.id, route_id: rt1.id
 save_check "Saved first Wayplace", wp1.save
 
 p3 = Place.new name: "Witchita"
@@ -84,7 +84,7 @@ rt4 = Route.new trip_id: t1.id, start_place: p4.id, end_place: p5.id, distance: 
 rt5 = Route.new trip_id: t1.id, start_place: p5.id, end_place: p6.id, distance: 731  
 save_check "Create Colorado and Utah routes", rt4.save && rt5.save
 
-wp2 = WayPlace.new name: "ok", place_id: p5w.id, route_id: rt4.id
+wp2 = WayPlace.new place_id: p5w.id, route_id: rt4.id
 save_check "Create wayplace 2", wp2.save
 
 a8  = Activity.new name: "see downtown Denver", activity_type: at_see.id, cost: 0, place_id: p5.id
@@ -107,8 +107,8 @@ save_check "Create route to Arches", rt5.save
 rt6 = Route.new trip_id: t1.id, start_place: p7.id, end_place: p1.id, distance: 731
 save_check "Create route to home", rt6.save
 
-wp3 = WayPlace.new name: "ok", place_id: p6w.id, route_id: rt5.id
-wp4 = WayPlace.new name: "ok", place_id: p7w.id, route_id: rt6.id
+wp3 = WayPlace.new place_id: p6w.id, route_id: rt5.id
+wp4 = WayPlace.new place_id: p7w.id, route_id: rt6.id
 save_check "saving wayplaces 3,4", wp3.save && wp4.save
 
 a16 = Activity.new name: "drive through Glen Canyon", activity_type: at_see.id, cost: 0, place_id: p7w.id
@@ -137,7 +137,7 @@ save_check "Create pb places", pb1.save && pb2.save && pb2w.save
 rtb1 = Route.new trip_id: trb.id, start_place: pb1.id, end_place: pb2.id, distance: 120
 save_check "Create rtb route", rtb1.save
 
-wpb1 = WayPlace.new name: "bogus", route_id: rtb1.id, place_id: pb2w.id
+wpb1 = WayPlace.new route_id: rtb1.id, place_id: pb2w.id
 save_check "Create wpb WayPlace",  wpb1.save
 
 acb1 = Activity.new name: "see Disneyworld", activity_type: at_see.id, cost: 1500

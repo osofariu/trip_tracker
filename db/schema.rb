@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321193708) do
+ActiveRecord::Schema.define(:version => 20130326131415) do
 
   create_table "activities", :force => true do |t|
     t.integer  "activity_type"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20130321193708) do
   create_table "way_places", :force => true do |t|
     t.integer  "route_id"
     t.integer  "place_id"
-    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -20,7 +20,7 @@ class WayPlacesControllerTest < ActionController::TestCase
 
   test "should create way_place" do
     assert_difference('WayPlace.count') do
-      post :create, way_place: { name: @way_place.name, place_id: @place3.id, route_id: @way_place.route_id }
+      post :create, way_place: { place_id: @place3.id, route_id: @way_place.route_id }
     end
 
     assert_redirected_to way_place_path(assigns(:way_place))
@@ -37,7 +37,7 @@ class WayPlacesControllerTest < ActionController::TestCase
   end
 
   test "should update way_place" do
-    put :update, id: @way_place, way_place: { name: @way_place.name, place_id: @way_place.place_id, route_id: @way_place.route_id }
+    put :update, id: @way_place, way_place: { place_id: @way_place.place_id, route_id: @way_place.route_id }
     assert_redirected_to way_place_path(assigns(:way_place))
   end
 
