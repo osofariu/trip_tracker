@@ -41,6 +41,11 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
   end
 
+  def add_activity
+    @place = Place.find(params[:id])
+  end
+
+
   # POST /places
   # POST /places.json
   def create

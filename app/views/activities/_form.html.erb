@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+<p>
+  Place_id = <%= params[:place_id] %>
+</p>
+  <% if params[:place_id] %>
+     <div class="field">
+      <%= f.label :place_id %><br />
+      <%= f.number_field :place_id %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :activity_type %><br />
     <%= f.number_field :activity_type %>

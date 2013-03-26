@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 	
-<table width="800">
+<table width="800" border="1">
 	<col style="width:5%">
 	<col style="width:20%">
 	<col style="width:75%">
@@ -18,10 +18,11 @@
 	<% @routes.each do |route| %>
 		<tr>
 			<% if route == @first_route %>
-				<td class="place_name" colspan="3"><%= route.get_places[:start].name %> (HOME)</td>
+				<td class="place_name" colspan="2"><%= route.get_places[:start].name %> (HOME)</td>
 			<% else %>
-				<td class="place_name" colspan="3"><%= route.get_places[:start].name %></td>
+				<td class="place_name" colspan="2"><%= route.get_places[:start].name %></td>
 			<% end %>
+			<td class="add_activity"><%= link_to "Add Activity", controller: "activities", action: "new", place_id:route.get_places[:start].id  %>
 		</tr>
 
 		<tr id="start_places">
