@@ -1,15 +1,20 @@
 
 # TripTracker
 * Simple application to help you plan a roadtrip.
+* This application is still in its (early) infancy
+* This is my first Rails app, so I expect I am doing lots of things wrong.
 
-###QUESTIONS
+## Motivation
+I am creating this application mainly to learn Rails (and Ruby), but I do want to make it functional. I wanted a simple web application for tracking roadtrips - create a basic itinerary, and track what happens when on that trip, day-by-day.  
+
+###Questions
 * I am hard-coding fixure object it's so they can be reference from other objects. Is this ok?  Other ways to do this?
 * I am not sure I am putting all the logic in the right place.. betwee view, helper, controller, and model.
 * Would it help to add more associations between models using through: associations?
 * I need to separate data logically better so different users can't see others' data (previous one may address this too)
 
 
-###FUTURE
+###Future Plans
 * [isolate data exposure for controllers](https://github.com/voxdolo/decent_exposure)
 
 ## About This Application
