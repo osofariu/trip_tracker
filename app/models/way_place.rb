@@ -8,4 +8,12 @@ class WayPlace < ActiveRecord::Base
     to=Place.find(Route.find(route_id).end_place).name
     return "#{from} to #{to}"
   end
+
+    def cost_of_activities
+    cost = 0
+    Activity.where(place_id: self.place_id).each do |act|
+      cost += act.cost
+    end
+    return cost
+  end
 end

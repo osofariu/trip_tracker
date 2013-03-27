@@ -33,7 +33,9 @@ at_stay_f =   ActivityType.new activity_type: "Stay with Friends"
 at_see =      ActivityType.new activity_type: "Sightsee"
 at_nada =     ActivityType.new activity_type: "Twittle thumbs"
 at_friends =  ActivityType.new activity_type: "See friends"
-save_check "Create ActivityTypes", at_stay_h.save && at_stay_c.save && at_stay_f.save && at_see.save && at_nada.save && at_friends.save
+at_plan =     ActivityType.new activity_type: "Planning"
+at_misc =     ActivityType.new activity_type: "Miscellaneous"
+save_check "Create ActivityTypes", at_stay_h.save && at_stay_c.save && at_stay_f.save && at_see.save && at_nada.save && at_friends.save && at_plan.save && at_misc.save
 
 t1 = Trip.new name: "TGA2", description: \
   "Cross-country trip from Columbus to Seattle. Duration is approximately 6-7 weeks.\
@@ -50,11 +52,13 @@ rt1 = Route.new trip_id: t1.id, start_place: p1.id, end_place: p2.id, distance: 
 save_check "Create the first route", rt1.save
 
 # things to do:
-a1  = Activity.new name: "trip planning", activity_type: at_nada.id, cost: 0, place_id: p1.id
+a1  = Activity.new name: "trip planning", activity_type: at_plan.id, cost: 0, place_id: p1.id
+a1b  = Activity.new name: "packing", activity_type: at_plan.id, cost: 0, place_id: p1.id
+a1c  = Activity.new name: "buying supplies", activity_type: at_plan.id, cost: 700, place_id: p1.id
 a2  = Activity.new name: "visit Brian and Tracey", activity_type: at_friends.id, cost: 0, place_id: p2.id
 a3  = Activity.new name: "stay with Brian and Tracey", activity_type: at_stay_f.id, cost: 0, place_id: p2.id
 a3b = Activity.new name: "view.. ahh.. the best.. with cows!", activity_type: at_see.id, cost: 0, place_id: p2w.id
-save_check "Create activities for first places", a1.save && a2.save && a3.save && a3b.save
+save_check "Create activities for first places", a1.save && a1b.save && a1c.save &&a2.save && a3.save && a3b.save
 
 wp1 = WayPlace.new place_id: p2w.id, route_id: rt1.id
 save_check "Saved first Wayplace", wp1.save
@@ -95,7 +99,8 @@ a12 = Activity.new name: "Museum of Colorado history", activity_type: at_see.id,
 a13 = Activity.new name: "Rocky Mountain NP", activity_type: at_see.id, cost: 20, place_id: p6.id
 a14 = Activity.new name: "Camping - Rocky Mountain NP", activity_type: at_see.id, cost: 17, place_id: p6.id
 a15 = Activity.new name: "see sunset", activity_type: at_see.id, cost: 0, place_id: p5w.id
-save_check "Colorado activities", a8.save && a9.save && a10.save && a11.save && a12.save && a13.save && a14.save && a15.save
+a16w= Activity.new name: "Replace brakes", activity_type: at_misc.id, cost: 450, place_id: p6w.id
+save_check "Colorado activities", a8.save && a9.save && a10.save && a11.save && a12.save && a13.save && a14.save && a15.save && a16w.save
 
 p7w = Place.new name: "way to Arches"
 p7  = Place.new name: "Arches NP"

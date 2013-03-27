@@ -58,8 +58,8 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.save
-        if params[:redirect_to]
-          format.html { redirect_to params[:redirect_to], notice: 'Route was successfully created.' }
+        if session[:redirect_to]
+          format.html { redirect_to session[:redirect_to], notice: 'Route was successfully created.' }
         else
           format.html { redirect_to @route, notice: 'Route was successfully created.' }
         end

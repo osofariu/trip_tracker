@@ -1,6 +1,9 @@
 
 #Dev Plan
 
+##QUESTIONS
+* I am hard-coding fixure object it's so they can be reference from other objects. Is this ok?  Other ways to do this?
+
 
 ##FUTURE
 * [isolate data exposure for controllers](https://github.com/voxdolo/decent_exposure)

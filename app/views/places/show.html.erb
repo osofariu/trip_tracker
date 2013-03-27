@@ -8,6 +8,14 @@
   <%= @place.notes %>
 </p>
 
+<h4> This place is present on the following routes: </h4>
+<p>
+    <% get_route_segment(@place.id).each do |segment| %>
+        <%= segment %><br/>
+    <% end %>
+    
+</p>
+
 
 <%= link_to 'Edit', edit_place_path(@place) %> |
 <%= link_to 'Back', places_path %>

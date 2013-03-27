@@ -13,4 +13,8 @@ public
   def get_type_name
     ActivityType.find(activity_type).activity_type
   end
+
+  def show_activity_info
+    "#{name} (#{ActivityType.find(activity_type).activity_type}) for $#{cost}"
+  end
 end

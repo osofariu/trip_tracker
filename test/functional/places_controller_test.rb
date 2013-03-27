@@ -23,7 +23,7 @@ class PlacesControllerTest < ActionController::TestCase
       post :create, place: { name: "${@place.name}_2", notes: @place.notes}
     end
 
-    assert_redirected_to place_path(assigns(:place))
+    assert_redirected_to places_path
   end
 
   test "should show place" do

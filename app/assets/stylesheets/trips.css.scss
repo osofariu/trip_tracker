@@ -89,17 +89,29 @@
 		padding-top: 1em;
 	}
 
-		#route_distance {
+		td, #route_distance {
 		font-weight: medium;
 		font-size: small;
 		font-variant: normal;
+		
+		.td_green {
+			color: #228822;
+		}
+
+		th {
+			font-weight: normal;
+			color: #228822;
+		}
 	}
 
 	.place_desc {
 		min-height: 20px;
 	}
 
-
+	.show_activities {
+		border-bottom:1px solid #B8B8B8;
+		border-top:1px solid #B8B8B8;
+	}
 
 	#start_places {
 		//background-color:#E6E6E6;

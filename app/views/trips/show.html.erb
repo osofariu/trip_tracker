@@ -1,10 +1,14 @@
 <% total_miles = 0 %>
+<% total_cost = 0.0 %>
+<% total_activity_cost = 0.0 %>
+<% total_gas_cost = 0.0 %>
 <table border="0" width="75%">
 	<tr>
 		<td><h1>Trip <%= @trip.name %> </h1>
+			<% session[:redirect_to] = trip_path(@trip.id) %>
 			(<%= link_to image_tag('/assets/edit.png'), edit_trip_path(@trip) %> trip)
 			(<%= link_to image_tag('/assets/add.png'), new_place_path %> place)
-			(<%= link_to image_tag('/assets/add.png'), new_route_path(trip_id: @trip.id, redirect_to: @trip) %> route)
+			(<%= link_to image_tag('/assets/add.png'), new_route_path(trip_id: @trip.id) %> route)
 		</td>
 	</tr>
 	<tr>
@@ -32,8 +36,40 @@
 						<td colspan="2">
 							<% if route.distance %>
 								<div id="route_distance">
-									Traveling: <%=route.distance %> miles.<br/>
-									Total miles traveled so far: <%= total_miles += route.distance %>
+									<%= route.notes %>
+									<% 
+										total_miles += route.distance; 
+										total_cost += route.cost_of_gas + route.cost_of_activities 
+										total_gas_cost += route.cost_of_gas 
+										total_activity_cost += route.cost_of_activities
+									%>
+									<table>
+										<tr>
+											<th></th>
+											<th>Route</th>
+											<th>Trip</th>
+										</tr>
+										<tr>
+											<td class="td_green">Miles</td>
+											<td><%= route.distance %></td>
+											<td><%= total_miles %></td>
+										</tr>
+										<tr>
+											<td  class="td_green">Gas</td>
+											<td>$<%= route.cost_of_gas %></td>
+											<td>$<%= total_gas_cost %> </td>
+										</tr>
+										<tr>
+											<td  class="td_green">Activities</td>
+											<td>$<%= route.cost_of_activities %></td>
+											<td>$<%= total_activity_cost %></td>
+										</tr>
+										<tr>
+											<td class="td_green">Total Cost</td>
+											<td>$<%= route.cost_of_gas + route.cost_of_activities %></td>
+											<td>$<%= total_cost %></td>
+										</tr>
+									</table>
 								</div>
 							<% end %>
 						</td>
@@ -44,14 +80,21 @@
 							<td class="place_name" colspan="3">@<%= route.get_places[:start].name %></td>
 						<% end %>
 					</tr>
-					<tr><td colspan="3"><u>Activities:</u></td></tr>
-					<tr id="start_places">
-						<td class="add_activity"><%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.get_places[:start].id  %></td>
+					<tr>
+						<td></td>
+						<td colspan="2">
+							<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.get_places[:start].id  %>
+							Activities:
+						</td>
+					</tr>
+					<tr id="start_places" class="show_activities">
+						<td></td>
 						<td colspan="2'">
 							<ul>
 								<% route.get_places[:start].get_activities.each do |activity| %>
 									<li>
-										<%= activity.name %> (<%= activity.get_type_name %>)
+										<%= activity.show_activity_info %>
+										<% total_cost += activity.cost %>
 									</li>
 								<% end %>
 							</ul>
@@ -62,15 +105,23 @@
 						<tr>
 							<td class="place_name" colspan="3">	@<%= place.name %></td>
 						</tr>
-						<tr><td colspan="3"><u>Activities:</u></td></tr>
-						<tr>						
-							<td class="add_activity"><%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:place.id %></td>
+						<tr>
+							<td></td>
+							<td colspan="2">
+								<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.get_places[:start].id  %>
+								Activities:
+							</td>
+						</tr>
+						<tr class="show_activities">						
+							<td></td>
 							<td colspan="2">
 								<% if place.get_activities.any? %>
 									<ul>
 										<% place.get_activities.each do |activity| %>
-								  			<li><%= activity.name %> (<%= activity.get_type_name %>)
+								  			<li>
+								  				<%= activity.show_activity_info %>
 								  				<% if activity.notes %> - <%= activity.notes %><% end %>
+								  				<% total_cost += activity.cost %>
 								  			</li>
 										<% end %>
 									</ul>
@@ -80,8 +131,16 @@
 					<% end %>
 		
 					<% if route == @last_route %>
-						<tr id="last_place">
+						<tr id="last_place" >
 							<td class="place_name" colspan="3"><%= route.get_places[:end].name %> (END)</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="route_distance">
+									<b>Miles</b> on trip so far: <%= total_miles %></br>
+									<b>Total Cost</b>  of trip: <%= total_cost %><br/>
+								</div>
+							</td>
 						</tr>
 					<% end %>
 				</table>

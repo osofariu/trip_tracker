@@ -1,31 +1,37 @@
 <h1>Listing routes</h1>
-
+<% session[:redirect_to] = routes_path %>
 <table>
-  <tr>
-    <th>If</th>
-    <th>Trip</th>
-    <th>Start place</th>
-    <th>End place</th>
-    <th>Notes</th>
-    <th>Distance</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <col style="width:4%">
+    <col style="width:21%">
+    <col style="width:20%">
+    <col style="width:20%">
+    <col style="width:30%">
+    <col style="width:5%">
+    <tr>
+        <th></th>
+        <th>Trip</th>
+        <th>Start place</th>
+        <th>End place</th>
+        <th>Notes</th>
+        <th>Distance</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
 
-<% @routes.each do |route| %>
-  <tr>
-    <td><%= route.id %></td>
-    <td><%= route.trip_id %></td>
-    <td><%= route.start_place %></td>
-    <td><%= route.end_place %></td>
-    <td><%= route.notes %></td>
-    <td><%= route.distance %></td>
-    <td><%= link_to 'Show', route %></td>
-    <td><%= link_to 'Edit', edit_route_path(route) %></td>
-    <td><%= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+    <% @routes.each do |route| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
+        <td>
+            <%= link_to image_tag('/assets/edit.png'), edit_route_path(route) %>
+            <%= link_to image_tag('/assets/info.png'), route %>
+        </td>
+        <td><%= get_trip_name(route.trip_id) %></td>
+        <td><%= get_place_name(route.start_place) %></td>
+        <td><%= get_place_name(route.end_place) %></td>
+        <td><%= route.notes %></td>
+        <td><%= route.distance %></td>
+    </tr>
+    <% end %>
 </table>
 
 <br />

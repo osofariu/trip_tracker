@@ -30,4 +30,32 @@ public
     end
     return places
   end
+
+  def cost_of_gas
+    if distance
+      distance / 30
+    else
+      0
+    end
+  end
+
+  def cost_of_activities
+    cost = 0
+    Activity.where(place_id: self.start_place).each do |act|
+      cost += act.cost
+    end
+    WayPlace.where(route_id: self.id).each do |wp|
+      cost += wp.cost_of_activities
+    end
+    return cost
+  end
+
+  def show_route_info
+    start_place = Place.find(self.start_place)
+    end_place = Place.find(self.end_place)
+    route_lines = []
+    route_lines << "Traveling: #{distance} miles to #{end_place.name} for the gas cost of: $#{cost_of_gas} and activities cost of: $#{cost_of_activities}."
+    route_lines << "Notes: #{notes}" if (notes)
+    return route_lines
+  end
 end
