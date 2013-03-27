@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :trip_id %><br />
-    <%= f.number_field :trip_id %>
+    <%= f.collection_select :trip_id, Trip.find(:all, order: "name"), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :start_place %><br />
-    <%= f.number_field :start_place %>
+    <%= f.collection_select :start_place, Place.find(:all, order: "name"), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :end_place %><br />
-    <%= f.number_field :end_place %>
+    <%= f.collection_select :end_place, Place.find(:all, order: "name"), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :notes %><br />

@@ -1,0 +1,106 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+#banner {
+  background: #D6F5D6;
+  padding: 10px;
+  border-bottom: 2px solid;
+  font: small-caps 40px/40px "Times New Roman", serif;
+  color: #282;
+  text-align: center;
+
+  img {
+    float: left;
+  }
+}
+
+#login_info {
+  font: small-caps 14px/14px "Times New Roman", serif;
+  text-align: right;
+  color: #808080;
+}
+
+#notice {
+  color: #000 !important;
+  border: 2px solid green;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+
+#columns {
+  background: #85E085;
+
+  #main {
+    margin-left: 15em;
+    padding: 1em;
+    background: white;
+  }
+
+  #side {
+    float: left;
+    padding: 0em 2em;
+    width: 6em;
+    margin-top:2em;
+    margin-left: -8em;
+    min-height: 40em;
+
+    ul {
+      padding: 0;
+      li {
+        list-style: none;
+        a {
+          color: #355A35;
+          font-size: small;
+                  &:hover {
+                    background-color:#D6F5D6;
+          } 
+        }
+      }
+    }
+  }
+  .trip_form {
+    fieldset {
+      background: #efe;
+      legend {
+        color: #dfd;
+        background: #141;
+        font-family: sans-serif;
+        padding: 0.2em 1em;
+      }
+    }
+    form {
+      label {
+        width: 5em;
+        float: left;
+        text-align: right;
+        padding-top: 0.2em;
+        margin-right: 0.1em;
+        display: block;
+      }
+
+      select, textarea, input {
+        margin-left: 0.5em;
+      }
+
+      .submit {
+        margin-left: 4em;
+      }
+      br {
+        display: none
+      }
+    }
+  }
+}

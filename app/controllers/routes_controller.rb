@@ -36,6 +36,9 @@ class RoutesController < ApplicationController
   # GET /routes/new.json
   def new
     @route = Route.new
+    if params[:trip_id]
+      @route.trip_id = params[:trip_id]
+    end 
 
     respond_to do |format|
       format.html # new.html.erb
@@ -55,7 +58,11 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.save
-        format.html { redirect_to @route, notice: 'Route was successfully created.' }
+        if params[:redirect_to]
+          format.html { redirect_to params[:redirect_to], notice: 'Route was successfully created.' }
+        else
+          format.html { redirect_to @route, notice: 'Route was successfully created.' }
+        end
         format.json { render json: @route, status: :created, location: @route }
       else
         format.html { render action: "new" }

@@ -10,9 +10,9 @@
   </tr>
 
 <% @way_places.each do |way_place| %>
-  <tr>
-    <td><%= way_place.route_id %></td>
-    <td><%= way_place.place_id %></td>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
+    <td><%= get_route_description(way_place.route_id) %></td>
+    <td><%= get_place_name(way_place.place_id) %></td>
     <td><%= link_to 'Show', way_place %></td>
     <td><%= link_to 'Edit', edit_way_place_path(way_place) %></td>
     <td><%= link_to 'Destroy', way_place, method: :delete, data: { confirm: 'Are you sure?' } %></td>

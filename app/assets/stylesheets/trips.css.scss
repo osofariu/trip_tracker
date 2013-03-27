@@ -6,11 +6,9 @@
 
 	h1 {
 		margin: 0;
-		padding-bottom: 0.5em;
+		padding-bottom: 0em;
 		font:  150% sans-serif;
 		color: #226;
-		border-bottom: 3px dotted #77d;
-		border-bottom-length:150px;
 	}
 
 
@@ -22,7 +20,7 @@
 
 	table tr td {
 		padding: 5px;
-		vertical-align: top;
+		vertical-align: center;
 	}
 
 	table, th, td
@@ -40,12 +38,20 @@
 	p.thick {font-weight:bold;}
 	p.thicker {font-weight:900;}
 
+	.list_line_even {
+	background:   #e0e0e0;
+	}
+	.list_line_odd {
+	background:   #f0f0f0;
+	}
+
 	.action_name {
 		font-size:100%;
 	}
 
 	.add_activity {
 		vertical-align: center;
+		text-align: center;
 	}
 
 	.action_desc {
@@ -58,7 +64,7 @@
 		vertical-align: center;
 	}
 
-	#trip_description {
+	#trip_description_foo {
 		overflow: auto;
 		margin-top: 1em;
 		border-bottom: 2px dotted #77d;
@@ -70,22 +76,37 @@
 	}
 
 	.place_name {
+		font-size:medium;
+		padding-bottom: 0.3em;
+		padding-top: 1em;
+	}
+
+	#route_name {
 		font-size:large;
+		font-weight: bold;
+		font-variant:small-caps;
 		padding-bottom: 0.5em;
-		padding-top: 2em;
-		border-bottom: 1px dotted #77d;
+		padding-top: 1em;
+	}
+
+		#route_distance {
+		font-weight: medium;
+		font-size: small;
+		font-variant: normal;
 	}
 
 	.place_desc {
 		min-height: 20px;
 	}
 
+
+
 	#start_places {
 		//background-color:#E6E6E6;
 
 
 		td {
-			vertical-align: top;
+			vertical-align: center;
 		}
 	}
 	

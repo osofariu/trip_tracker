@@ -12,6 +12,12 @@ class Route < ActiveRecord::Base
     end
   end
 
+  def route_name
+    from=Place.find(start_place).name
+    to=Place.find(end_place).name
+    return "#{from} to #{to}"
+  end
+
 public
 
   def get_places

@@ -6,7 +6,7 @@ Run "rake doc:app" to generate API documentation for your models, controllers, h
 
 # Issues
 * route validation
-	* validating that you can't create new route between two points between which there's an existing route (ok)
+	* validating that you can't create new route between two points between which there's an existing route (@done)
 	* validate on: update can't do the same because you may want to change something else
 		* but you could change the points to new values between which there's an existing route
 		* will need to check this in the code if someone modifies the end points.

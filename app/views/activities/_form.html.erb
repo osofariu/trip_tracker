@@ -12,19 +12,25 @@
   <% end %>
 
 <p>
-  Place_id = <%= params[:place_id] %>
 </p>
-  <% if params[:place_id] %>
-     <div class="field">
-      <%= f.label :place_id %><br />
-      <%= f.number_field :place_id %>
-    </div>
-  <% end %>
 
+   <div class="field">
+    <%= f.label :place_id %><br />
+    <%= f.collection_select :place_id, Place.find(:all, order: "name").unshift(Place.new) , :id, :name %>
+    <!-- <%= f.number_field :place_id %> -->
+  </div>
+
+<!-- 
   <div class="field">
     <%= f.label :activity_type %><br />
     <%= f.number_field :activity_type %>
+  </div> -->
+  
+  <div class="field">
+    <%= f.label :activity_type %><br />
+    <%= f.collection_select :activity_type, ActivityType.find(:all, order: "activity_type"), :id, :activity_type %>
   </div>
+
   <div class="field">
     <%= f.label :cost %><br />
     <%= f.text_field :cost %>

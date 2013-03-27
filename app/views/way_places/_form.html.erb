@@ -13,13 +13,15 @@
 
   <div class="field">
     <%= f.label :route_id %><br />
-    <%= f.number_field :route_id %>
+    <%= f.collection_select :route_id, Route.all, :id, :route_name %>
   </div>
   <div class="field">
     <%= f.label :place_id %><br />
-    <%= f.number_field :place_id %>
+    <%= f.collection_select :place_id, Place.find(:all, order: "name"), :id, :name %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+

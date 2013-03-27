@@ -12,8 +12,11 @@
   </tr>
 
 <% @places.each do |place| %>
-  <tr>
-    <td><%= place.id %></td>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
+    <td>
+      <%= link_to image_tag('/assets/edit.png'), edit_place_path(place) %>
+      <%= link_to image_tag('/assets/delete.png'),  place, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
     <td><%= place.name %></td>
     <td><%= place.notes %></td>
     <td><%= link_to 'Show', place %></td>

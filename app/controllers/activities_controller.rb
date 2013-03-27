@@ -28,6 +28,9 @@ class ActivitiesController < ApplicationController
   # GET /activities/new.json
   def new
     @activity = Activity.new
+    if params[:place_id]
+      @activity.place_id = params[:place_id]
+    end
 
     respond_to do |format|
       format.html # new.html.erb
