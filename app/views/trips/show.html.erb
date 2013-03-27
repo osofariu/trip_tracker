@@ -51,23 +51,23 @@
 										</tr>
 										<tr>
 											<td class="td_green">Miles</td>
-											<td><%= route.distance %></td>
-											<td><%= total_miles %></td>
+											<td class="td_right"><%= route.distance %></td>
+											<td class="td_right"><%= total_miles %></td>
 										</tr>
 										<tr>
-											<td  class="td_green">Gas</td>
-											<td>$<%= route.cost_of_gas %></td>
-											<td>$<%= total_gas_cost %> </td>
+											<td class="td_green">Gas</td>
+											<td class="td_right">$<%= route.cost_of_gas %></td>
+											<td class="td_right">$<%= total_gas_cost %> </td>
 										</tr>
 										<tr>
-											<td  class="td_green">Activities</td>
-											<td>$<%= route.cost_of_activities %></td>
-											<td>$<%= total_activity_cost %></td>
+											<td class="td_green">Activities</td>
+											<td class="td_right">$<%= route.cost_of_activities %></td>
+											<td class="td_right">$<%= total_activity_cost %></td>
 										</tr>
 										<tr>
 											<td class="td_green">Total Cost</td>
-											<td>$<%= route.cost_of_gas + route.cost_of_activities %></td>
-											<td>$<%= total_cost %></td>
+											<td class="td_right">$<%= route.cost_of_gas + route.cost_of_activities %></td>
+											<td class="td_right">$<%= total_cost %></td>
 										</tr>
 									</table>
 								</div>
@@ -88,13 +88,12 @@
 						</td>
 					</tr>
 					<tr id="start_places" class="show_activities">
-						<td></td>
-						<td colspan="2'">
+						<td colspan="3">
 							<ul>
 								<% route.get_places[:start].get_activities.each do |activity| %>
 									<li>
+										<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%>
 										<%= activity.show_activity_info %>
-										<% total_cost += activity.cost %>
 									</li>
 								<% end %>
 							</ul>
@@ -113,15 +112,13 @@
 							</td>
 						</tr>
 						<tr class="show_activities">						
-							<td></td>
-							<td colspan="2">
+							<td colspan="3">
 								<% if place.get_activities.any? %>
 									<ul>
 										<% place.get_activities.each do |activity| %>
 								  			<li>
-								  				<%= activity.show_activity_info %>
+								  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
 								  				<% if activity.notes %> - <%= activity.notes %><% end %>
-								  				<% total_cost += activity.cost %>
 								  			</li>
 										<% end %>
 									</ul>
@@ -137,8 +134,25 @@
 						<tr>
 							<td colspan="3">
 								<div class="route_distance">
-									<b>Miles</b> on trip so far: <%= total_miles %></br>
-									<b>Total Cost</b>  of trip: <%= total_cost %><br/>
+									<p>Stats for this trip:</p>
+									<table>
+										<tr>
+											<td class="td_green">Miles</td>
+											<td class="td_right"><%= total_miles %></td>
+										</tr>
+										<tr>
+											<td class="td_green">Gas</td>											
+											<td class="td_right">$<%= total_gas_cost %> </td>
+										</tr>
+										<tr>
+											<td class="td_green">Activities</td>											
+											<td class="td_right">$<%= total_activity_cost %></td>
+										</tr>
+										<tr>
+											<td class="td_green">Total Cost</td>											
+											<td class="td_right">$<%= total_cost %></td>
+										</tr>
+									</table>
 								</div>
 							</td>
 						</tr>

@@ -15,6 +15,7 @@ public
   end
 
   def show_activity_info
-    "#{name} (#{ActivityType.find(activity_type).activity_type}) for $#{cost}"
+    cost_str = cost > 0 ? "for #{cost}" : ""
+    "#{name} (#{ActivityType.find(activity_type).activity_type}) #{cost_str}"
   end
 end

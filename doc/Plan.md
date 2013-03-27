@@ -3,6 +3,9 @@
 
 ##QUESTIONS
 * I am hard-coding fixure object it's so they can be reference from other objects. Is this ok?  Other ways to do this?
+* I am not sure I am putting all the logic in the right place.. betwee view, helper, controller, and model.
+* Would it help to add more associations between models using through: associations?
+* I need to separate data logically better so different users can't see others' data (previous one may address this too)
 
 
 ##FUTURE
