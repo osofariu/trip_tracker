@@ -5,7 +5,7 @@
 * This is my first Rails app, so I expect I am doing lots of things wrong.
 
 ## Motivation
-I am creating this application mainly to learn Rails (and Ruby), but I do want to make it functional. I wanted a simple web application for tracking roadtrips - create a basic itinerary, and track what happens when on that trip, day-by-day.  
+I am creating this application mainly to learn Rails (and Ruby), but I do want to make it functional. I wanted a simple web application for tracking roadtrips - create a basic itinerary, and track what happens when on that trip, day-by-day. 
 
 ###Questions
 * I am hard-coding fixure object it's so they can be reference from other objects. Is this ok?  Other ways to do this?
