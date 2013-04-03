@@ -20,7 +20,7 @@ class UpdateRouteAndWayPlaceToFixRelationshipToPlace < ActiveRecord::Migration
   def up_update_route_wayplace_relationships
     ct=0
     WayPlace.all.each do |wp|
-      wp.place_kind = :way_place
+      wp.place_kind = "way_place"
       wp.save or puts "didn't save #{wp}"
       ct+=1
     end
@@ -32,13 +32,16 @@ class UpdateRouteAndWayPlaceToFixRelationshipToPlace < ActiveRecord::Migration
     ct = 0
     Route.all.each do |route|
       ct += 1
-      start_place = Place.find(route.start_place)
-      wp_start = WayPlace.new route_id: route.id, place_kind: :start_place, place_id: start_place.id
-      wp_start.save or puts "didn't save #{wp_start}"
-
+      if route.start_place
+        start_place = Place.find(route.start_place)
+        wp_start = WayPlace.new route_id: route.id, place_kind: :start_place, place_id: start_place.id
+        wp_start.save or puts "didn't save #{wp_start}"
+      end
       end_place = Place.find(route.end_place)
-      wp_end = WayPlace.new route_id: route.id, place_kind: :end_place, place_id:  end_place.id
-      wp_end.save or puts "didn't save #{wp_end}"
+      if end_place
+        wp_end = WayPlace.new route_id: route.id, place_kind: :end_place, place_id:  end_place.id
+        wp_end.save or puts "didn't save #{wp_end}"
+      end
     end
     puts "Updated #{ct} routes, created #{ct*2} way_places"
   end
