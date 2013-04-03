@@ -1,8 +1,8 @@
 class UpdateRouteAndWayPlaceToFixRelationshipToPlace < ActiveRecord::Migration
   def up
     add_column :way_places, :place_kind, :string
-    up_update_route_wayplace_relationships
-    up_update_route_place_relationships
+    #up_update_route_wayplace_relationships
+    #up_update_route_place_relationships
     remove_column :routes, :start_place
     remove_column :routes, :end_place
   end
@@ -10,7 +10,7 @@ class UpdateRouteAndWayPlaceToFixRelationshipToPlace < ActiveRecord::Migration
   def down
     add_column :routes, :start_place, :integer
     add_column :routes, :end_place, :integer
-    down_update_route_place_relationships
+    #down_update_route_place_relationships
     remove_column :way_places, :place_kind
   end
 
