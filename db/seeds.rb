@@ -51,9 +51,9 @@ t1 = Trip.new name: "TGA2", description: \
   As for cities, we're interested in seeing Minneapolis. ", user_id: u1.id
 save_check "Create trip 1", t1
 
-p1  = Place.new name: "E Longview"
-p2  = Place.new name: "Kansas City"
-p2w = Place.new name: "kansas plains"
+p1  = Place.new name: "E Longview", trip_id: t1.id
+p2  = Place.new name: "Kansas City", trip_id: t1.id
+p2w = Place.new name: "kansas plains", trip_id: t1.id
 save_check "Create first places", p1, p2, p2w
 
 # route 1
@@ -79,8 +79,8 @@ rt2 = Route.new trip_id: t1.id, distance: 240
 rt3 = Route.new trip_id: t1.id, distance: 433
 save_check "routes 2,3", rt2, rt3
 
-p3 = Place.new name: "Witchita"
-p4 = Place.new name: "Tulsa"
+p3 = Place.new name: "Witchita", trip_id: t1.id
+p4 = Place.new name: "Tulsa", trip_id: t1.id
 save_check "Create places in witchita amd Tulsa", p3, p4
 
 wp4=WayPlace.new(route_id: rt2.id, place_id: p2.id ,place_kind: "start_place")
@@ -96,10 +96,10 @@ a7 = Activity.new name: "stay with Diana's parents", activity_type: at_stay_f.id
 save_check "Create Kansas activities", a4, a5, a6, a7
 
 # Colorado
-p5w = Place.new name: "on the way to Denver"
-p5  = Place.new name: "Denver"
-p6w = Place.new name: "Mount Evans"
-p6  = Place.new name: "Rocky Mountain NP"
+p5w = Place.new name: "on the way to Denver", trip_id: t1.id
+p5  = Place.new name: "Denver", trip_id: t1.id
+p6w = Place.new name: "Mount Evans", trip_id: t1.id
+p6  = Place.new name: "Rocky Mountain NP", trip_id: t1.id
 save_check "Create Colorado places", p5w, p5, p6w, p6 
 
 rt4 = Route.new trip_id: t1.id, distance: 1030
@@ -128,8 +128,8 @@ a16w= Activity.new name: "Replace brakes", activity_type: at_misc.id, cost: 450,
 save_check "Colorado activities", a8, a9, a10, a11, a12, a13, a14, a15, a16w
 
 
-p7w = Place.new name: "way to Arches"
-p7  = Place.new name: "Arches NP"
+p7w = Place.new name: "way to Arches", trip_id: t1.id
+p7  = Place.new name: "Arches NP", trip_id: t1.id
 save_check "Create arches places", p7w, p7
 
 rt6 = Route.new trip_id: t1.id, distance: 731
@@ -162,9 +162,9 @@ trb = Trip.new name: "Disneyworld trip", description: "Visiting Orlando for the 
   some chocolate.  Word is it's the best there.", user_id: u2.id
 save_check "Create second trip", trb
 
-pb1  = Place.new name: "123 Pipers Squeak Dr."
-pb2w = Place.new name: "state line - crossed for the first time"
-pb2  = Place.new name: "1 Disneyworld Way, Orlando, Florida"
+pb1  = Place.new name: "123 Pipers Squeak Dr.", trip_id: trb.id
+pb2w = Place.new name: "state line - crossed for the first time", trip_id: trb.id
+pb2  = Place.new name: "1 Disneyworld Way, Orlando, Florida", trip_id: trb.id
 save_check "Create pb places", pb1, pb2, pb2w
 
 rtb1 = Route.new trip_id: trb.id, distance: 320
