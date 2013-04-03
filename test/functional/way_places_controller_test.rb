@@ -14,16 +14,17 @@ class WayPlacesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
+    
     get :new
     assert_response :success
   end
 
   test "should create way_place" do
     assert_difference('WayPlace.count') do
-      post :create, way_place: { place_id: @place3.id, route_id: @way_place.route_id }
+      post :create, way_place: { place_id: @place3.id, route_id: @way_place.route_id, place_kind: "way_place" }
     end
 
-    assert_redirected_to way_place_path(assigns(:way_place))
+    assert_redirected_to way_places_path
   end
 
   test "should show way_place" do

@@ -31,7 +31,8 @@ development:
   pool: 5
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: tt_prod
+  user: ljmwqhhwfopffc
   pool: 5
   timeout: 5000

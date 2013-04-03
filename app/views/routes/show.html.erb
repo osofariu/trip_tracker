@@ -5,12 +5,12 @@
 
 <p>
   <b>Start location:</b>
-  <%= @route.start_place %>
+  <%= @route.start_place_name %>
 </p>
 
 <p>
   <b>End location:</b>
-  <%= @route.end_place %>
+  <%= @route.end_place_name %>
 </p>
 
 <p>
@@ -23,6 +23,5 @@
   <%= @route.distance %>
 </p>
 
-
-<%= link_to 'Edit', edit_route_path(@route) %> |
-<%= link_to 'Back', routes_path %>
+<%= link_to 'Edit', edit_trip_route_path(@trip, @route) %> 
+<%= link_to 'Back', trip_routes_path(@trip) %>

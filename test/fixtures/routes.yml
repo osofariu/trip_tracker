@@ -3,15 +3,11 @@
 one:
   id: 1
   trip_id: 1
-  start_place: 1
-  end_place: 2
   notes: MyText
   distance: 1
 
 two:
   id: 2
   trip_id: 1
-  start_place: 2
-  end_place: 1
   notes: MyText
   distance: 1

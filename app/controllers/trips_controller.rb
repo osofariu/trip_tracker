@@ -6,6 +6,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     @trips = Trip.where(user_id: session[:user_id])
+    session[:trip_id] = nil
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,26 +18,27 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
+    session[:trip_id] = @trip.id
     if @trip.user_id != session[:user_id]
       raise "Trip #{params[:id]} does not exist for this user" if !@trip 
     end
 
-    @routes = Route.where(trip_id: @trip.id)
+    @routes = Route.where(trip_id: @trip.id).order('seq_no ASC')
     @first_route = @routes.first
     @last_route =  @routes.last
+    @first_place_id = @first_route.nil? ? nil : @first_route.start_place
     @user_name = User.find(@trip.user_id).name
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @trip }
     end
-    rescue  ActiveRecord::RecordNotFound
-    redirect_to welcome_index_path, notice: "This trip cannot be found." and return
   end
 
   # GET /trips/new
   # GET /trips/new.json
   def new
+    session[:trip_id] = nil
     @trip = Trip.new
     @trip.user_id = session[:user_id]
 
@@ -54,6 +56,7 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.json
   def create
+    session[:trip_id] = nil
     @trip = Trip.new(params[:trip])
     @trip.user_id = session[:user_id]
 
@@ -87,6 +90,7 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    session[:trip_id] = nil
     @trip = Trip.find(params[:id])
     @trip.destroy
 

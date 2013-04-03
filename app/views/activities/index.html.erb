@@ -3,10 +3,10 @@
 <table>
   <tr>
     <th></th>
-    <th>Place</th>
-    <th>Activity type</th>
-    <th>Cost</th>
     <th>Name</th>
+    <th>Activity type</th>
+    <th>Place</th>
+    <th>Cost</th>
     <th>Notes</th>
   </tr>
 
@@ -18,14 +18,20 @@
     </td>
     <td>
       <% if activity.place_id %>
-        <%= link_to Place.find(activity.place_id).name, activity %>
+        <%= link_to activity.name , activity %>
       <% else %>
             No place assigned
       <% end %>
     </td>
     <td><%= ActivityType.find(activity.activity_type).activity_type %></td>
+    <td>
+      <% if activity.place_id %>
+        <%= Place.find(activity.place_id).name %> 
+      <% else %>
+        No place assigned
+      <% end %>
+    </td>
     <td><%= activity.cost %></td>
-    <td><%= activity.name %></td>
     <td><%= activity.notes %></td>
   </tr>
 <% end %>

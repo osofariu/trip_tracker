@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  
+  #@current_trip = session[:trip_id] ? Trip.find(session[:trip_id]) : nil
+
   def require_login
     if session[:user_id]
       return true

@@ -7,7 +7,7 @@
 
 <% @trips.each do |trip| %>
   <tr>
-    <td><%= link_to trip.name, trip %></td>
+    <td><%= link_to trip.name, trip, trip_id: trip.id %></td>
     <td><%= trip.description %></td>
   </tr>
   <tr>

@@ -8,7 +8,7 @@
 			<% session[:redirect_to] = trip_path(@trip.id) %>
 			(<%= link_to image_tag('/assets/edit.png'), edit_trip_path(@trip) %> trip)
 			(<%= link_to image_tag('/assets/add.png'), new_place_path %> place)
-			(<%= link_to image_tag('/assets/add.png'), new_route_path(trip_id: @trip.id) %> route)
+			(<%= link_to image_tag('/assets/add.png'), new_trip_route_path(@trip) %> route)
 		</td>
 	</tr>
 	<tr>
@@ -28,7 +28,7 @@
 					<col style="width:78%">
 					<tr>
 						<td id="route_name" colspan="3">
-							<%= route.get_places[:start].name %> to <%= route.get_places[:end].name %><br/>
+							<%= route.start_place_name %> to <%= route.end_place_name %><br/>
 						</td>
 					</tr>
 					<tr>
@@ -75,62 +75,79 @@
 						</td>
 					<tr>
 						<% if route == @first_route %>
-							<td class="place_name" colspan="3">@<%= route.get_places[:start].name %> (HOME)</td>
+							<td class="place_name" colspan="3">@<%= route.start_place_name %> (HOME)</td>
 						<% else %>
-							<td class="place_name" colspan="3">@<%= route.get_places[:start].name %></td>
+							<td class="place_name" colspan="3">@<%= route.start_place_name %></td>
 						<% end %>
 					</tr>
 					<tr>
 						<td></td>
 						<td colspan="2">
-							<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.get_places[:start].id  %>
+							<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:@first_place_id  %>
 							Activities:
 						</td>
 					</tr>
-					<tr id="start_places" class="show_activities">
-						<td colspan="3">
-							<ul>
-								<% route.get_places[:start].get_activities.each do |activity| %>
-									<li>
-										<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%>
-										<%= activity.show_activity_info %>
-									</li>
-								<% end %>
-							</ul>
-							
-						</td>
-					</tr>			
-					<% route.get_places[:way_places].each do |place| %>	
+					<% if route.start_place %>
+						<tr id="start_places" class="show_activities">
+							<td colspan="3">
+								<ul>
+									<% route.start_place.get_activities.each do |activity| %>
+										<li>
+											<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%>
+											<%= activity.show_activity_info %>
+										</li>
+									<% end %>
+								</ul>
+								
+							</td>
+						</tr>	
+					<% end %>		
+					<% route.mid_places.each do |place| %>	
 						<tr>
 							<td class="place_name" colspan="3">	@<%= place.name %></td>
 						</tr>
 						<tr>
 							<td></td>
 							<td colspan="2">
-								<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.get_places[:start].id  %>
+								<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.start_place.id  %>
 								Activities:
 							</td>
 						</tr>
 						<tr class="show_activities">						
 							<td colspan="3">
-								<% if place.get_activities.any? %>
-									<ul>
-										<% place.get_activities.each do |activity| %>
-								  			<li>
-								  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
-								  				<% if activity.notes %> - <%= activity.notes %><% end %>
-								  			</li>
-										<% end %>
-									</ul>
-								<% end %>
+								<ul>
+									<% place.get_activities.each do |activity| %>
+							  			<li>
+							  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
+							  				<% if activity.notes %> - <%= activity.notes %><% end %>
+							  			</li>
+									<% end %>
+								</ul>
 							</td>
 						</tr>
 					<% end %>
 		
 					<% if route == @last_route %>
 						<tr id="last_place" >
-							<td class="place_name" colspan="3"><%= route.get_places[:end].name %> (END)</td>
+							<td class="place_name" colspan="3"><%= route.end_place_name %> (END)</td>
 						</tr>
+						<%if route.end_place %>
+							<tr class="show_activities">
+								<td colspan="3">
+									<% if @first_place_id != route.end_place.id %>
+										<ul>
+											<% route.end_place.get_activities.each do |activity| %>
+									  			<li>
+									  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
+									  				<% if activity.notes %> - <%= activity.notes %><% end %>
+									  			</li>
+											<% end %>
+										</ul>
+							
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
 						<tr>
 							<td colspan="3">
 								<div class="route_distance">

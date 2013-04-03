@@ -16,7 +16,7 @@
 
    <div class="field">
     <%= f.label :place_id %><br />
-    <%= f.collection_select :place_id, Place.find(:all, order: "name").unshift(Place.new) , :id, :name %>
+    <%= f.collection_select :place_id, Place.where(trip_id: session[:trip_id]) , :id, :name %>
     <!-- <%= f.number_field :place_id %> -->
   </div>
 

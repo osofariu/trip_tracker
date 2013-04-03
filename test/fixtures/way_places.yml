@@ -3,7 +3,10 @@
 one:
   route_id: 1
   place_id: 1
+  place_kind: "start_place"
 
 two:
   route_id: 1
   place_id: 2
+  place_kind: "end_place"
+

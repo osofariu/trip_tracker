@@ -4,7 +4,12 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    logger.info "place_controller#index #{session[:trip_id]}"
+    if session[:trip_id]
+      @places = Place.where(trip_id: session[:trip_id])
+    else
+      @places = Place.user_places(current_user)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,14 +26,19 @@ class PlacesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @place }
     end
-  rescue  ActiveRecord::RecordNotFound
-    redirect_to welcome_index_path, notice: "This place cannot be found." and return
   end
 
   # GET /places/new
   # GET /places/new.json
   def new
     @place = Place.new
+    if session[:trip_id]
+      @trips = [ Trip.find(session[:trip_id])]
+    else
+      @trips = Trip.where(user_id: session[:user_id])
+    end
+    logger.debug("TRIPS is: #{@trips}")
+    logger.flush
 
     respond_to do |format|
       format.html # { new.html.erb}
@@ -39,6 +49,8 @@ class PlacesController < ApplicationController
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
+    @trips = [ Trip.find(@place.trip_id)]
+    logger.debug "PLACE in edit has data.. #{@place}"
   end
 
   def add_activity
@@ -69,7 +81,7 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.update_attributes(params[:place])
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
+        format.html { redirect_to places_path, notice: 'Place was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

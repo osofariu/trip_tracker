@@ -2,15 +2,19 @@ module PlacesHelper
 
   def get_route_segment(place_id)
     segments = []
-    Route.where(start_place: place_id).each do |rt|
-      segments << "START of route: #{rt.route_name}"
-    end
-    Route.where(end_place: place_id).each do |rt|
-      segments << "END of route: #{rt.route_name}"
-    end
+    start_segment = nil
+    end_segment = nil
     WayPlace.where(place_id: place_id).each do |wp|
-      segments << "ON route: #{wp.route_name}"
+      if wp.place_kind == "start_place"
+        start_segment = "START route: #{wp.get_route_name}"
+      elsif wp.place_kind == "end_place"
+        end_segment = "END of route: #{wp.get_route_name}"
+      else
+        segments << "ON route: #{wp.get_route_name}"
+      end
     end
+    segments.unshift(start_segment)
+    segments.append(end_segment)
     return segments
   end
 

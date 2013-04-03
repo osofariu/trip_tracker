@@ -2,6 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @route %> |
-<%= link_to 'Back', routes_path %>
-<td><%= link_to 'Delete', @route, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= link_to 'Show', [@trip, @route] %> |
+<%= link_to 'Back', trip_routes_path(@route.trip_id) %>
+<td><%= link_to 'Delete', [@trip, @route], method: :delete, data: { confirm: 'Are you sure?' } %></td>

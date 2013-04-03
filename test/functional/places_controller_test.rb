@@ -4,6 +4,7 @@ class PlacesControllerTest < ActionController::TestCase
   setup do
     @place = places(:one)
     @user = users(:one)
+    @trip = trips(:one)
     setup_auth_for_testing
   end
 
@@ -20,7 +21,7 @@ class PlacesControllerTest < ActionController::TestCase
 
   test "should create place" do
     assert_difference('Place.count') do
-      post :create, place: { name: "${@place.name}_2", notes: @place.notes}
+      post :create, place: { name: "${@place.name}_2", trip_id: @trip.id, notes: @place.notes}
     end
 
     assert_redirected_to places_path
@@ -37,8 +38,8 @@ class PlacesControllerTest < ActionController::TestCase
   end
 
   test "should update place" do
-    put :update, id: @place, place: { name: @place.name, notes: @place.notes}
-    assert_redirected_to place_path(assigns(:place))
+    put :update, id: @place, place: { name: @place.name, notes: @place.notes, trip_id: @trip.id}
+    assert_redirected_to places_path
   end
 
   test "should destroy place" do

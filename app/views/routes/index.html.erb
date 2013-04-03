@@ -1,5 +1,5 @@
 <h1>Listing routes</h1>
-<% session[:redirect_to] = routes_path %>
+<% session[:redirect_to] = trip_routes_path %>
 <table>
     <col style="width:4%">
     <col style="width:21%">
@@ -22,12 +22,12 @@
     <% @routes.each do |route| %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
         <td>
-            <%= link_to image_tag('/assets/edit.png'), edit_route_path(route) %>
-            <%= link_to image_tag('/assets/info.png'), route %>
+            <%= link_to image_tag('/assets/edit.png'), edit_trip_route_path(@trip, route) %>
+            <%= link_to image_tag('/assets/info.png'), trip_route_path(@trip, route) %>
         </td>
         <td><%= get_trip_name(route.trip_id) %></td>
-        <td><%= get_place_name(route.start_place) %></td>
-        <td><%= get_place_name(route.end_place) %></td>
+        <td><%= route.start_place_name %></td>
+        <td><%= route.end_place_name %></td>
         <td><%= route.notes %></td>
         <td><%= route.distance %></td>
     </tr>
@@ -36,4 +36,4 @@
 
 <br />
 
-<%= link_to 'New Route', new_route_path %>
+<%= link_to 'New Route', new_trip_route_path %>

@@ -3,9 +3,9 @@
 one:
   id: 1
   name: ovi_test
-  password_digest: $2a$10$AUShKxaYwtAhmhltvy6bAevbtIWnbhlcI.52neIvijAwItq.u6TkG
+  password_digest: <%= BCrypt::Password.create('st3rk3s') %>
 
 other:
   id: 2
   name: public_test
-  password_digest: $2a$10$tKnRbfg96r/OecEyn3QhseDfEAhbbBtdqIWz203TZ0uXM9ItEGji2
+  password_digest: <%= BCrypt::Password.create('st3rk3sst3rk3s') %>

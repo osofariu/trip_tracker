@@ -24,9 +24,11 @@ get 'logout' => 'sessions#destroy'
 
   resources :way_places
 
-  resources :routes
+  #resources :routes
 
-  resources :trips
+  resources :trips do
+    resources :routes
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

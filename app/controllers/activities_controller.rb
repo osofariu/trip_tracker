@@ -3,7 +3,11 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
+    if session[:trip_id]
+      @activities = Activity.trip_activities(session[:trip_id])
+    else
+      @activities = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,8 +24,6 @@ class ActivitiesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @activity }
     end
-    rescue  ActiveRecord::RecordNotFound
-    redirect_to welcome_index_path, notice: "This activity cannot be found." and return
   end
 
   # GET /activities/new
@@ -49,6 +51,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
 
     respond_to do |format|
+      logger.debug "===== what is session_redirect #{session[:redirect_to]}"
       if @activity.save
         if session[:redirect_to]
           format.html { redirect_to session[:redirect_to], notice:'Activity was successfully created.'}
