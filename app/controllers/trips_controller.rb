@@ -41,6 +41,7 @@ class TripsController < ApplicationController
     session[:trip_id] = nil
     @trip = Trip.new
     @trip.user_id = session[:user_id]
+    @places = @trip.places.order('seq_no').all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,6 +52,7 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
+    @places = @trip.places.order('seq_no').all
   end
 
   # POST /trips
@@ -59,10 +61,15 @@ class TripsController < ApplicationController
     session[:trip_id] = nil
     @trip = Trip.new(params[:trip])
     @trip.user_id = session[:user_id]
+    
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        if session[:redirect_to]
+          format.html {redirect_to session[:redirect_to, notice: 'Place was successfully added.']}
+        else
+          format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        end
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }

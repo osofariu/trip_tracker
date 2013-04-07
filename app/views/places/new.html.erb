@@ -2,4 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', places_path %>
+<% if session[:redirect_to] %>
+    <%= link_to 'Back', session[:redirect_to] %>
+<% else %>
+	<%= link_to 'Back', places_path %>
+<% end %>

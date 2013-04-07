@@ -35,7 +35,7 @@
 						<td></td>
 						<td colspan="2">
 							<% if route.distance %>
-								<div id="route_distance">
+								<div class="route_distance">
 									<%= route.notes %>
 									<% 
 										total_miles += route.distance; 
@@ -43,30 +43,26 @@
 										total_gas_cost += route.cost_of_gas 
 										total_activity_cost += route.cost_of_activities
 									%>
+									
 									<table>
 										<tr>
-											<th></th>
-											<th>Route</th>
-											<th>Trip</th>
-										</tr>
-										<tr>
 											<td class="td_green">Miles</td>
-											<td class="td_right"><%= route.distance %></td>
-											<td class="td_right"><%= total_miles %></td>
-										</tr>
-										<tr>
 											<td class="td_green">Gas</td>
-											<td class="td_right">$<%= route.cost_of_gas %></td>
-											<td class="td_right">$<%= total_gas_cost %> </td>
-										</tr>
-										<tr>
 											<td class="td_green">Activities</td>
-											<td class="td_right">$<%= route.cost_of_activities %></td>
-											<td class="td_right">$<%= total_activity_cost %></td>
+											<td class="td_green">Total Cost</td>
 										</tr>
 										<tr>
-											<td class="td_green">Total Cost</td>
+											<td class="td_green">Route</td>
+											<td class="td_right"><%= route.distance %></td>
+											<td class="td_right">$<%= route.cost_of_gas %></td>
+											<td class="td_right">$<%= route.cost_of_activities %></td>
 											<td class="td_right">$<%= route.cost_of_gas + route.cost_of_activities %></td>
+										</tr>
+										<tr>
+											<td class="td_green">Trip</td>
+											<td class="td_right"><%= total_miles %></td>
+											<td class="td_right">$<%= total_gas_cost %> </td>
+											<td class="td_right">$<%= total_activity_cost %></td>
 											<td class="td_right">$<%= total_cost %></td>
 										</tr>
 									</table>
@@ -109,7 +105,7 @@
 						<tr>
 							<td></td>
 							<td colspan="2">
-								<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.start_place.id  %>
+								<%= link_to image_tag('/assets/add.png'), controller: "activities", action: "new", place_id:route.start_place_id  %>
 								Activities:
 							</td>
 						</tr>
@@ -155,18 +151,15 @@
 									<table>
 										<tr>
 											<td class="td_green">Miles</td>
+											<td class="td_green">Gas</td>
+											<td class="td_green">Activities</td>
+											<td class="td_green">Total Cost</td>
+										</tr>
+										<tr>
+											<td class="td_green">Trip</td>
 											<td class="td_right"><%= total_miles %></td>
-										</tr>
-										<tr>
-											<td class="td_green">Gas</td>											
 											<td class="td_right">$<%= total_gas_cost %> </td>
-										</tr>
-										<tr>
-											<td class="td_green">Activities</td>											
 											<td class="td_right">$<%= total_activity_cost %></td>
-										</tr>
-										<tr>
-											<td class="td_green">Total Cost</td>											
 											<td class="td_right">$<%= total_cost %></td>
 										</tr>
 									</table>

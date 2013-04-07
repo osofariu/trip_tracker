@@ -69,7 +69,7 @@ class RoutesControllerTest < ActionController::TestCase
   test "should update route" do
     setup_auth_for_testing
     put :update, id: @route, route: { distance: @route.distance, notes: @route.notes, trip_id: @route.trip_id }, trip_id: @route.trip_id
-    assert_redirected_to trip_route_path(@route.trip_id)
+    assert_redirected_to trip_routes_path
   end
 
     test "should not update route no session" do

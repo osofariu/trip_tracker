@@ -1,3 +1,22 @@
 // Place all the styles related to the Places controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+	#edit_parts {
+
+		#places_part {	
+
+			#place_part {	
+				font-size: medium;	
+			}
+
+			#place_spacer {
+				background-image: url(/assets/narrow-green-arrow.png);
+				height: 40px;
+			}
+		}
+	}
+
+	#after_edit_parts {
+		font-size: medium;
+	}

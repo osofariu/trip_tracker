@@ -8,7 +8,6 @@ class TripsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    post :create, session: {user_id: "tester123", password: "abc123", password_confirmation: "abc123"}
     get :index
     assert_response :success
   end

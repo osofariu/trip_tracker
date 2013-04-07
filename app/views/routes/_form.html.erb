@@ -17,11 +17,15 @@
   </div>
   <div class="field">
     <%= f.label :start_place %><br />
-    <%= f.collection_select :start_place, Place.where(trip_id: @trip.id), :id, :name,  selected: @def_start_place_id %>
+    <%= f.collection_select  :start_place, Place.where(trip_id: @trip.id), :id, :name,  selected: @def_start_place_id %>
   </div>
   <div class="field">
     <%= f.label :end_place %><br />
-    <%= f.collection_select :end_place,   Place.where(trip_id: @trip.id), :id, :name, selected: @def_end_place_id %>
+    <%= f.collection_select  :end_place, Place.where(trip_id: @trip.id), :id, :name, selected: @def_end_place_id %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br />
+    <%= f.text_field :seq_no %>
   </div>
   <div class="field">
     <%= f.label :notes %><br />

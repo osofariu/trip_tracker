@@ -1,15 +1,17 @@
 <h1>Listing routes</h1>
 <% session[:redirect_to] = trip_routes_path %>
 <table>
-    <col style="width:4%">
-    <col style="width:21%">
+    <col style="width:5%">
+    <col style="width:20%">
+    <col style="width:5%">
     <col style="width:20%">
     <col style="width:20%">
-    <col style="width:30%">
+    <col style="width:25%">
     <col style="width:5%">
     <tr>
         <th></th>
         <th>Trip</th>
+        <th>Order</th>
         <th>Start place</th>
         <th>End place</th>
         <th>Notes</th>
@@ -26,14 +28,37 @@
             <%= link_to image_tag('/assets/info.png'), trip_route_path(@trip, route) %>
         </td>
         <td><%= get_trip_name(route.trip_id) %></td>
-        <td><%= route.start_place_name %></td>
-        <td><%= route.end_place_name %></td>
+        <td><%= route.seq_no %> </td>
+        <td>
+            <% if route.start_place_id %>
+                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.start_place_id, place_kind: "start_place", route_id: route.id) %>
+            <% else %>
+                 <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "start_place", route_id: route.id) %>
+            <% end %>
+            <%= route.start_place_name %>
+        </td>
+        <td>
+            <% if route.end_place_id %>
+                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.end_place_id, place_kind: "start_place", route_id: route.id) %>
+            <% else %>
+                <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "end_place", route_id: route.id) %>
+            <% end %>
+            <%= route.end_place_name %>
+        </td>
         <td><%= route.notes %></td>
         <td><%= route.distance %></td>
     </tr>
     <% end %>
 </table>
 
+<% if trip_unassigned_places(@trip_id).length > 0 %>
+    <h2>Unassigned places</h2>
+    <% @places = trip_unassigned_places(@trip_id) %>
+    <table>
+        <%= render 'places/places' %>
+    </table>
+<% end %>
 <br />
 
 <%= link_to 'New Route', new_trip_route_path %>
+<%= link_to 'New Place', new_place_path %>

@@ -89,7 +89,7 @@
 		padding-top: 1em;
 	}
 
-	#route_distance {
+	.route_distance {
 		border: 1px solid  #D9D9D9;
 		font-weight: medium;
 		font-size: x-small;
@@ -137,4 +137,39 @@
 	#way_places {
 		//background-color:#EBFFEB;
 	}
+
+	#field_right {
+		float: right;
+		position: relative;
+		top: -100px;
+		right: 10px;
+	}
+	#spacer {
+		height: 100px;
+	}
+
+	#edit_parts {
+
+		#places_part {	
+
+			#place_part {	
+				font-size: medium;	
+			}
+
+			#place_spacer {
+				background-image: url(/assets/narrow-green-arrow.png);
+				height: 40px;
+			}
+		}
+	}
+
+	#after_edit_parts {
+		font-size: medium;
+	}
+
+
+
+
+
+
 }

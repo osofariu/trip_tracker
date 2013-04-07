@@ -1,11 +1,34 @@
 class Route < ActiveRecord::Base
+  attr_accessible :distance, :notes, :trip_id, :seq_no, :start_place, :end_place, :start_route
   belongs_to :trip
   has_many :way_places, dependent: :destroy
   has_many :places, through: :way_places
-  attr_accessible :distance, :notes, :trip_id, :seq_no, :start_place, :end_place
-
   validates :distance, numericality: true, :allow_nil => true
   before_save :init_seq_no
+  after_save  :save_wayplaces
+
+  def save_wayplaces
+    if @s_place
+      if wp=way_places.find_by_place_kind("start_place")
+        logger.debug "Updating start_place using wp #{wp.id}"
+        wp.place_id = @s_place.id
+        wp.save
+      else
+        logger.debug "Creating new wayplace for start"
+        way_places << WayPlace.new(place_id: @s_place.id, place_kind: "start_place", route_id: self.id)
+      end
+    end
+    if @e_place
+      if wp=way_places.find_by_place_kind("end_place")
+        logger.debug "Updating start_place using wp #{wp.id}"
+        wp.place_id = @e_place.id
+        wp.save
+      else
+        logger.debug "Creating new wayplace for end"
+        way_places << WayPlace.new(place_id: @e_place.id, place_kind: "end_place", route_id: self.id)
+      end
+    end
+  end
 
   def init_seq_no
     if seq_no.nil?
@@ -13,36 +36,66 @@ class Route < ActiveRecord::Base
     end
   end
 
-
-  # will not be set for new routes
   def start_place
-    if id
-      Route.get_route_places(id, "start_place")
+    wp = way_places.find_by_place_kind("start_place")
+    if wp
+      return Place.find(wp.place_id)
+    else
+      return nil
+    end
+  end
+
+  def start_place_id
+    if start_place
+      start_place.id
+    else
+      nil
+    end
+  end
+
+    def end_place_id
+    if end_place
+      end_place.id
     else
       nil
     end
   end
 
   def end_place
-    if id
-      Route.get_route_places(id, "end_place")
+    wp = way_places.find_by_place_kind("end_place")
+    if wp
+      return Place.find(wp.place_id)
     else
-      nil
+      return nil
     end
   end
 
-  def start_place=(place_id)
-    WayPlace.create(route_id: self.id, place_id: place_id, place_kind: "start_place")
+  def start_place=(place)
+    if place.class == String
+      @s_place = Place.find(place)
+    else
+      @s_place = place
+    end
+    logger.debug "===> saving start #{@s_place.id}"
   end
 
-  def end_place=(place_id)
-    WayPlace.create(route_id: self.id, place_id: place_id, place_kind: "end_place")
-  end
+  def end_place=(place)
+    if place.class == String
+      @e_place = Place.find(place)
+    else
+      @e_place = place
+    end
+  end  
+
 
   def mid_places
-    Route.get_route_places(id, "way_place")
+    places = []
+    way_places.where(route_id: id, place_kind: "way_place").each do |wp|
+      logger.debug "#{wp.id}, #{wp.place_kind}, #{wp.place_id}"
+      places << wp.place
+    end
+    return places
   end
-
 
   # normally.. this would not be unassigned.. but the model allows it
   def start_place_name
@@ -83,6 +136,7 @@ class Route < ActiveRecord::Base
     return cost
   end
 
+
 # class methods
 
   def self.trip_routes(trip_id)
@@ -91,38 +145,5 @@ class Route < ActiveRecord::Base
     else
       return Trip.find(trip_id).routes.map {|rt| [ Route.get_route_name(rt.id), rt.id]}
     end
-  end
-
-  def self.get_route_name(route_id)
-    start_place_name = end_place_name = "Unassigned"
-    Route.find(route_id).way_places.each do |wp|
-      if wp.place_kind == "start_place"
-        start_place_name=Place.find(wp.place_id).name
-      elsif wp.place_kind == "end_place"
-        end_place_name = Place.find(wp.place_id).name
-      end
-    end
-    return "#{start_place_name} to #{end_place_name}"
-  end
-
- 
-  # a little kludgy - it may return one record or an array depending on the kind
-  def self.get_route_places(route_id, want_place_kind)
-    places = []
-    route = Route.find(route_id)
-    route.way_places.each do |wp|
-      if (want_place_kind == "start_place"  && wp.place_kind == "start_place")
-        return Place.find(wp.place_id)
-      elsif (want_place_kind == "end_place"  && wp.place_kind == "end_place")
-        return Place.find(wp.place_id)
-      elsif (want_place_kind == "way_place" && wp.place_kind == "way_place")
-        places << Place.find(wp.place_id)
-      end
-    end
-    if want_place_kind == "way_place"
-      return places
-    else
-      return nil
-    end    
   end
 end

@@ -1,38 +1,6 @@
 <h1>Listing places</h1>
 
-<table>
-  <col style="width:4%">
-  <col style="width:15%">
-  <col style="width:50%">
-  <col style="width:30%">
-  <tr>
-    <th></th>
-    <th>Name</th>
-    <th>Route</th>
-    <th>Notes</th>
 
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @places.each do |place| %>
-  <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
-    <td>
-      <%= link_to image_tag('/assets/edit.png'), edit_place_path(place) %>
-      <%= link_to image_tag('/assets/delete.png'),  place, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-    <td><%= link_to place.name, place %></td>
-    <td>
-      <% get_route_segment(place.id).each do |segment| %>
-        <%= segment %><br/>
-      <% end %>
-    </td>
-    <td><%= place.notes %></td>
-  </tr>
-<% end %>
-</table>
+ <%= render 'trips/edit_parts' %>
 
-<br />
-
-<%= link_to 'New Place', new_place_path %>

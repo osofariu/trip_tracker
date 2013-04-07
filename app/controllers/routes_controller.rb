@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_filter :require_login
   before_filter :find_trip
 
 private 
@@ -13,7 +13,8 @@ public
   # GET /routes
   # GET /routes.json
   def index
-    @routes = @trip.routes.all
+    @routes = @trip.routes.order("seq_no").all
+    @trip_id = @trip.id
     respond_to do |format|
       if @trip.user_id != current_user 
         redirect_to welcome_index_path, notice: "This route cannot be found." and return
@@ -57,14 +58,14 @@ public
     @route = Route.find(params[:id])
     logger.debug "Route with ID= #{@route.id}"
       
-    start_p = Route.get_route_places(@route.id, "start_place")
+    start_p = @route.start_place
     if start_p
-      @def_start_place_id = Route.get_route_places(@route.id, "start_place").id
+      @def_start_place_id = start_p.id
     end
 
-    end_p = Route.get_route_places(@route.id, "end_place")
+    end_p = @route.end_place
     if end_p
-      @def_end_place_id   = Route.get_route_places(@route.id, "end_place").id
+      @def_end_place_id   = end_p.id
     end
 
     logger.debug "start_p_id: #{@def_start_place_id} and end_p: #{@def_end_place_id}"
@@ -81,7 +82,7 @@ public
         if session[:redirect_to]
           format.html { redirect_to session[:redirect_to], notice: 'Route was successfully created.' }
         else
-          format.html { redirect_to trip_routes_path(@route.trip_id), notice: 'Route was successfully created.' }
+          format.html { redirect_to trip_routes_path, notice: 'Route was successfully created.' }
         end
         format.json { render json: @route, status: :created, location: @route }
       else
@@ -98,7 +99,7 @@ public
 
     respond_to do |format|
       if @route.update_attributes(params[:route])
-        format.html { redirect_to [@trip, @route], notice: 'Route was successfully updated.' }
+        format.html { redirect_to trip_routes_path, notice: 'Route was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

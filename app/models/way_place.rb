@@ -1,8 +1,8 @@
 class WayPlace < ActiveRecord::Base
+  attr_accessible  :place_id, :route_id, :place_kind
   belongs_to :route
   belongs_to :place
-  has_many :places
-  attr_accessible  :place_id, :route_id, :place_kind
+
   validates :place_id, :route_id, :place_kind, presence: true
   validates :place_kind, inclusion: {in: ["way_place", "start_place", "end_place"],
     message: "%{value} is not a valid kind of place"}
@@ -19,13 +19,6 @@ class WayPlace < ActiveRecord::Base
     end    
   end
 
-  def get_route_name
-    Route.get_route_name(route_id)
-  end
-
-  def get_place_name
-    return Place.find(place_name).name
-  end
 
   def cost_of_activities
     cost = 0
