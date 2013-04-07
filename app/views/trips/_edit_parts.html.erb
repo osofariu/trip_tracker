@@ -1,0 +1,23 @@
+<% save_place_id = nil %>
+<div id="edit_parts">
+	<div id="places_part">
+		<% @places.each do |place| %>
+			<div id="place_part">
+				<%= link_to image_tag('/assets/edit.png'), edit_place_path(place.id) %>
+				<%= place.name %>
+				<% save_place_id=place.id %>
+			</div>
+			<div id="place_spacer"></div>
+		<% end %>
+	</div>
+</div>
+
+<div id="after_edit_parts">
+	<% if @places.count == 0 %>
+		<%= link_to "Create your <em>start</em> place".html_safe, new_place_path  %>
+	<% else %>
+		<%= link_to "Next place", new_place_path(last_place: save_place_id) %>
+	<% end %>
+</div>
+
+<div id="spacer"></div>

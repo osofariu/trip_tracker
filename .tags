@@ -1,0 +1,194 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ActiveSupport	test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c
+ActivitiesController	app/controllers/activities_controller.rb	/^class ActivitiesController < ApplicationController$/;"	c
+ActivitiesControllerTest	test/functional/activities_controller_test.rb	/^class ActivitiesControllerTest < ActionController::TestCase$/;"	c
+ActivitiesHelper	app/helpers/activities_helper.rb	/^module ActivitiesHelper$/;"	m
+ActivitiesHelperTest	test/unit/helpers/activities_helper_test.rb	/^class ActivitiesHelperTest < ActionView::TestCase$/;"	c
+Activity	app/models/activity.rb	/^class Activity < ActiveRecord::Base$/;"	c
+ActivityTest	test/unit/activity_test.rb	/^class ActivityTest < ActiveSupport::TestCase$/;"	c
+ActivityType	app/models/activity_type.rb	/^class ActivityType < ActiveRecord::Base$/;"	c
+ActivityTypeTest	test/unit/activity_type_test.rb	/^class ActivityTypeTest < ActiveSupport::TestCase$/;"	c
+ActivityTypesController	app/controllers/activity_types_controller.rb	/^class ActivityTypesController < ApplicationController$/;"	c
+ActivityTypesControllerTest	test/functional/activity_types_controller_test.rb	/^class ActivityTypesControllerTest < ActionController::TestCase$/;"	c
+ActivityTypesHelper	app/helpers/activity_types_helper.rb	/^module ActivityTypesHelper$/;"	m
+ActivityTypesHelperTest	test/unit/helpers/activity_types_helper_test.rb	/^class ActivityTypesHelperTest < ActionView::TestCase$/;"	c
+AddPlaceIdToActivity	db/migrate/20130320023719_add_place_id_to_activity.rb	/^class AddPlaceIdToActivity < ActiveRecord::Migration$/;"	c
+AddSeqNoToRoutesAsInteger	db/migrate/20130401194428_add_seq_no_to_routes_as_integer.rb	/^class AddSeqNoToRoutesAsInteger < ActiveRecord::Migration$/;"	c
+AddTripIdToPlaces	db/migrate/20130402172138_add_trip_id_to_places.rb	/^class AddTripIdToPlaces < ActiveRecord::Migration$/;"	c
+AdminController	app/controllers/admin_controller.rb	/^class AdminController < ApplicationController$/;"	c
+AdminControllerTest	test/functional/admin_controller_test.rb	/^class AdminControllerTest < ActionController::TestCase$/;"	c
+AdminHelper	app/helpers/admin_helper.rb	/^module AdminHelper$/;"	m
+AdminHelperTest	test/unit/helpers/admin_helper_test.rb	/^class AdminHelperTest < ActionView::TestCase$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:TripTracker
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+BrowsingTest	test/performance/browsing_test.rb	/^class BrowsingTest < ActionDispatch::PerformanceTest$/;"	c
+CreateActivities	db/migrate/20130320022020_create_activities.rb	/^class CreateActivities < ActiveRecord::Migration$/;"	c
+CreateActivityTypes	db/migrate/20130320022708_create_activity_types.rb	/^class CreateActivityTypes < ActiveRecord::Migration$/;"	c
+CreatePlacesAgain	db/migrate/20130320031256_create_places_again.rb	/^class CreatePlacesAgain < ActiveRecord::Migration$/;"	c
+CreateRoutes	db/migrate/20130320021650_create_routes.rb	/^class CreateRoutes < ActiveRecord::Migration$/;"	c
+CreateTrips	db/migrate/20130320021448_create_trips.rb	/^class CreateTrips < ActiveRecord::Migration$/;"	c
+CreateUsers	db/migrate/20130320021924_create_users.rb	/^class CreateUsers < ActiveRecord::Migration$/;"	c
+CreateWayPlaces	db/migrate/20130320021859_create_way_places.rb	/^class CreateWayPlaces < ActiveRecord::Migration$/;"	c
+Place	app/models/place.rb	/^class Place < ActiveRecord::Base$/;"	c
+PlaceTest	test/unit/place_test.rb	/^class PlaceTest < ActiveSupport::TestCase$/;"	c
+PlacesController	app/controllers/places_controller.rb	/^class PlacesController < ApplicationController$/;"	c
+PlacesControllerTest	test/functional/places_controller_test.rb	/^class PlacesControllerTest < ActionController::TestCase$/;"	c
+PlacesHelper	app/helpers/places_helper.rb	/^module PlacesHelper$/;"	m
+PlacesHelperTest	test/unit/helpers/places_helper_test.rb	/^class PlacesHelperTest < ActionView::TestCase$/;"	c
+RemoveNameFromWayplace	db/migrate/20130326131415_remove_name_from_wayplace.rb	/^class RemoveNameFromWayplace < ActiveRecord::Migration$/;"	c
+RemoveRouteIdFromPlaces	db/migrate/20130321032459_remove_route_id_from_places.rb	/^class RemoveRouteIdFromPlaces < ActiveRecord::Migration$/;"	c
+RenameLocationToPlace	db/migrate/20130321193708_rename_location_to_place.rb	/^class RenameLocationToPlace < ActiveRecord::Migration$/;"	c
+Route	app/models/route.rb	/^class Route < ActiveRecord::Base$/;"	c
+RouteTest	test/unit/route_test.rb	/^class RouteTest < ActiveSupport::TestCase$/;"	c
+RoutesController	app/controllers/routes_controller.rb	/^class RoutesController < ApplicationController$/;"	c
+RoutesControllerTest	test/functional/routes_controller_test.rb	/^class RoutesControllerTest < ActionController::TestCase$/;"	c
+RoutesHelper	app/helpers/routes_helper.rb	/^module RoutesHelper$/;"	m
+RoutesHelperTest	test/unit/helpers/routes_helper_test.rb	/^class RoutesHelperTest < ActionView::TestCase$/;"	c
+SessionsController	app/controllers/sessions_controller.rb	/^class SessionsController < ApplicationController$/;"	c
+SessionsControllerTest	test/functional/sessions_controller_test.rb	/^class SessionsControllerTest < ActionController::TestCase$/;"	c
+SessionsHelper	app/helpers/sessions_helper.rb	/^module SessionsHelper$/;"	m
+SessionsHelperTest	test/unit/helpers/sessions_helper_test.rb	/^class SessionsHelperTest < ActionView::TestCase$/;"	c
+Trip	app/models/trip.rb	/^class Trip < ActiveRecord::Base$/;"	c
+TripTest	test/unit/trip_test.rb	/^class TripTest < ActiveSupport::TestCase$/;"	c
+TripTracker	config/application.rb	/^module TripTracker$/;"	m
+TripsController	app/controllers/trips_controller.rb	/^class TripsController < ApplicationController$/;"	c
+TripsControllerTest	test/functional/trips_controller_test.rb	/^class TripsControllerTest < ActionController::TestCase$/;"	c
+TripsHelper	app/helpers/trips_helper.rb	/^module TripsHelper$/;"	m
+TripsHelperTest	test/unit/helpers/trips_helper_test.rb	/^class TripsHelperTest < ActionView::TestCase$/;"	c
+UpdateRouteAndWayPlaceToFixRelationshipToPlace	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^class UpdateRouteAndWayPlaceToFixRelationshipToPlace < ActiveRecord::Migration$/;"	c
+User	app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c
+UserTest	test/unit/user_test.rb	/^class UserTest < ActiveSupport::TestCase$/;"	c
+UsersController	app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
+UsersControllerTest	test/functional/users_controller_test.rb	/^class UsersControllerTest < ActionController::TestCase$/;"	c
+UsersHelper	app/helpers/users_helper.rb	/^module UsersHelper$/;"	m
+UsersHelperTest	test/unit/helpers/users_helper_test.rb	/^class UsersHelperTest < ActionView::TestCase$/;"	c
+WayPlace	app/models/way_place.rb	/^class WayPlace < ActiveRecord::Base$/;"	c
+WayPlaceTest	test/unit/way_place_test.rb	/^class WayPlaceTest < ActiveSupport::TestCase$/;"	c
+WayPlacesController	app/controllers/way_places_controller.rb	/^class WayPlacesController < ApplicationController$/;"	c
+WayPlacesControllerTest	test/functional/way_places_controller_test.rb	/^class WayPlacesControllerTest < ActionController::TestCase$/;"	c
+WayPlacesHelper	app/helpers/way_places_helper.rb	/^module WayPlacesHelper$/;"	m
+WayPlacesHelperTest	test/unit/helpers/way_places_helper_test.rb	/^class WayPlacesHelperTest < ActionView::TestCase$/;"	c
+WelcomeController	app/controllers/welcome_controller.rb	/^class WelcomeController < ApplicationController$/;"	c
+WelcomeControllerTest	test/functional/welcome_controller_test.rb	/^class WelcomeControllerTest < ActionController::TestCase$/;"	c
+WelcomeHelper	app/helpers/welcome_helper.rb	/^module WelcomeHelper$/;"	m
+WelcomeHelperTest	test/unit/helpers/welcome_helper_test.rb	/^class WelcomeHelperTest < ActionView::TestCase$/;"	c
+add_activity	app/controllers/places_controller.rb	/^  def add_activity$/;"	f	class:PlacesController
+by_name	app/controllers/places_controller.rb	/^  def by_name$/;"	f	class:PlacesController
+change	db/migrate/20130320021448_create_trips.rb	/^  def change$/;"	f	class:CreateTrips
+change	db/migrate/20130320021650_create_routes.rb	/^  def change$/;"	f	class:CreateRoutes
+change	db/migrate/20130320021859_create_way_places.rb	/^  def change$/;"	f	class:CreateWayPlaces
+change	db/migrate/20130320021924_create_users.rb	/^  def change$/;"	f	class:CreateUsers
+change	db/migrate/20130320022020_create_activities.rb	/^  def change$/;"	f	class:CreateActivities
+change	db/migrate/20130320022708_create_activity_types.rb	/^  def change$/;"	f	class:CreateActivityTypes
+change	db/migrate/20130320023719_add_place_id_to_activity.rb	/^  def change$/;"	f	class:AddPlaceIdToActivity
+change	db/migrate/20130320031256_create_places_again.rb	/^  def change$/;"	f	class:CreatePlacesAgain
+change	db/migrate/20130401194428_add_seq_no_to_routes_as_integer.rb	/^  def change$/;"	f	class:AddSeqNoToRoutesAsInteger
+cost_of_activities	app/models/route.rb	/^  def cost_of_activities$/;"	f
+cost_of_activities	app/models/way_place.rb	/^  def cost_of_activities$/;"	f	class:WayPlace
+cost_of_gas	app/models/route.rb	/^  def cost_of_gas$/;"	f
+create	app/controllers/activities_controller.rb	/^  def create$/;"	f	class:ActivitiesController
+create	app/controllers/activity_types_controller.rb	/^  def create$/;"	f	class:ActivityTypesController
+create	app/controllers/places_controller.rb	/^  def create$/;"	f	class:PlacesController
+create	app/controllers/routes_controller.rb	/^  def create$/;"	f	class:RoutesController
+create	app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
+create	app/controllers/trips_controller.rb	/^  def create$/;"	f	class:TripsController
+create	app/controllers/users_controller.rb	/^  def create$/;"	f	class:UsersController
+create	app/controllers/way_places_controller.rb	/^  def create$/;"	f	class:WayPlacesController
+current_user	app/controllers/application_controller.rb	/^  def current_user$/;"	f	class:ApplicationController
+destroy	app/controllers/activities_controller.rb	/^  def destroy$/;"	f	class:ActivitiesController
+destroy	app/controllers/activity_types_controller.rb	/^  def destroy$/;"	f	class:ActivityTypesController
+destroy	app/controllers/places_controller.rb	/^  def destroy$/;"	f	class:PlacesController
+destroy	app/controllers/routes_controller.rb	/^  def destroy$/;"	f	class:RoutesController
+destroy	app/controllers/sessions_controller.rb	/^  def destroy$/;"	f	class:SessionsController
+destroy	app/controllers/trips_controller.rb	/^  def destroy$/;"	f	class:TripsController
+destroy	app/controllers/users_controller.rb	/^  def destroy$/;"	f	class:UsersController
+destroy	app/controllers/way_places_controller.rb	/^  def destroy$/;"	f	class:WayPlacesController
+down	db/migrate/20130321032459_remove_route_id_from_places.rb	/^  def down$/;"	f	class:RemoveRouteIdFromPlaces
+down	db/migrate/20130321193708_rename_location_to_place.rb	/^  def down$/;"	f	class:RenameLocationToPlace
+down	db/migrate/20130326131415_remove_name_from_wayplace.rb	/^  def down$/;"	f	class:RemoveNameFromWayplace
+down	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def down$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
+down	db/migrate/20130402172138_add_trip_id_to_places.rb	/^  def down$/;"	f	class:AddTripIdToPlaces
+down_update_route_place_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def down_update_route_place_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
+edit	app/controllers/activities_controller.rb	/^  def edit$/;"	f	class:ActivitiesController
+edit	app/controllers/activity_types_controller.rb	/^  def edit$/;"	f	class:ActivityTypesController
+edit	app/controllers/places_controller.rb	/^  def edit$/;"	f	class:PlacesController
+edit	app/controllers/routes_controller.rb	/^  def edit$/;"	f	class:RoutesController
+edit	app/controllers/trips_controller.rb	/^  def edit$/;"	f	class:TripsController
+edit	app/controllers/users_controller.rb	/^  def edit$/;"	f	class:UsersController
+edit	app/controllers/way_places_controller.rb	/^  def edit$/;"	f	class:WayPlacesController
+end_place	app/models/route.rb	/^  def end_place$/;"	f	class:Route
+end_place=	app/models/route.rb	/^  def end_place=(place)$/;"	f	class:Route
+end_place_name	app/models/route.rb	/^  def end_place_name$/;"	f
+find_trip	app/controllers/routes_controller.rb	/^  def find_trip$/;"	f	class:RoutesController
+get_activities	app/models/place.rb	/^  def get_activities$/;"	f	class:Place
+get_by_id	app/models/activity.rb	/^  def self.get_by_id (id)$/;"	F	class:Activity
+get_by_id	app/models/place.rb	/^  def self.get_by_id (id)$/;"	F	class:Place
+get_route_segment	app/helpers/places_helper.rb	/^  def get_route_segment(place_id)$/;"	f	class:PlacesHelper
+get_trip_name	app/helpers/trips_helper.rb	/^  def get_trip_name(id)$/;"	f	class:TripsHelper
+get_type_name	app/models/activity.rb	/^  def get_type_name$/;"	f	class:Activity
+get_user	app/helpers/application_helper.rb	/^  def get_user$/;"	f	class:ApplicationHelper
+index	app/controllers/activities_controller.rb	/^  def index$/;"	f	class:ActivitiesController
+index	app/controllers/activity_types_controller.rb	/^  def index$/;"	f	class:ActivityTypesController
+index	app/controllers/admin_controller.rb	/^  def index$/;"	f	class:AdminController
+index	app/controllers/places_controller.rb	/^  def index$/;"	f	class:PlacesController
+index	app/controllers/routes_controller.rb	/^  def index$/;"	f	class:RoutesController
+index	app/controllers/trips_controller.rb	/^  def index$/;"	f	class:TripsController
+index	app/controllers/users_controller.rb	/^  def index$/;"	f	class:UsersController
+index	app/controllers/way_places_controller.rb	/^  def index$/;"	f	class:WayPlacesController
+index	app/controllers/welcome_controller.rb	/^  def index$/;"	f	class:WelcomeController
+init_seq_no	app/models/route.rb	/^  def init_seq_no$/;"	f	class:Route
+logged_on?	app/helpers/application_helper.rb	/^  def logged_on?$/;"	f	class:ApplicationHelper
+mid_places	app/models/route.rb	/^  def mid_places$/;"	f	class:Route
+new	app/controllers/activities_controller.rb	/^  def new$/;"	f	class:ActivitiesController
+new	app/controllers/activity_types_controller.rb	/^  def new$/;"	f	class:ActivityTypesController
+new	app/controllers/places_controller.rb	/^  def new$/;"	f	class:PlacesController
+new	app/controllers/routes_controller.rb	/^  def new$/;"	f	class:RoutesController
+new	app/controllers/sessions_controller.rb	/^  def new$/;"	f	class:SessionsController
+new	app/controllers/trips_controller.rb	/^  def new$/;"	f	class:TripsController
+new	app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
+new	app/controllers/way_places_controller.rb	/^  def new$/;"	f	class:WayPlacesController
+place_name	app/helpers/places_helper.rb	/^  def place_name(place_id)$/;"	f	class:PlacesHelper
+require_login	app/controllers/application_controller.rb	/^  def require_login$/;"	f	class:ApplicationController
+route_name_rt	app/helpers/routes_helper.rb	/^  def route_name_rt (route_id)$/;"	f	class:RoutesHelper
+route_name_wp	app/helpers/way_places_helper.rb	/^  def route_name_wp (way_place_id)$/;"	f	class:WayPlacesHelper
+save_check	db/seeds.rb	/^def save_check(text, *recs)$/;"	f
+set_cost	app/models/activity.rb	/^  def set_cost$/;"	f	class:Activity
+setup_auth_for_testing	test/test_helper.rb	/^  def setup_auth_for_testing$/;"	f	class:ActiveSupport
+show	app/controllers/activities_controller.rb	/^  def show$/;"	f	class:ActivitiesController
+show	app/controllers/activity_types_controller.rb	/^  def show$/;"	f	class:ActivityTypesController
+show	app/controllers/places_controller.rb	/^  def show$/;"	f	class:PlacesController
+show	app/controllers/routes_controller.rb	/^  def show$/;"	f	class:RoutesController
+show	app/controllers/trips_controller.rb	/^  def show$/;"	f	class:TripsController
+show	app/controllers/users_controller.rb	/^  def show$/;"	f	class:UsersController
+show	app/controllers/way_places_controller.rb	/^  def show$/;"	f	class:WayPlacesController
+show_activity_info	app/models/activity.rb	/^  def show_activity_info$/;"	f	class:Activity
+start_place	app/models/route.rb	/^  def start_place$/;"	f	class:Route
+start_place=	app/models/route.rb	/^  def start_place=(place)$/;"	f	class:Route
+start_place_name	app/models/route.rb	/^  def start_place_name$/;"	f
+test_homepage	test/performance/browsing_test.rb	/^  def test_homepage$/;"	f	class:BrowsingTest
+trip_activities	app/models/activity.rb	/^  def self.trip_activities(trip_id)$/;"	F	class:Activity
+trip_routes	app/models/route.rb	/^  def self.trip_routes(trip_id)$/;"	F
+trip_way_places	app/models/way_place.rb	/^  def self.trip_way_places(trip_id)$/;"	F	class:WayPlace
+unique_route_place_kind	app/models/way_place.rb	/^  def unique_route_place_kind$/;"	f	class:WayPlace
+up	db/migrate/20130321032459_remove_route_id_from_places.rb	/^  def up$/;"	f	class:RemoveRouteIdFromPlaces
+up	db/migrate/20130321193708_rename_location_to_place.rb	/^  def up$/;"	f	class:RenameLocationToPlace
+up	db/migrate/20130326131415_remove_name_from_wayplace.rb	/^  def up$/;"	f	class:RemoveNameFromWayplace
+up	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
+up	db/migrate/20130402172138_add_trip_id_to_places.rb	/^  def up$/;"	f	class:AddTripIdToPlaces
+up_update_route_place_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up_update_route_place_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
+up_update_route_wayplace_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up_update_route_wayplace_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
+update	app/controllers/activities_controller.rb	/^  def update$/;"	f	class:ActivitiesController
+update	app/controllers/activity_types_controller.rb	/^  def update$/;"	f	class:ActivityTypesController
+update	app/controllers/places_controller.rb	/^  def update$/;"	f	class:PlacesController
+update	app/controllers/routes_controller.rb	/^  def update$/;"	f	class:RoutesController
+update	app/controllers/trips_controller.rb	/^  def update$/;"	f	class:TripsController
+update	app/controllers/users_controller.rb	/^  def update$/;"	f	class:UsersController
+update	app/controllers/way_places_controller.rb	/^  def update$/;"	f	class:WayPlacesController
+user_places	app/models/place.rb	/^  def self.user_places(user_id)$/;"	F	class:Place
+user_unassigned_places	app/models/place.rb	/^  def self.user_unassigned_places(trip_id)$/;"	F	class:Place
