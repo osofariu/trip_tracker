@@ -6,9 +6,12 @@ class PlacesController < ApplicationController
   def index
     logger.info "place_controller#index #{session[:trip_id]}"
     if session[:trip_id]
-      @places = Place.where(trip_id: session[:trip_id])
+      @trip = Trip.find(session[:trip_id])
+      @places = @trip.base_places
+      @routes = @trip.routes
     else
-      @places = Place.user_places(current_user)
+      # user likely navigated directly to this page without a "trip" context
+      raise "Shouldn't get here"
     end
 
     respond_to do |format|
@@ -32,6 +35,7 @@ class PlacesController < ApplicationController
   # GET /places/new.json
   def new
     @place = Place.new
+    @base_id = params[:base_id]
 
     if session[:trip_id]
       @trips = [ Trip.find(session[:trip_id])]
@@ -65,14 +69,12 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
-    if session[:trip_id]
-      @trips = [Trip.find(session[:trip_id])]
+    if current_trip?
+      @trips = current_trip
     else
-      @trips = User.find(current_user).trips.all
+      @trips = current_user.trips.all
     end
     @place = Place.new(params[:place])
-    # validate unless.. need to skit it to save way_places
-    to_validate = true
 
     # creating a place and associating it to a route
     if place_kind = params[:place_kind] && route_id = params[:route_id]
@@ -82,9 +84,11 @@ class PlacesController < ApplicationController
 
     # adding a new place from edit_parts, so let's create a route
     if last_place = session[:last_place]
-      route = Route.create(trip_id: session[:trip_id])
+      route = Route.create(trip_id: current_trip.id)
       WayPlace.create(place_kind: "start_place", place_id: last_place, route_id: route.id)
 
+      # skip validation because wayplace requires place_id for validation, which doesn't exist.
+      to_validate = true
       if @place.valid?
         to_validate=false
       end
@@ -112,17 +116,17 @@ class PlacesController < ApplicationController
   # PUT /places/1.json
   def update
     @place = Place.find(params[:id])
-    if session[:trip_id]
-      @trips = [Trip.find(session[:trip_id])]
+    if current_trip?
+      @trips = [current_trip]
     else
-      @trips = User.find(current_user).trips.all
+      @trips = current_user.trips.all
     end
+    # need to put this place on a route through way_place
     if @place_kind = params[:place_kind] && @route_id = params[:route_id]
       route = Route.find(@route_id)
       # updating a place with existing way_place
-      logger.debug "looking for: "
       if (wp=route.way_places.find_by_place_kind(@place_kind))
-        wp.destroy
+        wp.destroy # don't need old connection
       end
       @place.way_places << WayPlace.new(route_id: @route_id, place_kind: @place_kind)
     end

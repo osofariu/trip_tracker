@@ -16,7 +16,7 @@ public
     @routes = @trip.routes.order("seq_no").all
     @trip_id = @trip.id
     respond_to do |format|
-      if @trip.user_id != current_user 
+      if @trip.user_id != current_user.id
         redirect_to welcome_index_path, notice: "This route cannot be found." and return
       else
         format.html # index.html.erb
@@ -30,7 +30,7 @@ public
   def show
     @route = @trip.routes.find(params[:id])
 
-    if (@trip.user_id != current_user)
+    if (@trip.user_id != current_user.id)
       redirect_to welcome_index_path, notice: "This route cannot be found (you thief)." and return
     end
     respond_to do |format|

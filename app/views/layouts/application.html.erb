@@ -28,30 +28,18 @@
                <% end %> -->
         <% end %>
       </div>
-      <ul>
-        <li><%= link_to "Welcome", welcome_index_path %></li>
-        <% if logged_on? %>
-          <li><%= link_to "Trips", trips_path %></li>
-        <% end %>
-        <% if session[:trip_id] %>
-          <li><%= link_to "Routes", trip_routes_path(session[:trip_id]) %> </li>
-          <li><%= link_to "Places", places_path %></li>
-          <li><%= link_to "Way-Places", way_places_path %></li>
-          <li><%= link_to "Activities", activities_path %> </li>
-        <% else %>
-        <div id="gray_links">
-        <li>Routes</li>
-        <li>Places</li>
-        <li>Way-Places</li>
-        <li>Activities</li>
+      <div id="nav_group">
+        <%= render_navigation %>
       </div>
-        <% end %>
-      </ul>
     </div>
     <div id="main">
         <% if notice %>
           <p id="notice"><%= notice %></p>
         <% end %>
+
+        <div id="breadcrumbs">
+          <%=  render_navigation(:renderer => :breadcrumbs, :join_with => ' &raquo; ', :prefix => ': ') %>
+        </div>
         <%= yield %>
     </div>
   </div>

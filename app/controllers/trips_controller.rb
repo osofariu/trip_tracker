@@ -41,7 +41,6 @@ class TripsController < ApplicationController
     session[:trip_id] = nil
     @trip = Trip.new
     @trip.user_id = session[:user_id]
-    @places = @trip.places.order('seq_no').all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,7 +51,8 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
-    @places = @trip.places.order('seq_no').all
+    @places = @trip.base_places.order('seq_no').all
+    @routes = @trip.routes
   end
 
   # POST /trips
@@ -66,7 +66,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       if @trip.save
         if session[:redirect_to]
-          format.html {redirect_to session[:redirect_to, notice: 'Place was successfully added.']}
+          format.html {redirect_to session[:redirect_to], notice: 'Place was successfully added.'}
         else
           format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         end
@@ -98,6 +98,7 @@ class TripsController < ApplicationController
   # DELETE /trips/1.json
   def destroy
     session[:trip_id] = nil
+    session[:redirect_to] = nil   # will try to show this non-existant trip otherwise
     @trip = Trip.find(params[:id])
     @trip.destroy
 

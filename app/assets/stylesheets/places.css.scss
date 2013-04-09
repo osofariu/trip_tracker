@@ -7,16 +7,27 @@
 		#places_part {	
 
 			#place_part {	
-				font-size: medium;	
+				font-size: medium;
+
+				#sub_place_part {
+					padding-left: 20;
+					font-weight:bold;
+				}
 			}
 
 			#place_spacer {
-				background-image: url(/assets/narrow-green-arrow.png);
-				height: 40px;
+				//background-image: url(/assets/narrow-green-arrow.png);
+				//height: 40px;
 			}
 		}
 	}
 
 	#after_edit_parts {
 		font-size: medium;
+	}
+
+
+	#place_parent_note {
+		font-size: medium;
+		padding-bottom: 20px;	
 	}

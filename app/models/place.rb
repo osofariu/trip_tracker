@@ -1,8 +1,9 @@
 class Place < ActiveRecord::Base
-  attr_accessible :name, :notes, :place_type, :trip_id, :seq_no
+  attr_accessible :name, :notes, :place_type, :trip_id, :seq_no, :base_id
   has_many :way_places
   has_many :routes, through: :way_places
   has_many :activities, dependent: :destroy
+  has_many :child_places, class_name: "Place", foreign_key: "base_id"
 
   validates :name, :trip_id, presence: true
   validates :name, uniqueness: true

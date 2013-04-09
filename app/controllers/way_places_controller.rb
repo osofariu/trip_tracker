@@ -6,6 +6,7 @@ class WayPlacesController < ApplicationController
   def index
     if session[:trip_id]
       @way_places = WayPlace.trip_way_places(session[:trip_id])
+      @trip = Trip.find(session[:trip_id])
     else
       @way_places = []
     end

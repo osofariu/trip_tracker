@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <% if @base_id %>
+    <div id="place_parent_note">
+      Creating place for parent <%= Place.find(@base_id).name %>
+      <%= f.hidden_field :base_id, value: @base_id %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :trip_id %><br />
     <%= f.collection_select :trip_id, @trips, :id, :name %>

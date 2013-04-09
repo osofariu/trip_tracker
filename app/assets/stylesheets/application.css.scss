@@ -25,6 +25,11 @@
   }
 }
 
+
+#breadcrumbs {
+  
+}
+
 #login_info {
   font: small-caps 14px/14px "Times New Roman", serif;
   text-align: right;
@@ -52,10 +57,44 @@
   #side {
     float: left;
     padding: 0em 2em;
-    width: 6em;
+    //width: 6em;
     margin-top:2em;
     margin-left: -8em;
     min-height: 40em;
+
+    #nav_group {
+      #navigation {
+        float: left;
+        width: 120px;
+        background-color: #D6D1B9;
+      }
+      ul {
+        padding-left: 5px;
+        ul {
+          padding-left: 20px; 
+        } 
+      }
+      a {
+        text-decoration: none;
+        color: #7f7669;
+        &:hover, &:active {
+          text-decoration: underline; 
+        } 
+      }
+      li {
+        border: medium none;
+        list-style-image: none;
+        list-style-type: none;
+        padding: 2px;
+        a.selected {
+          color: #4c4338;
+          text-decoration: underline; 
+        }
+        li {
+          font-size: 10pt; 
+        } 
+      }  
+    }
 
     #gray_links {
       color: #808080;

@@ -4,6 +4,7 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     if session[:trip_id]
+      @trip = Trip.find(session[:trip_id])
       @activities = Activity.trip_activities(session[:trip_id])
     else
       @activities = []

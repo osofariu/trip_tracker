@@ -9,9 +9,16 @@ class PlacesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    session[:trip_id] = @trip.id
     get :index
     assert_response :success
     assert_not_nil assigns(:places)
+  end
+
+  test "should not get index if no trip id set" do
+    assert_raise(RuntimeError, "Shouldn't get here") {
+      get :index
+    }
   end
 
   test "should get new" do

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "partials/edit_parts.css.scss";
+
 .trips {
 
 	h1 {
@@ -138,37 +140,43 @@
 		//background-color:#EBFFEB;
 	}
 
-	#field_right {
-		float: right;
-		position: relative;
-		top: -100px;
-		right: 10px;
+	#trip_form {
+		
+		border-style:dotted;
+		border-color:green;
+		border-width:1px;
+		#form_left_group {
+
+			float: left;
+			padding: 25px;
+
+			#form_name {
+
+				padding-bottom: 5px;
+			}
+			#form_start_date {
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+			#form_end_date {
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+			#form_flexible {
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+		}
+		#form_description {
+
+		}
 	}
+	
 	#spacer {
 		height: 100px;
 	}
 
-	#edit_parts {
-
-		#places_part {	
-
-			#place_part {	
-				font-size: medium;	
-			}
-
-			#place_spacer {
-				background-image: url(/assets/narrow-green-arrow.png);
-				height: 40px;
-			}
-		}
-	}
-
-	#after_edit_parts {
-		font-size: medium;
-	}
-
-
-
+	
 
 
 
