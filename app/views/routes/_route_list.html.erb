@@ -1,0 +1,46 @@
+<div id="route_part", class="inline_block">
+    <table>
+        <col style="width:15%">
+        <col style="width:10%">
+        <col style="width:40%">
+        <col style="width:40%">
+        <col style="width:5%">
+        <tr>
+            <th></th>
+            <th>Order</th>
+            <th>Start place</th>
+            <th>End place</th>
+            <th>Distance</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        <% @routes.each do |route| %>
+        <tr>
+            <td>
+                <%= link_to image_tag('/assets/edit.png'), edit_trip_route_path(@trip, route) %>
+                <%= link_to image_tag('/assets/info.png'), trip_route_path(@trip, route) %>
+            </td>
+            <td><%= route.seq_no %> </td>
+            <td>
+                <% if route.start_place_id %>
+                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.start_place_id, place_kind: "start_place", route_id: route.id) %>
+                <% else %>
+                <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "start_place", route_id: route.id) %>
+                <% end %>
+                <%= route.start_place_name %>
+            </td>
+            <td>
+                <% if route.end_place_id %>
+                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.end_place_id, place_kind: "start_place", route_id: route.id) %>
+                <% else %>
+                <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "end_place", route_id: route.id) %>
+                <% end %>
+                <%= route.end_place_name %>
+            </td>
+            <td><%= route.distance %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>

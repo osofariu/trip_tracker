@@ -1,0 +1,47 @@
+#edit_parts {
+	.inline_block {
+  		/* Setting a common base */
+  		margin: 0;
+  		padding: 0;
+	  //	div {
+		    /* Setting a common base */
+		    margin: 0;
+		    padding: 15px;
+		    display: inline-block;
+		    width: 400px;
+		    min-height: 100px;
+		    //background: #ccc;
+		    vertical-align: top; 
+		//} 
+	}
+
+
+	padding: 20px;
+	#places_part {	
+		//float: left;
+
+		#place_part {	
+			font-size: medium;	
+
+			#sub_place_part {
+				padding-left: 15px;
+			}
+		}
+
+		#place_spacer {
+			//background-image: url(/assets/narrow-green-arrow.png);
+			height: 40px;
+		}
+	}
+
+	#route_part {
+		
+	}
+}
+
+#after_edit_parts {
+	font-size: medium;
+}
+
+
+	
