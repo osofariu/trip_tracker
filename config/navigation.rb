@@ -46,16 +46,17 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            when the item should be highlighted, you can set a regexp which is matched
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>. 
     #
+
     primary.item :home, 'Home', root_path
+    primary.item :trip, 'All Trips' , trips_path
 
     if !@trip.nil? and !@trip.new_record?
-      primary.item :trip, 'All Trips' , trips_path 
-      primary.item :trip, 'Show Trip', trip_path(@trip)do |trips|
-        trips.item :edit_trip, "Edit #{Trip}", edit_trip_path( @trip )
-        trips.item :routes, 'Routes', trip_routes_path( @trip )
-        trips.item :place, 'Places', places_path
-        trips.item :way_place, 'Way-Places', way_places_path
-        trips.item :activities, "Activities", activities_path
+      primary.item :trip, @trip.name, trip_path(@trip)  do |trip|
+        trip.item :edit_trip, 'Edit', edit_trip_path( @trip )
+        trip.item :routes, 'Routes', trip_routes_path( @trip )
+        trip.item :place, 'Places', places_path
+        trip.item :way_place, 'Way-Places', way_places_path
+        trip.item :activities, "Activities", activities_path
       end
     end
 

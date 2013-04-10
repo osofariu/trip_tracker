@@ -17,7 +17,9 @@ ActivityTypesController	app/controllers/activity_types_controller.rb	/^class Act
 ActivityTypesControllerTest	test/functional/activity_types_controller_test.rb	/^class ActivityTypesControllerTest < ActionController::TestCase$/;"	c
 ActivityTypesHelper	app/helpers/activity_types_helper.rb	/^module ActivityTypesHelper$/;"	m
 ActivityTypesHelperTest	test/unit/helpers/activity_types_helper_test.rb	/^class ActivityTypesHelperTest < ActionView::TestCase$/;"	c
+AddDatesToTripAndPlaces	db/migrate/20130409131429_add_dates_to_trip_and_places.rb	/^class AddDatesToTripAndPlaces < ActiveRecord::Migration$/;"	c
 AddPlaceIdToActivity	db/migrate/20130320023719_add_place_id_to_activity.rb	/^class AddPlaceIdToActivity < ActiveRecord::Migration$/;"	c
+AddSeqNoAndBaseIdToPlace	db/migrate/20130406154438_add_seq_no_and_base_id_to_place.rb	/^class AddSeqNoAndBaseIdToPlace < ActiveRecord::Migration$/;"	c
 AddSeqNoToRoutesAsInteger	db/migrate/20130401194428_add_seq_no_to_routes_as_integer.rb	/^class AddSeqNoToRoutesAsInteger < ActiveRecord::Migration$/;"	c
 AddTripIdToPlaces	db/migrate/20130402172138_add_trip_id_to_places.rb	/^class AddTripIdToPlaces < ActiveRecord::Migration$/;"	c
 AdminController	app/controllers/admin_controller.rb	/^class AdminController < ApplicationController$/;"	c
@@ -100,7 +102,10 @@ create	app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:Session
 create	app/controllers/trips_controller.rb	/^  def create$/;"	f	class:TripsController
 create	app/controllers/users_controller.rb	/^  def create$/;"	f	class:UsersController
 create	app/controllers/way_places_controller.rb	/^  def create$/;"	f	class:WayPlacesController
+current_trip	app/controllers/application_controller.rb	/^  def current_trip$/;"	f	class:ApplicationController
+current_trip?	app/controllers/application_controller.rb	/^  def current_trip?$/;"	f	class:ApplicationController
 current_user	app/controllers/application_controller.rb	/^  def current_user$/;"	f	class:ApplicationController
+current_user?	app/controllers/application_controller.rb	/^  def current_user?$/;"	f	class:ApplicationController
 destroy	app/controllers/activities_controller.rb	/^  def destroy$/;"	f	class:ActivitiesController
 destroy	app/controllers/activity_types_controller.rb	/^  def destroy$/;"	f	class:ActivityTypesController
 destroy	app/controllers/places_controller.rb	/^  def destroy$/;"	f	class:PlacesController
@@ -114,6 +119,8 @@ down	db/migrate/20130321193708_rename_location_to_place.rb	/^  def down$/;"	f	cl
 down	db/migrate/20130326131415_remove_name_from_wayplace.rb	/^  def down$/;"	f	class:RemoveNameFromWayplace
 down	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def down$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
 down	db/migrate/20130402172138_add_trip_id_to_places.rb	/^  def down$/;"	f	class:AddTripIdToPlaces
+down	db/migrate/20130406154438_add_seq_no_and_base_id_to_place.rb	/^  def down$/;"	f	class:AddSeqNoAndBaseIdToPlace
+down	db/migrate/20130409131429_add_dates_to_trip_and_places.rb	/^  def down$/;"	f	class:AddDatesToTripAndPlaces
 down_update_route_place_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def down_update_route_place_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
 edit	app/controllers/activities_controller.rb	/^  def edit$/;"	f	class:ActivitiesController
 edit	app/controllers/activity_types_controller.rb	/^  def edit$/;"	f	class:ActivityTypesController
@@ -124,15 +131,21 @@ edit	app/controllers/users_controller.rb	/^  def edit$/;"	f	class:UsersControlle
 edit	app/controllers/way_places_controller.rb	/^  def edit$/;"	f	class:WayPlacesController
 end_place	app/models/route.rb	/^  def end_place$/;"	f	class:Route
 end_place=	app/models/route.rb	/^  def end_place=(place)$/;"	f	class:Route
+end_place_id	app/models/route.rb	/^    def end_place_id$/;"	f	class:Route
 end_place_name	app/models/route.rb	/^  def end_place_name$/;"	f
+ensure_ownership	app/controllers/places_controller.rb	/^  def ensure_ownership(*opt_place)$/;"	f	class:PlacesController
+enusure_ownership	app/controllers/trips_controller.rb	/^  def enusure_ownership(trip)$/;"	f	class:TripsController
 find_trip	app/controllers/routes_controller.rb	/^  def find_trip$/;"	f	class:RoutesController
+first_place?	app/models/place.rb	/^  def first_place?$/;"	f	class:Place
 get_activities	app/models/place.rb	/^  def get_activities$/;"	f	class:Place
+get_and_compact_seq_no	app/models/place.rb	/^  def get_and_compact_seq_no(place)$/;"	f	class:Place
 get_by_id	app/models/activity.rb	/^  def self.get_by_id (id)$/;"	F	class:Activity
 get_by_id	app/models/place.rb	/^  def self.get_by_id (id)$/;"	F	class:Place
 get_route_segment	app/helpers/places_helper.rb	/^  def get_route_segment(place_id)$/;"	f	class:PlacesHelper
 get_trip_name	app/helpers/trips_helper.rb	/^  def get_trip_name(id)$/;"	f	class:TripsHelper
 get_type_name	app/models/activity.rb	/^  def get_type_name$/;"	f	class:Activity
 get_user	app/helpers/application_helper.rb	/^  def get_user$/;"	f	class:ApplicationHelper
+get_user	app/helpers/sessions_helper.rb	/^  def get_user$/;"	f	class:SessionsHelper
 index	app/controllers/activities_controller.rb	/^  def index$/;"	f	class:ActivitiesController
 index	app/controllers/activity_types_controller.rb	/^  def index$/;"	f	class:ActivityTypesController
 index	app/controllers/admin_controller.rb	/^  def index$/;"	f	class:AdminController
@@ -142,6 +155,7 @@ index	app/controllers/trips_controller.rb	/^  def index$/;"	f	class:TripsControl
 index	app/controllers/users_controller.rb	/^  def index$/;"	f	class:UsersController
 index	app/controllers/way_places_controller.rb	/^  def index$/;"	f	class:WayPlacesController
 index	app/controllers/welcome_controller.rb	/^  def index$/;"	f	class:WelcomeController
+init_seq_no	app/models/place.rb	/^  def init_seq_no$/;"	f	class:Place
 init_seq_no	app/models/route.rb	/^  def init_seq_no$/;"	f	class:Route
 logged_on?	app/helpers/application_helper.rb	/^  def logged_on?$/;"	f	class:ApplicationHelper
 mid_places	app/models/route.rb	/^  def mid_places$/;"	f	class:Route
@@ -155,10 +169,13 @@ new	app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
 new	app/controllers/way_places_controller.rb	/^  def new$/;"	f	class:WayPlacesController
 place_name	app/helpers/places_helper.rb	/^  def place_name(place_id)$/;"	f	class:PlacesHelper
 require_login	app/controllers/application_controller.rb	/^  def require_login$/;"	f	class:ApplicationController
+reset_current_trip	app/controllers/application_controller.rb	/^  def reset_current_trip$/;"	f	class:ApplicationController
 route_name_rt	app/helpers/routes_helper.rb	/^  def route_name_rt (route_id)$/;"	f	class:RoutesHelper
 route_name_wp	app/helpers/way_places_helper.rb	/^  def route_name_wp (way_place_id)$/;"	f	class:WayPlacesHelper
 save_check	db/seeds.rb	/^def save_check(text, *recs)$/;"	f
+save_wayplaces	app/models/route.rb	/^  def save_wayplaces$/;"	f	class:Route
 set_cost	app/models/activity.rb	/^  def set_cost$/;"	f	class:Activity
+set_current_trip	app/controllers/application_controller.rb	/^  def set_current_trip(trip_id)$/;"	f	class:ApplicationController
 setup_auth_for_testing	test/test_helper.rb	/^  def setup_auth_for_testing$/;"	f	class:ActiveSupport
 show	app/controllers/activities_controller.rb	/^  def show$/;"	f	class:ActivitiesController
 show	app/controllers/activity_types_controller.rb	/^  def show$/;"	f	class:ActivityTypesController
@@ -170,10 +187,12 @@ show	app/controllers/way_places_controller.rb	/^  def show$/;"	f	class:WayPlaces
 show_activity_info	app/models/activity.rb	/^  def show_activity_info$/;"	f	class:Activity
 start_place	app/models/route.rb	/^  def start_place$/;"	f	class:Route
 start_place=	app/models/route.rb	/^  def start_place=(place)$/;"	f	class:Route
+start_place_id	app/models/route.rb	/^  def start_place_id$/;"	f	class:Route
 start_place_name	app/models/route.rb	/^  def start_place_name$/;"	f
 test_homepage	test/performance/browsing_test.rb	/^  def test_homepage$/;"	f	class:BrowsingTest
 trip_activities	app/models/activity.rb	/^  def self.trip_activities(trip_id)$/;"	F	class:Activity
 trip_routes	app/models/route.rb	/^  def self.trip_routes(trip_id)$/;"	F
+trip_unassigned_places	app/helpers/places_helper.rb	/^  def trip_unassigned_places(trip_id)$/;"	f	class:PlacesHelper
 trip_way_places	app/models/way_place.rb	/^  def self.trip_way_places(trip_id)$/;"	F	class:WayPlace
 unique_route_place_kind	app/models/way_place.rb	/^  def unique_route_place_kind$/;"	f	class:WayPlace
 up	db/migrate/20130321032459_remove_route_id_from_places.rb	/^  def up$/;"	f	class:RemoveRouteIdFromPlaces
@@ -181,6 +200,8 @@ up	db/migrate/20130321193708_rename_location_to_place.rb	/^  def up$/;"	f	class:
 up	db/migrate/20130326131415_remove_name_from_wayplace.rb	/^  def up$/;"	f	class:RemoveNameFromWayplace
 up	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
 up	db/migrate/20130402172138_add_trip_id_to_places.rb	/^  def up$/;"	f	class:AddTripIdToPlaces
+up	db/migrate/20130406154438_add_seq_no_and_base_id_to_place.rb	/^  def up$/;"	f	class:AddSeqNoAndBaseIdToPlace
+up	db/migrate/20130409131429_add_dates_to_trip_and_places.rb	/^  def up$/;"	f	class:AddDatesToTripAndPlaces
 up_update_route_place_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up_update_route_place_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
 up_update_route_wayplace_relationships	db/migrate/20130401125147_update_route_and_way_place_to_fix_relationship_to_place.rb	/^  def up_update_route_wayplace_relationships$/;"	f	class:UpdateRouteAndWayPlaceToFixRelationshipToPlace
 update	app/controllers/activities_controller.rb	/^  def update$/;"	f	class:ActivitiesController
@@ -190,5 +211,3 @@ update	app/controllers/routes_controller.rb	/^  def update$/;"	f	class:RoutesCon
 update	app/controllers/trips_controller.rb	/^  def update$/;"	f	class:TripsController
 update	app/controllers/users_controller.rb	/^  def update$/;"	f	class:UsersController
 update	app/controllers/way_places_controller.rb	/^  def update$/;"	f	class:WayPlacesController
-user_places	app/models/place.rb	/^  def self.user_places(user_id)$/;"	F	class:Place
-user_unassigned_places	app/models/place.rb	/^  def self.user_unassigned_places(trip_id)$/;"	F	class:Place

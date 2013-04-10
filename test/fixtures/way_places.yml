@@ -10,3 +10,13 @@ two:
   place_id: 2
   place_kind: "end_place"
 
+three:
+  route_id: 2
+  place_id: 2
+  place_kind: "start_place"
+
+four:
+  route_id: 2
+  place_id: 3
+  place_kind: "end_place"
+

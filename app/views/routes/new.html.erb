@@ -2,8 +2,5 @@
 
 <%= render 'form' %>
 
-<% if session[:redirect_to] %>
-	<%= link_to 'Back', session[:redirect_to] %>
-<% else %>
-	<%= link_to 'Back', trip_routes_path(@trip) %>
-<% end %>
+
+<%= link_to 'Back', trip_routes_path(@trip) %>

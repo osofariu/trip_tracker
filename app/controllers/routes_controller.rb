@@ -79,11 +79,7 @@ public
 
     respond_to do |format|
       if @route.save
-        if session[:redirect_to]
-          format.html { redirect_to session[:redirect_to], notice: 'Route was successfully created.' }
-        else
-          format.html { redirect_to trip_routes_path, notice: 'Route was successfully created.' }
-        end
+        format.html { redirect_to trip_routes_path, notice: 'Route was successfully created.' }
         format.json { render json: @route, status: :created, location: @route }
       else
         format.html { render action: "new" }

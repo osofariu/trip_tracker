@@ -1,6 +1,3 @@
-<% if @trips %>
-  <% session[:redirect_to] = edit_trip_path(@trip) %>
-<% end %>
 
 <div id="trip_form">
   <%= form_for(@trip) do |f| %>

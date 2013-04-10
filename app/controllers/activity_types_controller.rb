@@ -1,5 +1,8 @@
 class ActivityTypesController < ApplicationController
-  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+
+  # This controller will either go away or be used only by an admin
+
+  before_filter :require_login
   # GET /activity_types
   # GET /activity_types.json
   def index

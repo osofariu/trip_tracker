@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406154438) do
+ActiveRecord::Schema.define(:version => 20130409131429) do
 
   create_table "activities", :force => true do |t|
     t.integer  "activity_type"
@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(:version => 20130406154438) do
   create_table "places", :force => true do |t|
     t.string   "name"
     t.text     "notes"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "trip_id"
-    t.integer  "seq_no",     :default => 0
+    t.integer  "seq_no",       :default => 0
     t.integer  "base_id"
+    t.date     "arrival_date"
+    t.integer  "days"
   end
 
   create_table "routes", :force => true do |t|
@@ -55,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20130406154438) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   create_table "users", :force => true do |t|

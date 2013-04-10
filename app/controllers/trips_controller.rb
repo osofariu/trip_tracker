@@ -1,12 +1,20 @@
 class TripsController < ApplicationController
 
-  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_filter :require_login
+
+  def ensure_ownership(trip)
+    if trip.user_id != current_user.id
+      raise "Trip #{trip.id} does not exist for this user" 
+    else
+      set_current_trip(trip.id)
+    end
+  end
 
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.where(user_id: session[:user_id])
-    session[:trip_id] = nil
+    @trips = Trip.where(user_id: current_user.id)
+    reset_current_trip
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,16 +26,10 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
-    session[:trip_id] = @trip.id
-    if @trip.user_id != session[:user_id]
-      raise "Trip #{params[:id]} does not exist for this user" if !@trip 
-    end
+    ensure_ownership @trip
 
-    @routes = Route.where(trip_id: @trip.id).order('seq_no ASC')
-    @first_route = @routes.first
-    @last_route =  @routes.last
-    @first_place_id = @first_route.nil? ? nil : @first_route.start_place
-    @user_name = User.find(@trip.user_id).name
+    @routes = @trip.routes.order('seq_no ASC')
+    @first_place_id = @routes.first.nil? ? nil : @routes.first.start_place
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,9 +40,9 @@ class TripsController < ApplicationController
   # GET /trips/new
   # GET /trips/new.json
   def new
-    session[:trip_id] = nil
+    reset_current_trip
     @trip = Trip.new
-    @trip.user_id = session[:user_id]
+    @trip.user_id = current_user.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,25 +53,22 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
-    @places = @trip.base_places.order('seq_no').all
+    ensure_ownership @trip
+
+    @places = @trip.base_places.order('seq_no ASC')
     @routes = @trip.routes
   end
 
   # POST /trips
   # POST /trips.json
   def create
-    session[:trip_id] = nil
+    reset_current_trip
     @trip = Trip.new(params[:trip])
-    @trip.user_id = session[:user_id]
+    @trip.user_id = current_user.id
     
-
     respond_to do |format|
       if @trip.save
-        if session[:redirect_to]
-          format.html {redirect_to session[:redirect_to], notice: 'Place was successfully added.'}
-        else
-          format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        end
+        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }
@@ -82,6 +81,7 @@ class TripsController < ApplicationController
   # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
+    ensure_ownership @trip
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
@@ -97,9 +97,9 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
-    session[:trip_id] = nil
-    session[:redirect_to] = nil   # will try to show this non-existant trip otherwise
+    reset_current_trip
     @trip = Trip.find(params[:id])
+    ensure_ownership @trip
     @trip.destroy
 
     respond_to do |format|

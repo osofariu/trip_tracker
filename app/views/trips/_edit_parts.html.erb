@@ -7,6 +7,7 @@
 				<td class="place_part">
 					<%= link_to image_tag('/assets/edit.png'), edit_place_path(place.id) %>
 					<%= link_to image_tag('/assets/arrow_down.png'), new_place_path(after_id: place.id) %>
+					<%= link_to place.seq_no %>
 					<%= place.name %>
 					<% save_place_id=place.id %>
 					<%= link_to image_tag('/assets/arrow_right.png'), new_place_path(base_id: place.id) %>
@@ -20,8 +21,12 @@
 						<% end %>
 					</ul>
 				</td>
-				<td class="activities_part">
 
+				<td class="activities_part">				
+					<%= place.arrival_date %> 
+					<% if place.days %>
+						(<%= place.days %> days) 
+					<% end %>
 				</td>
 			</tr>
 			<% end %>

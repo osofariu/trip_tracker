@@ -18,18 +18,48 @@
     </div>
   <% end %>
 
+  <% if @last_place %>
+    <%= f.hidden_field :last_place, value: @last_place %>
+  <% end %>
+
   <div class="field">
     <%= f.label :trip_id %><br />
-    <%= f.collection_select :trip_id, @trips, :id, :name %>
+    <%= f.collection_select :trip_id, [ @trip ], :id, :name %>
   </div>
+  
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  
+  <% if @place.first_place? %>
+    <div class="field">
+      <%= f.label 'Start Date' %><br />
+      <%= f.date_select :arrival_date, :start_year => 2013, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } %>
+    </div>
+
+  <% else %>
+    <div class="field">
+      <%= f.label :arrival_date %><br />
+      <%= f.date_select :arrival_date, :start_year => 2013, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } %>
+   </div>
+
+    <div class="field">
+      <%= f.label :days %><br />
+      <%= f.text_field :days %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :seq_no %><br />
+    <%= f.text_field :seq_no %>
+  </div>
+
   <div class="field">
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -39,8 +39,10 @@ class Route < ActiveRecord::Base
   def start_place
     wp = way_places.find_by_place_kind("start_place")
     if wp
+      logger.debug "GOT wp: #{wp.id} which points to: place with id: #{Place.find(wp.place_id).id}"
       return Place.find(wp.place_id)
     else
+      logger.debug "Why this be nil? "
       return nil
     end
   end

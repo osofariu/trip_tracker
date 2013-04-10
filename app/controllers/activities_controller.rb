@@ -1,5 +1,9 @@
 class ActivitiesController < ApplicationController
-  before_filter :require_login, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_filter :require_login
+
+  # This controller will go away
+
+
   # GET /activities
   # GET /activities.json
   def index
@@ -52,13 +56,8 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
 
     respond_to do |format|
-      logger.debug "===== what is session_redirect #{session[:redirect_to]}"
       if @activity.save
-        if session[:redirect_to]
-          format.html { redirect_to session[:redirect_to], notice:'Activity was successfully created.'}
-        else
-          format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        end
+        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }  
         format.json { render json: @activity, status: :created, location: @activity }
       else
         format.html { render action: "new" }

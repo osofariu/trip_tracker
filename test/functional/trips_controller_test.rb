@@ -27,6 +27,7 @@ class TripsControllerTest < ActionController::TestCase
   end
 
   test "should show trip" do
+    session[:trip_id] = @trip.id
     get :show, id: @trip
     assert_response :success
   end

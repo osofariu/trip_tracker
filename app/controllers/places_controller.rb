@@ -1,18 +1,24 @@
 class PlacesController < ApplicationController
   before_filter :require_login
 
+  def ensure_ownership(*opt_place)
+    if !current_trip?
+      raise "Places can only be managed withing the context of a particular trip."
+    end
+    if place=opt_place[0]
+      if place.trip_id != current_trip.id
+        raise "This place does not belong to the current trip."
+      end
+    end
+  end
+
   # GET /places
   # GET /places.json
   def index
-    logger.info "place_controller#index #{session[:trip_id]}"
-    if session[:trip_id]
-      @trip = Trip.find(session[:trip_id])
-      @places = @trip.base_places
-      @routes = @trip.routes
-    else
-      # user likely navigated directly to this page without a "trip" context
-      raise "Shouldn't get here"
-    end
+    ensure_ownership
+    @trip = current_trip
+    @places = @trip.base_places.order('seq_no ASC')
+    @routes = @trip.routes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,6 +30,7 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.find(params[:id])
+    ensure_ownership @place
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,18 +41,10 @@ class PlacesController < ApplicationController
   # GET /places/new
   # GET /places/new.json
   def new
+    ensure_ownership
     @place = Place.new
     @base_id = params[:base_id]
-
-    if session[:trip_id]
-      @trips = [ Trip.find(session[:trip_id])]
-    else
-      @trips = Trip.where(user_id: session[:user_id])
-    end
-
-    #session[:place_kind] = params[:place_kind] if params[:place_kind]
-    #session[:route_id] = params[:route_id] if params[:route_id]
-    session[:last_place] = params[:last_place] if params[:last_place]
+    @trip = current_trip
 
     respond_to do |format|
       format.html # { new.html.erb}
@@ -56,25 +55,18 @@ class PlacesController < ApplicationController
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
-    @trips = [ Trip.find(@place.trip_id)]
-
-    logger.debug "PLACE in edit has data.. #{@place}"
-  end
-
-  def add_activity
-    @place = Place.find(params[:id])
+    ensure_ownership @place
+    @prev_place = Place.find_by_seq_no(@place.seq_no-1)
+    @trip = Trip.find(@place.trip_id)
   end
 
 
   # POST /places
   # POST /places.json
   def create
-    if current_trip?
-      @trips = current_trip
-    else
-      @trips = current_user.trips.all
-    end
+    @trip = current_trip
     @place = Place.new(params[:place])
+    ensure_ownership @place
 
     # creating a place and associating it to a route
     if place_kind = params[:place_kind] && route_id = params[:route_id]
@@ -98,12 +90,7 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save(validate: to_validate)
-        if session[:redirect_to]
-          format.html { redirect_to session[:redirect_to], notice: 'Place was successfully created.' }
-        else
-         format.html { redirect_to places_path, notice: 'Place was successfully created.' }
-        end
-
+        format.html { redirect_to places_path, notice: 'Place was successfully created.' }
         format.json { render json: @place, status: :created, location: @place }
       else
         format.html { render action: "new" }
@@ -133,11 +120,7 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.update_attributes(params[:place])
-        if session[:redirect_to]
-          format.html { redirect_to session[:redirect_to], notice: 'Place was successfully updated.' }
-        else
-          format.html { redirect_to places_path, notice: 'Place was successfully updated.' }
-        end
+        format.html { redirect_to places_path, notice: 'Place was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -153,11 +136,7 @@ class PlacesController < ApplicationController
     @place.destroy
 
     respond_to do |format|
-      if session[:redirect_to]
-        format.html { redirect_to session[:redirect_to], notice: 'Place was successfully removed.' }
-      else
-        format.html { redirect_to places_url }
-      end
+      format.html { redirect_to places_url }
       format.json { head :no_content }
     end
   end
