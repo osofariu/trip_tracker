@@ -6,9 +6,6 @@
     </td>
     <td><%= link_to place.name, place %></td>
     <td>
-      <% get_route_segment(place.id).each do |segment| %>
-        <%= segment %><br/>
-      <% end %>
     </td>
     <td><%= place.notes %></td>
   </tr>

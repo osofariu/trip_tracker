@@ -15,6 +15,7 @@ class TripsController < ApplicationController
   def index
     @trips = Trip.where(user_id: current_user.id)
     reset_current_trip
+    session[:return_to] = request.url
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,7 +30,7 @@ class TripsController < ApplicationController
     ensure_ownership @trip
 
     @routes = @trip.routes.order('seq_no ASC')
-    @first_place_id = @routes.first.nil? ? nil : @routes.first.start_place
+    @first_place_id = @routes.first.nil? ? nil : @routes.first.start_place_id
 
     respond_to do |format|
       format.html # show.html.erb
@@ -54,8 +55,6 @@ class TripsController < ApplicationController
   def edit
     @trip = Trip.find(params[:id])
     ensure_ownership @trip
-
-    @places = @trip.base_places.order('seq_no ASC')
     @routes = @trip.routes
   end
 

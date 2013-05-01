@@ -7,12 +7,13 @@ TripTracker::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-get 'admin' => 'admin#index'
-get 'logout' => 'sessions#destroy'
+  get 'admin' => 'admin#index'
+  get 'logout' => 'sessions#destroy'
 
   resources :places do
     collection do
       get 'by_name'
+      get 'map_distance'
     end
   end
 
@@ -25,7 +26,11 @@ get 'logout' => 'sessions#destroy'
   resources :way_places
 
   resources :trips do
-    resources :routes
+    resources :routes do
+      collection do
+        get 'cleanup'
+      end
+    end
   end
 
   root :to => 'welcome#index'

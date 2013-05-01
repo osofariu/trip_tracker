@@ -13,8 +13,10 @@ public
   # GET /routes
   # GET /routes.json
   def index
-    @routes = @trip.routes.order("seq_no").all
+    @routes = @trip.routes.order("seq_no ASC")
     @trip_id = @trip.id
+    session[:return_to] = request.referer
+    logger.debug "Saving return address in routes_controller: #{request.referer}"
     respond_to do |format|
       if @trip.user_id != current_user.id
         redirect_to welcome_index_path, notice: "This route cannot be found." and return
@@ -56,6 +58,7 @@ public
   # GET /routes/1/edit
   def edit
     @route = Route.find(params[:id])
+    session[:return_to] = request.referer
     logger.debug "Route with ID= #{@route.id}"
       
     start_p = @route.start_place
@@ -95,7 +98,7 @@ public
 
     respond_to do |format|
       if @route.update_attributes(params[:route])
-        format.html { redirect_to trip_routes_path, notice: 'Route was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Route was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -111,8 +114,15 @@ public
     @route.destroy 
 
     respond_to do |format|
-      format.html { redirect_to trip_routes_path(@trip) }
+      format.html { redirect_to session[:return_to] }
       format.json { head :no_content }
+    end
+  end
+
+  def cleanup
+    Route.remove_inactive
+    respond_to do |format|
+      format.html { redirect_to session[:return_to] }
     end
   end
 end

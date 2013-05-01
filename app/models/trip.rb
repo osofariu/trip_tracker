@@ -1,7 +1,7 @@
 class Trip < ActiveRecord::Base
   belongs_to :user
   has_many :routes, dependent: :destroy
-  has_many :base_places, class_name: :Place, conditions: {base_id: nil}
+  has_many :major_places, class_name: :Place, conditions: {parent_id: nil}
   has_many :places
   attr_accessible :description, :name, :user_id, :start_date, :end_date
   validates :name, :user_id, presence: true

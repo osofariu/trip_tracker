@@ -1,74 +1,115 @@
 class Place < ActiveRecord::Base
-  attr_accessible :name, :notes, :place_type, :trip_id, :seq_no, :base_id, :arrival_date, :days
-  has_many :way_places
-  has_many :routes, through: :way_places
+  include PlacesHelper
+  include ActionView::Helpers::TextHelper
+
+  attr_accessible :name, :notes, :trip_id, :arrival_date, :days, :after_id, :active, :parent_id, :seq_no
+
   has_many :activities, dependent: :destroy
-  has_many :child_places, class_name: "Place", foreign_key: "base_id"
   belongs_to :trip
 
   validates :name, :trip_id, presence: true
   validates :name, uniqueness: true
-  before_save  :init_seq_no
 
-  def init_seq_no
-    if self.seq_no.nil? or self.seq_no == 0
-      self[:seq_no] = 1 + trip.places.count
-    else
-      self[:seq_no] = set_and_compact_seq_no(self)
+  before_save     :fix_seq_no, :update_my_minor_places_status
+  after_save      :fix_routes
+  before_destroy  :delete_my_minor_places                       # minor places depend on their parent
+  after_destroy   :fix_seq_no_after_destroy, :fix_routes        # removing a place may affect the other of others, and the routes
+
+  public 
+
+  # minor places in between start and end
+  def my_minor_places
+    return Place.where(trip_id: self.trip_id, parent_id: self.id)
+  end
+
+  # cost only at this place/destination
+  def cost_of_activities
+    Activity.where(place_id: id).each.inject(0) {|sum, activity| sum + activity.cost}
+  end
+
+  # this includes this and all minor places that follow it
+  def cost_of_activities_at_destination
+    total_cost=cost_of_activities # cost at this location
+    my_minor_places.each do |place|
+      total_cost += place.cost_of_activities
     end
   end
 
-
-  def first_place?
-    if Place.count == 0 or Place.minimum(:seq_no) == seq_no
-      true
-    else
-      false
+  def self.remove_trip_inactive_places(trip_id)
+    trip = Trip.find(trip_id)
+    trip.places.where(active: false).each do |place|
+      place.destroy
     end
   end
 
-  def self.get_by_id (id)
-    place = Place.find(id)
+    def showArrivalDate
+    if arrival_date
+      arrival_date.strftime("%b %-d")
+    end 
   end
 
-  def get_activities
-    Activity.where(place_id: id)
+  def showDuration
+    if days
+      pluralize(days, "day")
+    end
   end
 
-  private
+  protected
 
-# TODO : move from using base_place to places, and integate that with UI
+  def fix_seq_no
+    PlaceOrderManager.new.account_for(self)
+  end
 
-  # seq_no must be kept unique, and ordered from 1 to N
-  # assumption: places may have one or more duplicate id's (as seq_no); if seq_no is empty, the order is unspecified
-  def set_and_compact_seq_no(place)
-    trip = Trip.find(place.trip_id)
-    places_seq = trip.base_places.order('seq_no ASC').collect {|place| [place.id, place.seq_no]}
-    max_seq_no = place.id == nil ? trip.places.count+1 : trip.places.count
-    desired_seq_no = place.seq_no <= max_seq_no ? place.seq_no : max_seq_no   # don't let seq_no get out of bounds
-    current_seq_no = 0
-    if place.id != nil
-      places_seq.each do |id_seq|                                             # the value of place.seq_no from the database
-        if id_seq[0] == place.id
-          current_seq_no=id_seq[1] 
+  def fix_seq_no_after_destroy
+    PlaceOrderManager.new.update_places(self)
+  end
+
+  def delete_my_minor_places
+    my_minor_places.each do |minor_place| 
+      minor_place.destroy
+    end
+  end
+
+  def update_my_minor_places_status
+    if self.active_changed?
+      my_minor_places.each do |minor_place| 
+        minor_place.update_attributes(active: self.active) if (minor_place.active != self.active)
+      end
+    end
+  end
+
+  # routes must adapt to places; when places get added or moved around routes are updated.
+  def fix_routes
+    trip = Trip.find(trip_id)
+    places = trip.major_places.order("seq_no ASC")
+    first_place = places.shift
+    good_routes={}
+    wanted_route_seq=1
+  # make sure active routes map to places in the current order
+    places.each do |next_place|
+      if rt=Route.where(start_place_id: first_place.id, end_place_id: next_place.id).first
+        rt.update_attributes(active: true) if !rt.active 
+        rt.update_attributes(seq_no: wanted_route_seq) if rt.seq_no != wanted_route_seq
+      else
+        logger.debug "Creating new route from #{first_place.id} to #{next_place.id}"
+        Route.create(trip_id: trip.id, start_place_id: first_place.id, end_place_id: next_place.id, seq_no: wanted_route_seq)
+      end
+      good_routes["#{first_place.id}-#{next_place.id}"] = true     # save good routes so we can inactivate the rest below 
+      first_place = next_place
+      wanted_route_seq +=1
+    end
+  # inactivate all routes that are no longer connected by places.
+    routes = trip.routes.order('seq_no ASC')
+    if routes
+      first_route = routes.first
+      last_route = routes.last
+      routes.each do |route|
+        if route.id == last_route.id && route.end_place_id == first_route.start_place_id     # going back to the beginning: route is ok
+          route.update_attributes(active: true) if !route.active
+        elsif !good_routes["#{route.start_place_id}-#{route.end_place_id}"]
+          route.update_attributes(active: false)
         end
       end
     end
-    if (place.id == nil)                                                      # add placeholder for new place at end of sequence
-      places_seq.insert(desired_seq_no-1, [place.id, place.seq_no])
-    elsif current_seq_no != place.seq_no                                      # move existing place in sequence to where it should be
-      r = places_seq.delete_at(current_seq_no-1)
-      places_seq.insert(desired_seq_no-1, r)
-    end
-    expect_id=1
-    places_seq.each do |ids|                                                  # all places (including new one) are where they should be in sequence
-      if ids[0] == nil or ids[0] == place.id
-      elsif ids[1] != expect_id
-        p=Place.find(ids[0])
-        p.update_column(:seq_no, expect_id)
-      end
-      expect_id += 1
-    end
-    return desired_seq_no
   end
 end

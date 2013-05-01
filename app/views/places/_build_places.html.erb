@@ -1,0 +1,63 @@
+<% save_place_id = nil %>
+<div id="edit_parts">
+	<div id="places_part" class="inline_block">
+		<h2>Your places</h2>
+		Use this section to add, move, or delete places on your trip.
+		<table>
+			<% @major_places.each do |place| %>
+				<tr>
+					<td class="seq_no"> <%= place.seq_no  %></td>
+
+					<td class="place_part"><%= place.name %></td>
+					<td><%= place.arrival_date %></td>
+					<td id="buttons">
+						<%= link_to image_tag('/assets/wand.png', title: 'edit place'), edit_place_path(place.id) %>
+						<%= link_to image_tag('/assets/trash.png', title: 'delete place'), place, method: :delete,  data: {confirm: "Are you sure you want to delete this place?"} %>
+						<%= link_to image_tag('/assets/plus.png', title: 'add place below'), new_place_path(after_id: place.id) %>				
+					</td>
+				</tr>
+
+				<% place.my_minor_places.each do |minor_place| %>
+					<tr>
+						<td class="seq_no"> <%= minor_place.seq_no  %></td>
+						<td class="minor_place_part"><%= minor_place.name %></td>
+						<td><%= minor_place.arrival_date %></td>
+						<td id="buttons">
+							<%= link_to image_tag('/assets/wand.png', title: 'edit place'), edit_place_path(minor_place.id, parent_id:place.id) %>	
+							<%= link_to image_tag('/assets/trash.png', title: 'delete place'), minor_place, method: :delete,  data: {confirm: "Are you sure you want to delete this place?"} %>						
+							<%= link_to image_tag('/assets/plus.png', title: 'add place below'), new_place_path(parent_id: place.id) %>
+						</td>
+					</tr>
+				<% end %>
+					<tr>		
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="minor_place_part", id="buttons">
+							<%= link_to image_tag('/assets/plus.png', title: 'add place below'), new_place_path(parent_id: place.id) %>
+						</td>
+					</tr>
+			<% end %>
+		</table>
+		<div id="after_edit_parts">
+			<% if @major_places.count == 0 %>
+			<p>
+				Where do you want to go?
+			</p>
+			<%= link_to "Create your <em>first</em> place".html_safe, new_place_path  %>
+			<% else %>
+			<p>
+				<%= link_to "Add place", new_place_path(last_place: save_place_id) %>
+			</p>
+			<% end %>
+		</div>
+		<div id="place_spacer">			
+		</div>
+	</div>
+	 <%= render 'routes/route_list' %>
+</div>
+
+
+
+
+<div id="spacer"></div>

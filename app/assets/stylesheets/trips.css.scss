@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "partials/edit_parts.css.scss";
-
 .trips {
 
 	h1 {
@@ -101,6 +99,7 @@
 		.td_green {
 			color: #228822;
 			font-size: x-small;
+			text-align: right;
 		}
 
 		.td_right {

@@ -20,15 +20,17 @@
 #   pool: 5
 #   timeout: 5000
 
-test:
+test: &test
   adapter: postgresql
   database: tt_test
   pool: 5
+  min_messages: warning
 
 development:
   adapter: postgresql
   database: tt_development
   pool: 5
+  min_messages: warning
 
 production:
   adapter: postgresql
@@ -36,3 +38,6 @@ production:
   user: ljmwqhhwfopffc
   pool: 5
   timeout: 5000
+
+cucumber:
+  <<: *test

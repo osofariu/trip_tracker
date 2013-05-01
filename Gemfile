@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'nokogiri'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,6 +28,14 @@ gem 'bcrypt-ruby', '>= 3.0.0'
 
 # simple navigation
 gem 'simple-navigation'
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
+  gem 'webrat'
+end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

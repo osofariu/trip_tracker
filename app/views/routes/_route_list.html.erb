@@ -1,6 +1,8 @@
 <div id="route_part", class="inline_block">
+    <h2>Your routes</h2>
+    This section gets build automatically as you add, move, or delete places.
     <table>
-        <col style="width:15%">
+        <col style="width:10%">
         <col style="width:10%">
         <col style="width:40%">
         <col style="width:40%">
@@ -15,32 +17,46 @@
             <th></th>
             <th></th>
         </tr>
-        
+        <% have_invalid_routes = false %>
         <% @routes.each do |route| %>
-        <tr>
-            <td>
-                <%= link_to image_tag('/assets/edit.png'), edit_trip_route_path(@trip, route) %>
-                <%= link_to image_tag('/assets/info.png'), trip_route_path(@trip, route) %>
-            </td>
-            <td><%= route.seq_no %> </td>
-            <td>
-                <% if route.start_place_id %>
-                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.start_place_id, place_kind: "start_place", route_id: route.id) %>
-                <% else %>
-                <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "start_place", route_id: route.id) %>
-                <% end %>
-                <%= route.start_place_name %>
-            </td>
-            <td>
-                <% if route.end_place_id %>
-                <%= link_to image_tag('/assets/edit.png'), edit_place_path(route.end_place_id, place_kind: "start_place", route_id: route.id) %>
-                <% else %>
-                <%= link_to image_tag('/assets/edit.png'), new_place_path(place_kind: "end_place", route_id: route.id) %>
-                <% end %>
-                <%= route.end_place_name %>
-            </td>
-            <td><%= route.distance %></td>
-        </tr>
+            <% if route.active %>
+                <tr>
+                    <td class="good_route">
+                        <%= link_to image_tag('/assets/wand.png', title: 'edit route'), edit_trip_route_path(@trip, route) %>
+                    </td>
+                    <td class="good_route"><%= route.seq_no %> </td>
+                    <td class="good_route">
+                        <%= route.start_place_name %>
+                    </td>
+                    <td class="good_route">
+                        <%= route.end_place_name %>
+                    </td>
+                    <td class="good_route"><%= route.distance %></td>
+                </tr>
+            <% else %>
+                <tr>
+                    <td>
+                        <%= link_to image_tag('/assets/trash.png', title: 'delete inactive route'), [@trip, route], method: :delete, data: { confirm: 'Are you sure?'} %>
+                    </td>
+                    <td class="bad_route"><%= route.seq_no %> </td>
+                    <td class="bad_route">
+                        <%= route.start_place_name %>
+                    </td>
+                    <td class="bad_route">
+                        <%= route.end_place_name %>
+                    </td>
+                    <td class="bad_route"><%= route.distance %></td>
+
+                    <% if route.active == false %>
+                        <% have_invalid_routes = true %>
+                    <% end %>
+                </tr>
+            <% end %> 
         <% end %>
     </table>
+    <% if have_invalid_routes %>
+    <p>
+        <%= link_to 'Accept change', cleanup_trip_routes_path(@trip) %> - this will delete all inactive routes.
+    </p>
+    <% end %>
 </div>

@@ -45,6 +45,7 @@
 									
 									<table>
 										<tr>
+											<td></td>
 											<td class="td_green">Miles</td>
 											<td class="td_green">Gas</td>
 											<td class="td_green">Activities</td>
@@ -70,7 +71,7 @@
 						</td>
 					<tr>
 						<td class="place_name" colspan="3">
-							@<%= route.start_place_name %> 
+							<%= route.start_place_name %> 
 							<% if route.start_place && route.start_place.arrival_date %>
 								on <%= route.start_place.arrival_date %>
 							<% end %>
@@ -87,7 +88,7 @@
 						<tr id="start_places" class="show_activities">
 							<td colspan="3">
 								<ul>
-									<% route.start_place.get_activities.each do |activity| %>
+									<% route.start_place.activities.each do |activity| %>
 										<li>
 											<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%>
 											<%= activity.show_activity_info %>
@@ -98,9 +99,9 @@
 							</td>
 						</tr>	
 					<% end %>		
-					<% route.mid_places.each do |place| %>	
+					<% route.start_place.my_minor_places.each do |place| %>	
 						<tr>
-							<td class="place_name" colspan="3">	@<%= place.name %></td>
+							<td class="place_name" colspan="3">	<%= place.name %></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -112,7 +113,7 @@
 						<tr class="show_activities">						
 							<td colspan="3">
 								<ul>
-									<% place.get_activities.each do |activity| %>
+									<% place.activities.each do |activity| %>
 							  			<li>
 							  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
 							  				<% if activity.notes %> - <%= activity.notes %><% end %>
@@ -126,26 +127,23 @@
 					<% if route == @routes.last %>
 						<tr id="last_place" >
 							<td class="place_name" colspan="3">
-								@<%= route.end_place_name %>
+								<%= route.end_place_name %>
 								<% if route.end_place && route.start_place.arrival_date %>
 									on <%= route.start_place.arrival_date %>
 								<% end %>
 							</td>
 						</tr>
-						<%if route.end_place %>
+						<%if route.end_place && @first_place_id != route.end_place_id%>
 							<tr class="show_activities">
-								<td colspan="3">
-									<% if @first_place_id != route.end_place.id %>
-										<ul>
-											<% route.end_place.get_activities.each do |activity| %>
-									  			<li>
-									  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
-									  				<% if activity.notes %> - <%= activity.notes %><% end %>
-									  			</li>
-											<% end %>
-										</ul>
-							
-									<% end %>
+								<td colspan="3">									
+									<ul>
+										<% route.end_place.activities.each do |activity| %>
+								  			<li>
+								  				<%= link_to image_tag('/assets/edit.png'), edit_activity_path(activity.id)%> <%= activity.show_activity_info %>
+								  				<% if activity.notes %> - <%= activity.notes %><% end %>
+								  			</li>
+										<% end %>
+									</ul>							
 								</td>
 							</tr>
 						<% end %>
@@ -155,6 +153,7 @@
 									<p>Stats for this trip:</p>
 									<table>
 										<tr>
+											<td></td>
 											<td class="td_green">Miles</td>
 											<td class="td_green">Gas</td>
 											<td class="td_green">Activities</td>

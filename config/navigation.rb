@@ -55,7 +55,6 @@ SimpleNavigation::Configuration.run do |navigation|
         trip.item :edit_trip, 'Edit', edit_trip_path( @trip )
         trip.item :routes, 'Routes', trip_routes_path( @trip )
         trip.item :place, 'Places', places_path
-        trip.item :way_place, 'Way-Places', way_places_path
         trip.item :activities, "Activities", activities_path
       end
     end

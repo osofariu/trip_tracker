@@ -8,26 +8,37 @@
 		    margin: 0;
 		    padding: 15px;
 		    display: inline-block;
-		    width: 400px;
+		    //width: 550px;
 		    min-height: 100px;
 		    //background: #ccc;
 		    vertical-align: top; 
 		//} 
 	}
 
-
 	padding: 20px;
 	#places_part {	
 		//float: left;
-
-		#place_part {	
-			font-size: medium;	
-
-			#sub_place_part {
-				padding-left: 15px;
-			}
+		width: 400px;
+		.seq_no {
+			color: #C0C0C0;
+			text-align: right;
+			padding-right: 6px;
 		}
 
+		#buttons {
+			text-align: right;
+		}
+	
+		.place_part {	
+			font-size: medium;	
+		}
+
+		.minor_place_part {
+			font-size: small;	
+			padding-left: 20px;
+			padding-top: 5px;
+		}
+		
 		#place_spacer {
 			//background-image: url(/assets/narrow-green-arrow.png);
 			height: 40px;
@@ -35,7 +46,7 @@
 	}
 
 	#route_part {
-		
+		 width: 450px;
 	}
 }
 
