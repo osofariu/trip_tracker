@@ -34,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
-  gem 'webrat'
+  gem 'selenium-webdriver'
 end
 
 # To use Jbuilder templates for JSON

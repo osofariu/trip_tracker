@@ -14,7 +14,7 @@ describe Route do
       expect {
         p1 = create(:place, trip: trip)
         p2 = create(:place, trip: trip)
-        route = Route.where(seq_no: 0).first
+        route = Route.where(seq_no: 1).first
         route.start_place.should == p1
         route.end_place.should == p2
       }.to change {Route.all.count}.from(0).to(1)
@@ -25,7 +25,7 @@ describe Route do
         p1 = create(:place, trip: trip)
         p2 = create(:place, trip: trip)
         p3 = create(:place, trip: trip)
-        route = Route.where(seq_no: 1).first
+        route = Route.where(seq_no: 2).first
         route.start_place.should == p2
         route.end_place.should == p3
       }.to change {Route.all.count}.from(0).to(2)
@@ -38,7 +38,7 @@ describe Route do
         p2 = create(:place, trip: trip)
         p3 = create(:place, trip: trip)
         p4 = create(:place, trip: trip)
-        route = Route.where(seq_no: 2).first
+        route = Route.where(seq_no: 3).first
         route.start_place.should == p3
         route.end_place.should == p4
       }.to change {Route.all.count}.from(0).to(3)
