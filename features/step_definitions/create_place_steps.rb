@@ -6,7 +6,7 @@ Given(/^I am logged in, and I have a trip$/) do
   end
 end
 
-When(/^I create a destination named "(.*?)", and set start date of "(.*?)"$/) do |arg1, arg2|
+When(/^I create my first destination named "(.*?)", and set start date to "(.*?)"$/) do |arg1, arg2|
   click_link 'Build trip'
   click_link "Create your first destination"
   fill_in "Name", with: arg1

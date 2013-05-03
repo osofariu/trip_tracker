@@ -28,13 +28,12 @@
   <% else %>
     <div class="field">
         <p>
-    If you want this place to be saved under an existing place (as a daytrip, for example), select that place from the list.
-  </p>
-      <%= f.label 'Parent Place Name' %><br />
-      <%= f.collection_select :parent_id, @places_select, :id, :name, include_blank: 'None' %>
+          If you want this place to be saved under an existing place (as a daytrip, for example), select that place from the list.
+        </p>
+        <%= f.label 'Parent Place Name' %><br />
+        <%= f.collection_select :parent_id, @places_select, :id, :name, include_blank: 'None' %>
     </div>
   <% end %>
-
 
   <div class="field">
     <%= f.label :name %><br />
