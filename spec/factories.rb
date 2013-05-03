@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :place do
     association :trip
     sequence(:name) {|i| "Place#{i}" }
-    notes "PlaceNotes"
+    notes "This is a nice place. I mean, niiiice"
   end
 end
 
@@ -11,8 +11,8 @@ end
 FactoryGirl.define do 
   factory :trip do
     association :user
-    sequence(:name) {|i| "TripName#{i}"}
-    description "TripDescription"
+    sequence(:name) {|i| "Trip#{i}"}
+    description "I am going to Disneyworld"
   end
 end
 

@@ -7,8 +7,7 @@ Given(/^I am logged in, and I have a trip$/) do
 end
 
 When(/^I create a destination named "(.*?)", and set start date of "(.*?)"$/) do |arg1, arg2|
-  click_link @trip.name
-  click_link 'Places'
+  click_link 'Build trip'
   click_link "Create your first destination"
   fill_in "Name", with: arg1
   place_date = Date.parse(arg2)
@@ -16,7 +15,6 @@ When(/^I create a destination named "(.*?)", and set start date of "(.*?)"$/) do
   select place_date.strftime("%B"),  from: "place_arrival_date_2i"
   select place_date.strftime("%-d"), from: "place_arrival_date_3i"
   click_button "Create Place"
-  save_page('/tmp/my_page.html')
 end
 
 Then(/^"(.*?)" should appear on the Place Builder page with start date of "(.*?)"$/) do |arg1, arg2|

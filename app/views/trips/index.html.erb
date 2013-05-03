@@ -1,22 +1,20 @@
-<table class="border-table">
-  <col style="width:25%">
-  <col style="width:60%">
-  <tr>
-    <td colspan="5"><h1>Listing trips</h1>
-</td>
 
-<% @trips.each do |trip| %>
-  <tr>
-    <td><%= link_to trip.name, trip, trip_id: trip.id %></td>
-    <td><%= trip.description %></td>
-  </tr>
-  <tr>
-    <td id="separator" colspan="5">
-      
-    </td>
-  </tr>
+<%if get_user && get_trips.count == 0 %>
+	You don't have any trips.  Would you like to <%= link_to "Create one?", new_trip_path %>
 <% end %>
-</table>
+
+<div id="show_trips">
+  <% @trips.each do |trip| %>
+  <div id="show_a_trip">
+    <%= trip.name %>
+    <ul>
+      <li>[<%= link_to 'Build trip', places_path(trip_id: trip.id) %>] [<%= link_to 'View itinerary', trip, trip_id: trip.id %>]</li>
+      <li><%= trip.description %></li>
+    </ul>
+  </div>
+
+<% end %>
+</div>
 
 <br />
 

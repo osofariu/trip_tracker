@@ -5,10 +5,7 @@ Given(/^I have a destination named "(.*?)", and set start date of "(.*?)"$/) do 
 end
 
 When(/^I create a destination named "(.*?)", with start date of:  "(.*?)"$/) do |arg1, arg2|
-  save_page('/tmp/my_page2.html')
-  click_link @trip.name
-  click_link 'Places'
-  save_page('/tmp/my_page3.html')
+  click_link 'Build trip'
   click_link 'Add place'
   fill_in "Name", with: arg1
   place_date = Date.parse(arg2)

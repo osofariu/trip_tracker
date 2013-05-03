@@ -3,34 +3,35 @@
 </h1>
 
 <div class="welcome_desc">
-	Use this application to plan and track your upcoming roadtrip. Here's how you use it:
-	<ul>
-		<li>Create a new trip, and give it a description.</li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
 
-	<%if session[:user_id] %>
-		<p>
-			Testing pages below:
-		</p>
+	Trip Tracker allows you to plan an upcoming road trip.  Here's what you can do:
+	<ul>
+		<li>Add as many <em>destinations</em> as you like.</li>
 		<ul>
-			<li>Look for current places:
-				<%= form_tag("/places/by_name", method: "get") do %>
-				<%= label_tag(:name, "Place name:") %>
-				<%= text_field_tag(:name) %>
-				<%= submit_tag("Search") %>
-				<% end %>
-			</li>
-				<li><%= link_to "My trips", trips_path %></li>
+			<li>Don't worry about the order.  You can re-arrange your <em>destinations</em> later</li>
+			<li>If you tell Trip Tracker how long you are staying at each <em>destination</em> it will help you create a draft itinerary (future)</li>
 		</ul>
-	<% else %>
-		<p>
-		Please <%= link_to "log in", login_path %> to start using TripTracker.
-	</p>
+		<li>As you add <em>destinations</em>, Trip Tracker constructs a list of <em>routes</em> automatically based on the order in which you visit your <em>destinations</em>.</li>
+		<ul>
+			<li>If you change the order of your <em>destinations</em>, Trip Tracker will automatically recontruct your <em>routes</em>.</li>
+			<li>Trip Tracker will try to compute the <em>distance</em> between <em>destinations</em>, as it creates your <em>routes</em>.  You can help it do that by providing a little more geographic information - such as "Columbus, OH" instead of just "Columbus" (future)</li>
+			<li>As your routes get built-up Trip Tracker will help you decide how many miles you drive per day, so your planning is more realistic (future)</li>
+		</ul>
+		<li>For each <em>destination</em> you can add any number of <em>excursions</em>.  <em>Excursions</em> are useful if you use a <em>destination</em> as a hub and plan one ore more day trips from there</li>
+		<li>For each <em>destination</em> or <em>excursion</em> you can create any number of <em>activities</em> to do, <em>points of interest</em> to see.</li>
+		<ul>
+			<li>you can estimate the cost of your trip by setting the cost of each activity.</li>
+			<li>Activities are a great way to track things you want to do, such as go snorkling or a bike ride </li>
+			<li>Points of interest would typically be actual places like museums or zoos. </li>
+		</ul>
+	</ul>
+</div>
+
+<%if get_user && get_trips.count == 0 %>
+	You don't have any trips.  Would you like to <%= link_to "Create one?", new_trip_path %>
+<% elsif get_user %>
+	You have <%= get_trips.count %> trips:
+	<% get_trips.each do |trip| %> 
+		<%= link_to trip.name, places_path(trip_id: trip.id) %>,
 	<% end %>
-	
+<% end %>

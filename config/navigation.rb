@@ -48,17 +48,16 @@ SimpleNavigation::Configuration.run do |navigation|
     #
 
     primary.item :home, 'Home', root_path
-    primary.item :trip, 'All Trips' , trips_path
-
-    if !@trip.nil? and !@trip.new_record?
-      primary.item :trip, @trip.name, trip_path(@trip)  do |trip|
-        trip.item :edit_trip, 'Edit', edit_trip_path( @trip )
-        trip.item :routes, 'Routes', trip_routes_path( @trip )
-        trip.item :place, 'Places', places_path
-        trip.item :activities, "Activities", activities_path
+    primary.item :trip, 'All Trips' , trips_path do |all|
+      if !@trip.nil? and !@trip.new_record?
+        all.item :trip, @trip.name, edit_trip_path(@trip)  do |trip|
+          trip.item :place, 'Build trip', places_path
+          trip.item :show_trip, 'See itinerary', trip_path(@trip)
+          trip.item :routes, 'See Routes', trip_routes_path( @trip )
+          trip.item :activities, "See Activities", activities_path
+        end
       end
     end
-
 
     # Add an item which has a sub navigation (same params, but with block)
     #primary.item :key_2, 'name', url, options do |sub_nav|

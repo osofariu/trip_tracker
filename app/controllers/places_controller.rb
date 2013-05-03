@@ -14,7 +14,13 @@ class PlacesController < ApplicationController
   end
 
   def find_trip
-    @trip = Trip.find(session[:trip_id])
+    if  params[:trip_id]
+      trip_id = params[:trip_id]
+      set_current_trip(trip_id)
+    else
+      trip_id = session[:trip_id]
+    end
+    @trip = Trip.find(trip_id)
   end
 
   # GET /places

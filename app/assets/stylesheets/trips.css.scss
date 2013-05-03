@@ -135,8 +135,17 @@
 		}
 	}
 	
-	#way_places {
-		//background-color:#EBFFEB;
+	#show_trips {
+
+		#show_a_trip {
+			font-size: large;
+			ul {
+				list-style-type: none;
+				li {
+					padding-bottom: 5px;
+				}
+			}
+		}
 	}
 
 	#trip_form {

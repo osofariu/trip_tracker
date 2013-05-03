@@ -1,4 +1,4 @@
-Feature: Create a Destination
+Feature: Manage Destinations
 
 	So that I can build my trip, I need to be able to create Destinations
 
