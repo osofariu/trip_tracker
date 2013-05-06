@@ -40,7 +40,7 @@
     <%= f.text_field :name %>
   </div>
   
-  <% if first_place?(@place.seq_no) %>
+  <% if first_place?(@trip, @place) %>
     <div class="field">
       <%= f.label 'Start Date' %><br />
       <%= f.date_select :arrival_date, :start_year => 2013, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } %>
@@ -49,18 +49,18 @@
   <% else %>
     <div class="field">
       <%= f.label :arrival_date %><br />
-      <%= f.date_select :arrival_date, :start_year => 2013, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } %>
+      <%= f.date_select :arrival_date, :start_year => 2013, :default => default_arrival_date(@prev_place) %>
    </div>
 
     <div class="field">
-      <%= f.label :days %><br />
+      <%= f.label :days, "Nights" %><br />
       <%= f.text_field :days %>
     </div>
   <% end %>
 
   <div class="field">
     <%= f.label :seq_no %><br />
-    <%= text_field_tag :seq_no, @place.seq_no %>
+    <%= f.text_field :seq_no %>
   </div>
 
   <div class="field">

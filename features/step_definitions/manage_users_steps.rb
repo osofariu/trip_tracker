@@ -5,7 +5,7 @@ Given(/^I am not logged in yet$/) do
 end
 
 When(/^I log in$/) do
-  @user = create_user1
+  @user = create_user
   if login_for_user(@user.id)
     puts "User logged in as #{@user.name}"
   end

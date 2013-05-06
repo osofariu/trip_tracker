@@ -1,10 +1,18 @@
 module PlacesHelper
 
  #is this the first place created or the one with smallest seq_no?
-  def first_place?(seq_no)
-    Place.count == 0 or Place.minimum(:seq_no) == seq_no
+  def first_place?(trip, place)
+    trip.major_places.count == 0 or (place && place.seq_no == 1)
   end
 
+  def default_arrival_date(prev_place)
+    if prev_place && prev_place.days && prev_place.arrival_date
+      desired_date=prev_place.arrival_date.next_day(prev_place.days)
+    elsif prev_place && prev_place.arrival_date
+      desired_date=prev_place.arrival_date
+    end
+    return {year: desired_date.year, month: desired_date.month, day: desired_date.day} if desired_date
+  end
 
   # manage seq_no for places both globally and for minor place (which are grouped under a major place)
   class PlaceOrderManager

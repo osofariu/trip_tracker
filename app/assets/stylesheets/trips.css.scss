@@ -136,9 +136,17 @@
 	}
 	
 	#show_trips {
-
 		#show_a_trip {
-			font-size: large;
+			overflow: hidden;
+			.show_a_trip_name {
+				font-size: large;
+				float: left;			
+			}
+			.show_a_trip_links {
+				font-size: small;
+				overflow: hidden;
+			}
+
 			ul {
 				list-style-type: none;
 				li {

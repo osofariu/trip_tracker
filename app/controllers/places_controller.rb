@@ -1,19 +1,18 @@
 class PlacesController < ApplicationController
   before_filter :require_login
-  before_filter :find_trip
+  before_filter :set_trip_params
 
   def ensure_ownership(*opt_place)
-    if !current_trip?
-      raise "Places can only be managed withing the context of a particular trip."
-    end
-    if place=opt_place[0]
+    raise "Places can only be managed withing the context of a particular trip." if !current_trip?
+    opt_place.each do |place| 
       if place.trip_id != current_trip.id
         raise "This place does not belong to the current trip."
       end
     end
   end
 
-  def find_trip
+  # useful when selecting a trip from list of trip, so we can build it 
+  def set_trip_params
     if  params[:trip_id]
       trip_id = params[:trip_id]
       set_current_trip(trip_id)
@@ -56,7 +55,10 @@ class PlacesController < ApplicationController
     ensure_ownership
     @place = Place.new
     @trip = current_trip
-    
+    if params[:prev_place]
+      @prev_place = Place.find(params[:prev_place])
+      ensure_ownership @prev_place
+    end
     if @parent_id=params[:parent_id]
       parent = Place.find(@parent_id)
       @places_select = [parent]
@@ -74,6 +76,10 @@ class PlacesController < ApplicationController
   def edit
     session[:return_to] = request.referer
     @place = Place.find(params[:id])
+    if params[:prev_place]
+      @prev_place = Place.find(params[:prev_place])   # this is set for all BUT the first place
+      ensure_ownership @prev_place
+    end
     @trip = Trip.find(@place.trip_id)
     @places_select = @trip.major_places.order('seq_no ASC').all    
     if @parent_id = params[:parent_id]
@@ -103,23 +109,22 @@ class PlacesController < ApplicationController
 
   # PUT /places/1
   # PUT /places/1.json
-  def update
-    @place = Place.find(params[:id])
-    @place.seq_no = params[:seq_no] if params[:seq_no] 
-    @places_select = @trip.major_places.order('seq_no ASC').all
-    ensure_ownership @place
-    @trips = [current_trip]
+  # def update
+  #   @place = Place.find(params[:id])
+  #   @places_select = @trip.major_places.order('seq_no ASC').all
+  #   ensure_ownership @place
+  #   @trips = [current_trip]
 
-    respond_to do |format|
-      if @place.update_attributes(params[:place])
-        format.html { redirect_to session[:return_to], notice: 'Place was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @place.update_attributes(params[:place])
+  #       format.html { redirect_to session[:return_to], notice: 'Place was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @place.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /places/1
   # DELETE /places/1.json

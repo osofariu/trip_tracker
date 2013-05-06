@@ -9,7 +9,6 @@ describe TripsHelper do
     it "returns a list with one trip when user has one trip" do
       trip = create(:trip)
       session[:user_id] = trip.user_id
-      puts "session.inspect: #{session.inspect}"
       helper.get_trips.should == [trip]
     end
   end

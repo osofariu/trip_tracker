@@ -35,6 +35,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'selenium-webdriver'
+  gem 'launchy'
 end
 
 # To use Jbuilder templates for JSON
