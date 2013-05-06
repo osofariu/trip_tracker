@@ -107,24 +107,24 @@ class PlacesController < ApplicationController
     end
   end
 
-  # PUT /places/1
-  # PUT /places/1.json
-  # def update
-  #   @place = Place.find(params[:id])
-  #   @places_select = @trip.major_places.order('seq_no ASC').all
-  #   ensure_ownership @place
-  #   @trips = [current_trip]
+  #PUT /places/1
+  #PUT /places/1.json
+  def update
+    @place = Place.find(params[:id])
+    @places_select = @trip.major_places.order('seq_no ASC').all
+    ensure_ownership @place
+    @trips = [current_trip]
 
-  #   respond_to do |format|
-  #     if @place.update_attributes(params[:place])
-  #       format.html { redirect_to session[:return_to], notice: 'Place was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: "edit" }
-  #       format.json { render json: @place.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+      if @place.update_attributes(params[:place])
+        format.html { redirect_to session[:return_to], notice: 'Place was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @place.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /places/1
   # DELETE /places/1.json
