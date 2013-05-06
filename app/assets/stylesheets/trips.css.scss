@@ -140,11 +140,12 @@
 			overflow: hidden;
 			.show_a_trip_name {
 				font-size: large;
-				float: left;			
+				overflow: hidden;	
 			}
 			.show_a_trip_links {
+				float: left;	
 				font-size: small;
-				overflow: hidden;
+			
 			}
 
 			ul {

@@ -30,8 +30,13 @@
 <%if get_user && get_trips.count == 0 %>
 	You don't have any trips.  Would you like to <%= link_to "Create one?", new_trip_path %>
 <% elsif get_user %>
-	You have <%= get_trips.count %> trips:
-	<% get_trips.each do |trip| %> 
-		<%= link_to trip.name, places_path(trip_id: trip.id) %>,
+	You have <%= pluralize(get_trips.count, "trip")%>:
+	<% get_trips.each_with_index do |trip, index| %> 
+		<% if index+1 < get_trips.count %>
+			<%= link_to trip.name, places_path(trip_id: trip.id) %>,
+		<% else %>
+			<%= link_to trip.name, places_path(trip_id: trip.id) %>.
+		<% end %>
 	<% end %>
+	Add <%= link_to "another", new_trip_path  %>.
 <% end %>

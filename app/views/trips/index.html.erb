@@ -6,12 +6,15 @@
 <div id="show_trips">
   <% @trips.each do |trip| %>
   <div id="show_a_trip">
-  	<div class="show_a_trip_name">
-  		<%= trip.name %> 
-  	</div>
-  	 <div class="show_a_trip_links">
-    	&nbsp;&nbsp;<%= link_to  image_tag('/assets/builder.png', title: 'Build Trip'), places_path(trip_id: trip.id) %> &nbsp;<%= link_to  image_tag('/assets/itinerary.png', title: 'See Itinerary'), trip, trip_id: trip.id %>
+    <div class="show_a_trip_links">
+        <%= link_to  image_tag('/assets/wand.png', title: 'Edit Trip'), edit_trip_path(trip.id) %>
+        <%= link_to  image_tag('/assets/builder.png', title: 'Build Trip'), places_path(trip_id: trip.id) %>
+        <%= link_to  image_tag('/assets/itinerary.png', title: 'See Itinerary'), trip, trip_id: trip.id %>
     </div>
+  	<div class="show_a_trip_name">
+  		&nbsp;&nbsp;<%= trip.name %> 
+  	</div>
+
     <ul>
       <li><%= trip.description %></li>
     </ul>
