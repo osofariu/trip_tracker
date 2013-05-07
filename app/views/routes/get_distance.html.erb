@@ -1,0 +1,13 @@
+
+<%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA7j_Q-rshuWkc8HyFI4V2HxQYPm-xtd00hTQOC0OXpAMO40FHAxT29dNBGfxqMPq5zwdeiDSHEPL89A" %>
+<%= javascript_include_tag "get_distance" %>
+
+<%=  button_to_function "Get Distance", "showLocation('Columbus, OH', 'Atlanta, GA')" %>
+
+<p id="location1">Location1</p>
+<p id="location2">Location2</p>
+
+<script>
+	document.getElementById("location1").innerHTML=q;
+	document.getElementById("location2").innerHTML=location2;
+</script>

@@ -1,0 +1,6 @@
+<%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA7j_Q-rshuWkc8HyFI4V2HxQYPm-xtd00hTQOC0OXpAMO40FHAxT29dNBGfxqMPq5zwdeiDSHEPL89A" %>
+<%= javascript_include_tag "get_distance" %>
+<%= form_tag "/routes/get_distance" %>
+<%= text_field_tag 'start_place', 'Columbus, OH' %>
+<%= text_field_tag 'end_place', 'Atlanta, GA' %>
+<%= submit_tag  'Get Distance', :onLoad => "initialize()", :onsubmit => "showLocation()" %>
