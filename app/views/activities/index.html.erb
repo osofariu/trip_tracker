@@ -11,7 +11,7 @@
   </tr>
 
 <% @activities.each do |activity| %>
-  <tr class="<%= cycle('list_line_odd', 'list_line_even') %> ">
+  <tr>
     <td>
       <%= link_to image_tag('/assets/wand.png'), edit_activity_path(activity) %>
       <%= link_to image_tag('/assets/trash.png'),  activity, method: :delete, data: { confirm: 'Are you sure?' } %>

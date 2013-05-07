@@ -1,15 +1,10 @@
 <h1>Listing routes</h1>
 
-<%= render 'route_list' %>
+<div id="routes_main">
+	<%= render 'route_list' %>
+</div>
 
-<% if trip_unassigned_places(@trip_id).length > 0 %>
-    <h2>Unassigned places</h2>
-    <% @places = trip_unassigned_places(@trip_id) %>
-    <table>
-        <%= render 'places/places' %>
-    </table>
-<% end %>
+
+<%= render 'get_distance' %>
 <br />
 
-<%= link_to 'New Route', new_trip_route_path %>
-<%= link_to 'New Place', new_place_path %>

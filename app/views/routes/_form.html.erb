@@ -15,26 +15,32 @@
     <%= f.label :trip_id %><br />
     <%= f.collection_select :trip_id, Trip.where(user_id: @trip.user_id), :id, :name %>
   </div>
+  
   <div class="field">
-    <%= f.label :start_place %><br />
-    <%= f.collection_select  :start_place, Place.where(trip_id: @trip.id), :id, :name,  selected: @def_start_place_id %>
+    <%= f.label :start_place_id %><br />
+    <%= f.collection_select  :start_place_id, Place.where(trip_id: @trip.id), :id, :name,  selected: @def_start_place_id %>
   </div>
+
   <div class="field">
-    <%= f.label :end_place %><br />
-    <%= f.collection_select  :end_place, Place.where(trip_id: @trip.id), :id, :name, selected: @def_end_place_id %>
+    <%= f.label :end_place_id %><br />
+    <%= f.collection_select  :end_place_id, Place.where(trip_id: @trip.id), :id, :name, selected: @def_end_place_id %>
   </div>
+
+    <div class="field">
+    <%= f.label :distance %><br />
+    <%= f.number_field :distance %>
+  </div>
+
   <div class="field">
     <%= f.label :order %><br />
     <%= f.text_field :seq_no %>
   </div>
+
   <div class="field">
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
   </div>
-  <div class="field">
-    <%= f.label :distance %><br />
-    <%= f.number_field :distance %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,6 +1,7 @@
 TripTracker::Application.routes.draw do
   get "welcome/index"
-
+  get 'routes/get_distance'
+  post 'routes/get_distance'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create 
@@ -22,8 +23,6 @@ TripTracker::Application.routes.draw do
   resources :activities
 
   resources :users
-
-  resources :way_places
 
   resources :trips do
     resources :routes do

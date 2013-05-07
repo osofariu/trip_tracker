@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
   before_filter :require_login
-  before_filter :find_trip
+  before_filter :find_trip, except: ["get_distance"]
 
 private 
 
@@ -14,7 +14,6 @@ public
   # GET /routes.json
   def index
     @routes = @trip.routes.order("seq_no ASC")
-    @trip_id = @trip.id
     session[:return_to] = request.referer
     logger.debug "Saving return address in routes_controller: #{request.referer}"
     respond_to do |format|
@@ -45,10 +44,8 @@ public
   # GET /routes/new.json
   def new
     @route = @trip.routes.new
-    if params[:trip_id]
-      @route.trip_id = params[:trip_id]
-    end 
-    logger.debug "routes/new id: (#{@route.id})."
+    @route.trip_id = @trip.id
+    @route.distance = calc_distance(route.start_place.name, route.end_place.name)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @route }
@@ -124,5 +121,10 @@ public
     respond_to do |format|
       format.html { redirect_to session[:return_to] }
     end
+  end
+
+  def get_distance
+    @start_place = params[:start_place]
+    @end_place = params[:end_place]
   end
 end
