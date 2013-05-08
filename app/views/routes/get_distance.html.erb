@@ -1,13 +1,12 @@
 
 <%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA7j_Q-rshuWkc8HyFI4V2HxQYPm-xtd00hTQOC0OXpAMO40FHAxT29dNBGfxqMPq5zwdeiDSHEPL89A" %>
 <%= javascript_include_tag "get_distance" %>
+<% func_name = "showLocation(" + "'" + @start_place+ "'" + "," + "'" + @end_place + "'" + ")" %>
+<%=  button_to_function "Get Distance", func_name %><br />
+Get distance from <%= @start_place %> to <%= @end_place %> using function <%= func_name %>
 
-<%=  button_to_function "Get Distance", "showLocation('Columbus, OH', 'Atlanta, GA')" %>
+<div id="location1_name"></div> <div id="location1_coord"></div>
+<div id="location2_name"></div> <div id="location2_coord"></div>
+<div id="driving_distance"></div>
+<div id="driving_duration"></div>
 
-<p id="location1">Location1</p>
-<p id="location2">Location2</p>
-
-<script>
-	document.getElementById("location1").innerHTML=q;
-	document.getElementById("location2").innerHTML=location2;
-</script>

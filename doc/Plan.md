@@ -1,48 +1,48 @@
 
-#Dev Plan
+#Upcoming Work
 
-## Model change
-* what if I got rid of route / start_place and end_place?  Having this causes lots of issues with modeling relationships.
-	* say.. continue to use direct relationship, but let the place track its association with the route..
-	* a route could exist without a place in the DB or UI?
-	* how efficient is it to always search for two places every time you show a route? - no less so
-		* you already do that because you need more info!  It only helps with integrity..
-	* I am bothered by the polymorphic relationship between route and place.. a place really belongs to 2 routes.
-		* should I go through way_places and create two records - one as start and one as end? seems to be what I want when I show place relationships.
-	
-		* route id = 1								places: id = 1; id = 2, id = 3
-			* route_place id = 1, type = start, place = 1
-			* route_place id = 2, type = end, place = 2
-			* route_place id = 3, type = way-place, place = 3
+##Stories
 
-##QUESTIONS
-* I am hard-coding fixure object it's so they can be reference from other objects. Is this ok?  Other ways to do this?
-* I am not sure I am putting all the logic in the right place.. betwee view, helper, controller, and model.
-* Would it help to add more associations between models using through: associations?
-* I need to separate data logically better so different users can't see others' data (previous one may address this too)
+* Story 1: calculate driving distance beween places with google maps 
+	* when editing route update distance (in progress)
+	* automatically calculate distance when route is built
+	* notify user when a route distance could not be computed
+	* help user update name/location of places to find a route in google maps
+* Story 2: update arrival date & nights automatically for all Places affected
+	* when a place is modified or moved, re-ordered
+	* highlight changes to make them visible to the user
+* Story 3: Handle Destination deletion better
+	* inactivate the Destination and its Excursions
+	* Allow user to commit both deletion of Destination and Routes
+* Story 4: User registration (devise)
+* Story 5: Improve creation of forms (formtastic)
 
+## Known Bugs
+1. Places appear to be unique per user not trip; should be unique per trip.
+	* tried adding "Columbus, OH" to trip "testing pickles" reported "name taken".  This names appears under the TGA2 trip.
 
-##FUTURE
-* [isolate data exposure for controllers](https://github.com/voxdolo/decent_exposure)
+#Release Notes
 
+###Iteration 0.5 (Current)
+* (Story1) Add basic support for getting driving distance
 
-##NOW
-
+###Iteration 0.4
+* Site is now usable for building a basic trip:
+	* places can be re-ordered @done
+	* routes get rebuilt automatically @done
+	* support for arrival_date and number of nights @done
 
 ###Iteration 0.3
 * __Views__
-	* improve linking between trips, routes, way_places, places, and activities to make site usable
-***
+	* improve linking between trips, routes, way_places, places, and activities to make site usable @done
 
-###Iteration 0.2 @done
+###Iteration 0.2 
 * __Authentication__
-	* Add authentication
-	* test authentication
-* __Model__
-	* better validation of data access (people see their own data)
-***
 
-###Iteration 0.1 @done
+* __Model__
+	* better validation of data access (people see their own data) @done
+
+###Iteration 0.1 
 
 * __Models__
     * create objects @done
@@ -55,6 +55,5 @@
 	* good seed data
 	* some linking between different models
 
-***
 
 

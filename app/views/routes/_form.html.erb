@@ -1,3 +1,6 @@
+<%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA7j_Q-rshuWkc8HyFI4V2HxQYPm-xtd00hTQOC0OXpAMO40FHAxT29dNBGfxqMPq5zwdeiDSHEPL89A" %>
+<%= javascript_include_tag "get_distance" %>
+
 <%= form_for([@trip, @route]) do |f| %>
   <% if @route.errors.any? %>
     <div id="error_explanation">
@@ -11,35 +14,41 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :trip_id %><br />
-    <%= f.collection_select :trip_id, Trip.where(user_id: @trip.user_id), :id, :name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :start_place_id %><br />
-    <%= f.collection_select  :start_place_id, Place.where(trip_id: @trip.id), :id, :name,  selected: @def_start_place_id %>
-  </div>
+<table>
+  <tr>
+    <th>Trip</td>
+    <td><%= @trip.name  %></td>
+ </tr>
+  <tr>
+    <th>From</td>
+    <td><%= @start_place.name %></td>
+ </tr>
+ <tr>
+    <th>To</td>
+    <td><%= @end_place.name %></td>
+ </tr>
+</table>
 
-  <div class="field">
-    <%= f.label :end_place_id %><br />
-    <%= f.collection_select  :end_place_id, Place.where(trip_id: @trip.id), :id, :name, selected: @def_end_place_id %>
-  </div>
+<div id="update_link">
+  <% func_name = "showLocation(" + "'" + @start_place.name + "'" + "," + "'" + @end_place.name + "'" + ")" %>
+<%=  button_to_function "Lookup route info", func_name %><br />
+</div>
 
-    <div class="field">
-    <%= f.label :distance %><br />
-    <%= f.number_field :distance %>
-  </div>
+ 
 
-  <div class="field">
-    <%= f.label :order %><br />
-    <%= f.text_field :seq_no %>
-  </div>
+<div class="field" id="distance">
+  <%= f.label :distance %><br />
+  <%= f.number_field :distance, id: 'driving_distance'%>
+</div>
+
+<div id="results"></div>
 
   <div class="field">
     <%= f.label :notes %><br />
     <%= f.text_area :notes %>
   </div>
+
+  <div id="update_comment"></div>
 
   <div class="actions">
     <%= f.submit %>

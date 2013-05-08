@@ -56,7 +56,8 @@ public
   def edit
     @route = Route.find(params[:id])
     session[:return_to] = request.referer
-    logger.debug "Route with ID= #{@route.id}"
+    @start_place = Place.find(@route.start_place_id)
+    @end_place = Place.find(@route.end_place_id)
       
     start_p = @route.start_place
     if start_p
