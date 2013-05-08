@@ -53,7 +53,6 @@ function initialize() {
         var drivingDistanceKilometers = gDir.getDistance().meters / 1000;
         var drivingTime = displayDuration(gDir.getDuration().seconds);
         var route_notes = location1.address + ' (' + location1.lat + ':' + location1.lon + ')' + ' to ' + location2.address + ' (' + location2.lat + ':' + location2.lon + ')\nDriving Distance: ' + drivingDistanceMiles + ' miles' + '\nDriving Time: ' + drivingTime;
-        //document.getElementById('results').innerHTML = '<strong>Address 1: </strong>' + location1.address + ' (' + location1.lat + ':' + location1.lon + ')<br /><strong>Address 2: </strong>' + location2.address + ' (' + location2.lat + ':' + location2.lon + ')<br /><strong>Driving Distance: </strong>' + drivingDistanceMiles + ' miles (or ' + drivingDistanceKilometers + ' kilometers)' + '<br /><strong>Driving Time:</strong> ' + drivingTime;
         var str1=""
         var str2="";
         document.getElementById('driving_distance').value=drivingDistanceMiles.toFixed(2);
