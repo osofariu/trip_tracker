@@ -41,7 +41,10 @@
   <%= f.number_field :distance, id: 'driving_distance'%>
 </div>
 
-<div id="results"></div>
+<div class="field">
+  <%= f.label :drive_time %> <br />
+  <%= f.text_field :drive_time, id: 'drive_time' %>
+</div>
 
   <div class="field">
     <%= f.label :notes %><br />
