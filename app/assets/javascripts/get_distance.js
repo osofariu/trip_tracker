@@ -57,14 +57,9 @@ function initialize() {
         var str1=""
         var str2="";
         document.getElementById('driving_distance').value=drivingDistanceMiles.toFixed(2);
+        document.getElementById('drive_time').value=drivingTime;
         document.getElementById('route_notes').value=route_notes;
-        document.getElementById('update_comment').innerHTML="click Update below to save this information"
-        //document.getElementById("location1_name").innerHTML=self.location1.address;
-        //document.getElementById("location2_name").innerHTML=self.location2.address;
-        //document.getElementById("location1_coord").innerHTML=str1.concat(" (", self.location1.lat, ",",  self.location1.lon, ")");
-        //document.getElementById("location2_coord").innerHTML=str2.concat(" (", self.location2.lat, "," , self.location2.lon, ")");
-        //document.getElementById("driving_distance")=drivingDistanceMiles.toFixed(2);  
-        //document.getElementById("driving_duration").innerHTML=drivingTime;
+        document.getElementById('update_comment').innerHTML="click Update below to save this information";
     });
 }
 

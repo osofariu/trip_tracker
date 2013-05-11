@@ -33,7 +33,7 @@
                         <%= route.end_place_name %>
                     </td>
                     <td class="good_route"><%= route.distance %></td>
-                    <td class="good_route"> <%= get_route_driving_time(route) %></td>
+                    <td class="good_route"> <%= route.drive_time %></td>
                 </tr>
             <% else %>
                 <tr>
