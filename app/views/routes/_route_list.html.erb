@@ -1,19 +1,20 @@
 <div id="route_part", class="inline_block">
     <h2>Your routes</h2>
     This section gets build automatically as you add, move, or delete places.
-    <table>
+    <table id="routes_list_table">
+        <col style="width:10%">
         <col style="width:10%">
         <col style="width:20%">
-        <col style="width:30%">
-        <col style="width:30%">
+        <col style="width:20%">
         <col style="width:10%">
+        <col style="width:30%>"
         <tr>
             <th></th>
             <th>Order</th>
             <th>Start place</th>
             <th>End place</th>
-            <th>Distance</th>
-            <th></th>
+            <th>Miles</th>
+            <th>Drive time</th>
             <th></th>
             <th></th>
         </tr>
@@ -22,7 +23,7 @@
             <% if route.active %>
                 <tr>
                     <td class="good_route">
-                        <%= link_to image_tag('/assets/wand.png', title: 'edit route'), edit_trip_route_path(@trip, route) %>
+                        <%= link_to image_tag('/assets/wand.png', title: 'edit route'), edit_trip_route_path(@trip, route), id: make_route_id(@trip, route) %>
                     </td>
                     <td class="good_route"><%= route.seq_no %> </td>
                     <td class="good_route">
@@ -32,6 +33,7 @@
                         <%= route.end_place_name %>
                     </td>
                     <td class="good_route"><%= route.distance %></td>
+                    <td class="good_route"> <%= route.drive_time %></td>
                 </tr>
             <% else %>
                 <tr>

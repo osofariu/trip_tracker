@@ -8,16 +8,19 @@
 		    margin: 0;
 		    padding: 10px;
 		    display: inline-block;
-		    //width: 550px;
 		    min-height: 100px;
 		    //background: #ccc;
 		    vertical-align: top; 
 		//} 
 	}
 
-	padding: 20px;
+	padding: 10px;
 	#places_part {	
+<<<<<<< HEAD
 		width: 400px;
+=======
+		width: 450px;
+>>>>>>> calc_distance
 		border-right: 2px solid lightGreen;
 
 		td {
@@ -51,7 +54,12 @@
 	}
 
 	#route_part {
+<<<<<<< HEAD
 		 width: 500px;
+=======
+		 width: 550px;
+		 padding-left: 20px;
+>>>>>>> calc_distance
 	}
 }
 

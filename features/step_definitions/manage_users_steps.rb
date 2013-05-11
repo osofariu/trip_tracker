@@ -14,3 +14,4 @@ end
 Then(/^I should see the Welcome page$/) do
   page.has_content?("You are logged in as #{@user.name}").should == true
 end
+

@@ -1,5 +1,5 @@
 class Route < ActiveRecord::Base
-  attr_accessible :distance, :notes, :trip_id, :seq_no, :start_place, :end_place, :start_route, :start_place_id, :end_place_id, :active
+  attr_accessible :distance, :notes, :trip_id, :seq_no, :start_place, :end_place, :start_route, :start_place_id, :end_place_id, :active, :drive_time
   belongs_to :trip
   validates :distance, numericality: true, :allow_nil => true
 
