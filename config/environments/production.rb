@@ -15,7 +15,7 @@ TripTracker::Application.configure do
   config.assets.compress = true
 
   # precompiled assets
-config.assets.precompile += %w(get_distance.js) 
+config.assets.precompile += %w(get_distance.js find_place.js) 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
 
