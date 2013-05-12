@@ -1,7 +1,7 @@
 
 Given /My first destination named "(.*)", and a start date of "(.*)"/ do |name, start_date|
   click_link 'Create your first destination'
-  fill_in "Name", with: name
+  fill_in "searchTextField", with: name
   step("Fill select date \"arrival date\" with #{start_date}")
   click_button "Create Place"
 end
@@ -10,7 +10,7 @@ Given /Another destination named "(.*)", an arrival date of "(.*)", and a durati
   within "#after_edit_parts" do
     click_link "Add place"
   end
-  fill_in 'Name', with: name
+  fill_in 'searchTextField', with: name
   fill_in 'Nights', with: duration
   step("Fill select date \"arrival date\" with #{arrival_date}")
   click_button "Create Place"

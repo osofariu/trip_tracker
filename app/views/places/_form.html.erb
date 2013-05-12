@@ -1,3 +1,6 @@
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyD7dX6kGdaqlOai_k7__h6tr-2MR9goD6o" %>
+<%= javascript_include_tag "find_place" %>
+          
 <%= form_for(@place) do |f| %>
   <% if @place.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
 
   <% if @last_place %>
     <%= f.hidden_field :last_place, value: @last_place %>
@@ -35,11 +39,13 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field" id="panel" style="margin-left: 0px">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, id: "searchTextField", size: "50", autofocus: true %>
   </div>
-  
+  <div id="map-canvas"></div>
+
+
   <% if first_place?(@trip, @place) %>
     <div class="field">
       <%= f.label 'Start Date' %><br />
