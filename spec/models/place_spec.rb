@@ -12,9 +12,38 @@ describe Place do
     it "can be saved successfully," do
       place = build(:place)
       res=place.save
-      assert_equal res, true
+      res.should be_true
     end
   end
+
+  context "attempting to create duplicate place names" do
+
+    it "will not allow me to save a second place with the same name per trip" do
+      place1 = create(:place, trip: trip)
+      place2 = build(:place, trip: trip, name: place1.name)
+      place2.save.should == false
+      place2.errors.messages[:name].should == ["has already been taken"]
+    end
+
+    it "will allow me to save a place with the same name as another place under a different trip" do
+      place1 = create(:place, trip: trip)
+      trip2 = create(:trip, name: 'second trip')
+      place2 = build(:place, trip: trip2)
+      place2.save.should be_true
+    end
+  end
+
+  context "basic validation" do
+
+    it "is invalid without a name" do
+      build(:place, name: nil).should_not be_valid
+    end
+
+    it "is invalid without a trip_id" do
+      build(:place, trip_id: nil).should_not be_valid
+    end
+  end
+
 
   context "working with two places create only," do
 

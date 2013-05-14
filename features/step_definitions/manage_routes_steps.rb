@@ -1,5 +1,4 @@
 Then(/^I should see a Route from "(.*?)" to "(.*?)" with distance "(.*?)" and driving duration of "(.*?)"$/) do |arg1, arg2, arg3, arg4|
-  #save_and_open_page
   within_table('routes_list_table') do
     has_content?(arg1).should == true
     has_content?(arg2).should == true
@@ -22,6 +21,7 @@ end
 
 When(/^I click button to Calculate the Route$/) do
   click_button 'Lookup route info'
+  fill_in "drive_time", with: "2 hrs 46 mins"  # Google returns slightly varying results / need an exact value
 end
 
 When(/^I click button to Update the Route$/) do
