@@ -19,20 +19,20 @@ function displayDuration(seconds) {
     if (Math.floor(hours) > 0) {
         var post = "";
         if (Math.floor(hours) == 1) {
-            post = " hour ";
+            post = " hr ";
         }
         else {
-            post = " hours ";
+            post = " hrs ";
         }
         hours_str=hours_str.concat(Math.floor(hours).toString(), post);
     }
     if (Math.floor(minutes) > 0) {
         var post = "";
         if (Math.floor(minutes) == 1) {
-            post = " minute ";
+            post = " min ";
         }
         else {
-            post = " minutes ";
+            post = " mins ";
         }
         minutes_str=minutes_str.concat(Math.floor(minutes).toString(), post);
     }

@@ -2,13 +2,16 @@ class PlacesController < ApplicationController
   before_filter :require_login
   before_filter :set_trip_params
 
-  def ensure_ownership(*opt_place)
-    raise "Places can only be managed withing the context of a particular trip." if !current_trip?
-    opt_place.each do |place| 
-      if place.trip_id != current_trip.id
-        raise "This place does not belong to the current trip."
-      end
+  def proper_ownership?(place=nil)
+    if !current_trip?
+      flash[:notice] = "Places can only be managed withing the context of a particular trip."
+      return false
     end
+    if place && place.trip_id != current_trip.id
+        flash[:notice] = "This place does not belong to the current trip."
+        return false
+    end
+    return true
   end
 
   # useful when selecting a trip from list of trip, so we can build it 
@@ -19,13 +22,27 @@ class PlacesController < ApplicationController
     else
       trip_id = session[:trip_id]
     end
+    #Rails.logger.debug "set_trip_params id: #{trip_id} or #{params[:trip_id]} and name: #{params[:place][:name]}"
     @trip = Trip.find(trip_id)
+  end
+
+  def get_places_select(parent_id)
+   if parent_id
+      parent = Place.find(parent_id)
+      places_select = [parent]
+    else
+      places_select = @trip.major_places.order('seq_no ASC').all
+    end
+    return places_select
   end
 
   # GET /places
   # GET /places.json
   def index
-    ensure_ownership
+    unless proper_ownership?
+      redirect_to welcome_index_path
+      return
+    end
     @trip = current_trip
     session[:return_to] = request.url
     @major_places = @trip.major_places.order('seq_no ASC')
@@ -41,7 +58,10 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.find(params[:id])
-    ensure_ownership @place
+    unless proper_ownership? @place
+      redirect_to welcome_index_path
+      return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -52,19 +72,22 @@ class PlacesController < ApplicationController
   # GET /places/new
   # GET /places/new.json
   def new
-    ensure_ownership
+    Rails.logger.debug "Beginning of new"
+    unless proper_ownership?
+      redirect_to welcome_index_path
+      return
+    end
     @place = Place.new
     @trip = current_trip
     if params[:prev_place]
       @prev_place = Place.find(params[:prev_place])
-      ensure_ownership @prev_place
+      unless proper_ownership? @prev_place
+        redirect_to welcome_index_path
+        return
+      end
     end
-    if @parent_id=params[:parent_id]
-      parent = Place.find(@parent_id)
-      @places_select = [parent]
-    else
-      @places_select = @trip.major_places.order('seq_no ASC').all
-    end
+    @parent_id = params[:parent_id]
+    @places_select = get_places_select(@parent_id)
 
     respond_to do |format|
       format.html # { new.html.erb}
@@ -78,15 +101,18 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     if params[:prev_place]
       @prev_place = Place.find(params[:prev_place])   # this is set for all BUT the first place
-      ensure_ownership @prev_place
+      unless proper_ownership? @prev_place
+        redirect_to welcome_index_path
+        return
+      end
     end
     @trip = Trip.find(@place.trip_id)
-    @places_select = @trip.major_places.order('seq_no ASC').all    
-    if @parent_id = params[:parent_id]
-      parent =  Place.find(@parent_id)
-      @places_select = [parent]
+    @parent_id = params[:parent_id]
+    @places_select = get_places_select(@parent_id)
+    unless proper_ownership? @place
+      redirect_to welcome_index_path
+      return
     end
-    ensure_ownership @place
   end
 
   # POST /places
@@ -94,7 +120,12 @@ class PlacesController < ApplicationController
   def create
     @trip = current_trip
     @place = Place.new(params[:place])
-    ensure_ownership @place
+    @parent_id = params[:parent_id]
+    @places_select = get_places_select(@parent_id)
+    unless proper_ownership? @place
+      redirect_to welcome_index_path
+      return
+    end
    
     respond_to do |format|
       if @place.save
@@ -111,8 +142,12 @@ class PlacesController < ApplicationController
   #PUT /places/1.json
   def update
     @place = Place.find(params[:id])
-    @places_select = @trip.major_places.order('seq_no ASC').all
-    ensure_ownership @place
+    @parent_id = params[:parent_id]
+    @places_select = get_places_select(@parent_id)
+    unless proper_ownership? @place
+      redirect_to welcome_index_path
+      return
+    end
     @trips = [current_trip]
 
     respond_to do |format|

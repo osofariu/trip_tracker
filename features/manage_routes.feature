@@ -16,4 +16,4 @@ Scenario: I should be able to calculate distance, and see it with route on trip 
     When  I edit route the route
     And   I click button to Calculate the Route
     And   I click button to Update the Route
-    Then  I should see a Route from "Disneyworld, Orlando, FL" to "Fort Myers, FL" with distance "183" and driving duration of "2 hours 46 minutes" 
+    Then  I should see a Route from "Disneyworld, Orlando, FL" to "Fort Myers, FL" with distance "183" and driving duration of "2 hrs 46 mins" 
